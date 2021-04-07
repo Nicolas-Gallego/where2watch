@@ -13,26 +13,27 @@ import FilmPage from './views/FilmPage'
 function App() {
   return (
     <div>
-      {/* <NavbarUnregistered/> */}
-      <NavbarRegistered />
 
-      <BrowserRouter>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/signup" component={Signup}></Route>
-        <Route path="/profile" component={Profile}></Route>
-        <Route path="/editprofile" component={EditProfile}></Route>
+     {/* <NavbarUnregistered/> */}
+     <NavbarRegistered/>
+    
+    <BrowserRouter>
+      <Route path="/" exact component={Home}></Route>
+      <Route path="/login"  component={Login}></Route>
+      <Route path="/signup" component={Signup}></Route>
+      <Route path="/profile"  component={Profile}></Route>
+      <Route path="/editprofile"  component={EditProfile}></Route>
+     
 
 
-
-        {/*     
+{/*     
 /categories 
 /user-profile/:user_id/
 /user-profile/:user_id/modify
 /:user_id/movies
 /:user_id/movies/categories=?
 /:user_id/movies/categories=?/:movie_id */}
-      </BrowserRouter>
+    </BrowserRouter>
     </div>
   );
 }
