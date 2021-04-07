@@ -64,7 +64,7 @@ router.post('/signup',
 
 
 //Profil router
-router.get('/profil/:id', async (req, res) => {
+router.get('/profile/:id', async (req, res) => {
     try {
         const userProfil = await UserModel.findById(req.params.id)
         res.json(userProfil)
