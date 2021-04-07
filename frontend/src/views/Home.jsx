@@ -2,31 +2,51 @@
 
 function Home() {
     return (
-        <div>
-
-            <h1>Home Page</h1>
-            <form>
-                <fieldset disabled>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Search</span>
-                        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" />
-</div>
-                        <div class="mb-3">
-                            <label for="disabledTextInput" class="form-label">Disabled input</label>
-                            <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                            <select id="disabledSelect" class="form-select">
-                                <option>Disabled select</option>
-                            </select>
+        <div className="container-fluid">
+            <div className="row d-flex justify-content-center">
+                <div className="col-10">
+                    <h1>Home Page</h1>
+                    <form>
+                        <div className="input-group mb-3 ">
+                            <span className="input-group-text" id="basic-addon1">Search</span>
+                            <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
                         </div>
 
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-  </fieldset>
-</form>
-            
+                        <div className="mb-3">
+                            <div classNameName="row">
+                                <div classNameName="col-sm-10 col-md-5">
+                                    <div className="input-group mb-3">
+                                        <label className="input-group-text" for="inputGroupSelect01">Catégories</label>
+                                        <select className="form-select" id="inputGroupSelect01">
+                                            <option selected>Choose...</option>
+                                            <option value="1">Action</option>
+                                            <option value="2">Mangas</option>
+                                            <option value="3">Comedy</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div classNameName="col-sm-10 col-md-5">
+                                    <div className="input-group mb-3">
+                                        <label className="input-group-text" for="inputGroupSelect01">Platform</label>
+                                        <select className="form-select" id="inputGroupSelect01">
+                                            <option selected>Choose...</option>
+                                            <option value="1">netflix</option>
+                                            <option value="2">Prime Video</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {/* <div classNameName="col-sm-10 col-md-2">
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </div> */}
+                                <div className="d-grid gap-2 col-sm-10 col-md-2">
+                                    <button className="btn btn-primary" type="button">Create Account</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

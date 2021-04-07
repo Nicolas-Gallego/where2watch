@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import "../css/main.css"
 
-function Signup() {
+function EditProfile() {
     const [pseudo, setPseudo] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [age, setAge] = useState("");
 
-    const onClickCreate = () => {
+    const onClickSave = () => {
         console.clear();
         console.log("hello signup");
+    }
+    const onClickAnnuler = (event) => {
+        console.clear();
+        event.preventDefault();
     }
 
 
@@ -22,13 +25,13 @@ function Signup() {
                 <div className="col-12 col-md-6">
 
 
-                    <h1 className="title">Sign Up</h1>
+                    <h1 className="title">Edit Profile</h1>
                     <div className="mb-3">
                         <input type="file"
                             placeholder="image"
                             className="form-control"
-                            // value={image}
-                            // onChange={(event) => setImage(event.target.files[0])}
+                        // value={image}
+                        // onChange={(event) => setImage(event.target.files[0])}
                         />
                         <label className="form-label">Pseudo</label>
                         <input type="text"
@@ -81,12 +84,15 @@ function Signup() {
                             </select>
                         </div>
 
-                        <div className="d-grid gap-2">
-                            <button className="btn btn-primary" type="button" onClick={onClickCreate}>Create Account</button>
-                            {/* <button className="btn btn-primary" type="button">Login</button> */}
-                        </div>
-                        <div className="d-grid gap-2">
-                            <Link to="/login" class="d-flex justify-content-end">Login</Link>
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-2">
+                                <button className="btn btn-success" type="button" onClick={onClickSave}>Save</button>
+                            </div>
+                            <div className="col-2">
+                                <button className="btn btn-danger" type="button" onClick={onClickAnnuler}>Annuler</button>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -95,4 +101,4 @@ function Signup() {
     )
 }
 
-export default Signup;
+export default EditProfile;
