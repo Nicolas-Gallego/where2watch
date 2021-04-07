@@ -62,6 +62,20 @@ router.post('/signup',
 
 // })
 
+router.post('/login', async (req, res) => {
+    const user = new UserModel({
+    username: req.body.username,
+    password: req.body.password,
+})
+try {
+    const findUser = await user.findOne()
+    res.json(findUser)
+
+} catch (err) {
+    res.json({ message: err })
+}
+
+})
 
 //Profil router
 router.get('/profile/:id', async (req, res) => {
