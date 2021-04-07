@@ -2,12 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import NavbarUnregistered from './components/NavbarUnregistered'
 import NavbarRegistered from './components/NavbarRegistered'
+import FilmPage from './views/FilmPage'
 
 function App() {
   return (
     <div>
-     {/* <NavbarUnregistered/> */}
-     <NavbarRegistered/>
+     <FilmPage/>
     </div>
   );
 }
