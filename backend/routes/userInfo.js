@@ -21,4 +21,14 @@ router.post('/signup', async (req, res) => {
 
 })
 
+router.get('/profil/:id', async (req, res) => {
+    try {
+        const userProfil = await UserModel.findById(req.params.id)
+        res.json(userProfil)
+
+    } catch (err) {
+        res.json({ message: err })
+    }
+})
+
 module.exports = router;
