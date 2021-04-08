@@ -22,8 +22,8 @@ function App() {
       <Route path="/login"  component={Login}></Route>
       <Route path="/signup" component={Signup}></Route>
       <Route path="/profile"  component={Profile}></Route>
-      <Route path="/editprofile"  component={EditProfile}></Route>
-     
+      <Route path="/editprofile"  component={EditProfile}></Route>     
+      <Route path="/film/id"  component={FilmPage}></Route>     
 
 
 {/*     
