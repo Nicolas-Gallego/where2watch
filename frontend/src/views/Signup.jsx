@@ -1,22 +1,84 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
+import { Multiselect } from 'multiselect-react-dropdown';
+import "../css/FormsInput.css"
 import "../css/main.css"
 
 function Signup() {
     const { register, handleSubmit, errors } = useForm();
+    const history = useHistory();
 
-    const [pseudo, setPseudo] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [age, setAge] = useState("");
+    // const [platform, setPlatform] = useState("");
+    const [platform, setPlatform] = useState([
+        { key: "Netflix", platform: "Group 1" },
+        { key: "Amazon Prime", platform: "Group 1" },
+        { key: "Other", platform: "Group 1" }
+    ]);
 
-    const onClickCreate = () => {
-        console.clear();
-        console.log("hello signup");
+    
+
+    // const expanded = false;
+    // function showCheckboxes() {
+    //     let checkboxes = document.getElementsById("checkboxes");
+    //     if(!expanded) {
+    //         checkboxes.style.display = "block";
+    //         expanded = true;
+    //     }else{
+    //         checkboxes.style.display = "none";
+    //         expanded = false;
+    //     }
+    // }
+
+    async function onClickCreate() {
+        let data = { username, email, password, age, platform }
+        console.log("user created", data);
+
+        let result = await fetch('http://localhost:8000/user/signup', {
+            method: "POST",
+            mode: 'cors',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json"
+            },
+        })
+        result = await result.json()
+        console.warn("Result", result);
+        if (result.ok) {
+            const tokenObj = await result.json();
+            localStorage.setItem('token', tokenObj.token);
+            history.push('/profile');
+        }
     }
+
+    // const onClickCreate = (event) => {
+    //     console.clear();
+    //     console.log("hello signup", event);
+    // try {
+    //     console.clear();
+    //     console.log('Success received the value of Form:', value)
+    //         const result = await fetch('http://localhost:8000/user/signup', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'content-type': 'application/json'
+    //             },
+    //             body: JSON.stringify(value)
+    //         });
+    //         console.log('MY Result:', result);
+    //         const results = await result.json()
+    //         localStorage.setItem('LocalStorage', JSON.stringify(results))
+    //         console.log('FINAL Results :', results);
+    //         history.push("/home")
+    // } catch (err) {
+    //     console.error(err)
+    // }
+    // }
 
 
     return (
@@ -37,8 +99,8 @@ function Signup() {
                             <input type="text"
                                 className="form-control"
                                 placeholder="User name"
-                                value={pseudo}
-                                onChange={(event) => setPseudo(event.target.value)}
+                                value={username}
+                                onChange={(event) => setUsername(event.target.value)}
                             />
 
                             <label className="form-label">Email address</label>
@@ -75,18 +137,18 @@ function Signup() {
                             />
 
                             <div className="mb-3">
-                                <label className="form-label" for="inputGroupSelect01">Platform</label>
-                                <select className="form-select" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">netflix</option>
-                                    <option value="2">Prime Video</option>
-                                    <option value="3">Three</option>
-                                </select>
+                            <label className="form-label" for="inputGroupSelect01">Platform</label>
+                            <Multiselect
+                                options={platform}
+                                displayValue="key"
+                                showCheckbox={true}
+                                onChange={(event)=> setPlatform(event.target.value)}
+                            />
                             </div>
 
                             <div className="d-grid gap-2">
-                                <button className="btn btn-primary" type="button" 
-                                onClick={onClickCreate}>Create Account</button>
+                                <button className="btn btn-primary" type="button"
+                                    onClick={onClickCreate}>Create Account</button>
                                 {/* <button className="btn btn-primary" type="button">Login</button> */}
                             </div>
                             <div className="d-grid gap-2">
