@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     },
     platform:{
         type: String,
+        canal: ['Netflix', 'Amazon', 'Disney+','Canal+'],
         required: true
     },
 

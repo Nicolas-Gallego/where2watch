@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const authRoute = require('./routes/userInfo'); //Import routes
+const authRoute = require('./routes/auth'); //Import routes
 const cors = require('cors');
 
 

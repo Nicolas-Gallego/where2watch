@@ -1,9 +1,8 @@
 import NavbarUnregistered from "../components/NavbarUnregistered";
-import "../filmPage.css";
+import "../css/filmPage.css";
 const FilmPage = () => {
   return (
     <>
-      <NavbarUnregistered />
       <div>
         <div className="container-fluid">
           {/* must be replace by film title */}
@@ -11,13 +10,13 @@ const FilmPage = () => {
           <div className="row d-flex justify-content-center">
             {/* must be replace by film poster  */}
             <img
-              src="placeholder_poster.png"
+              src="/placeholder_poster.png"
               alt="film poster"
               className="filmPoster col-md-6 col-sm-12"
             />
             <div className="col-md-6 col-sm-12 mt-1">
               <h4>Synopsis</h4>
-              {/* must be replace by fil Synopcis */}
+              {/* must be replace by film Synopsis */}
               <span>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -31,15 +30,15 @@ const FilmPage = () => {
               <div className="logos d-flex justify-content-start">
                 <a href="#">
                   {" "}
-                  <img src="netflix.png" alt="" className="logoPlatform" />
+                  <img src="/netflix.png" alt="" className="logoPlatform" />
                 </a>
                 <a href="#">
                   {" "}
-                  <img src="prime.png" alt="" className="logoPlatform" />
+                  <img src="/prime.png" alt="" className="logoPlatform" />
                 </a>
                 <a href="#">
                   {" "}
-                  <img src="disney.png" alt="" className="logoPlatform" />
+                  <img src="/disney.png" alt="" className="logoPlatform" />
                 </a>
               </div>
               <div className="filmInfos">
@@ -99,21 +98,21 @@ const FilmPage = () => {
                   <div class="carousel-inner">
                     <div class="carousel-item active">
                       <img
-                        src="placeholder_poster.png"
+                        src="/placeholder_poster.png"
                         class="d-block w-100"
                         alt="..."
                       />
                     </div>
                     <div class="carousel-item">
                       <img
-                        src="placeholder_poster.png"
+                        src="/placeholder_poster.png"
                         class="d-block w-100"
                         alt="..."
                       />
                     </div>
                     <div class="carousel-item">
                       <img
-                        src="placeholder_poster.png"
+                        src="/placeholder_poster.png"
                         class="d-block w-100"
                         alt="..."
                       />
