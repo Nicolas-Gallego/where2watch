@@ -81,4 +81,23 @@ router.get('/profile/:id', async (req, res) => {
     }
 })
 
+
+//updateProfil router
+
+router.put('/updateProfil/:id', async (req, res) => {
+    try {
+        const updateProfil = await UserModel.updateOne({ _id: req.params.id },
+            {
+                $set: {
+                    username: req.body.username
+                }
+            })
+        res.json(updateProfil)
+
+    } catch (err) {
+        res.json({ message: err })
+    }
+})
+
 module.exports = router;
+
