@@ -40,7 +40,7 @@ function Home() {
                             <button type="submit" className="btn btn-primary">Submit</button>
                         </div> */}
                                 <div className="d-grid gap-2 col-sm-10 col-md-2">
-                                    <button className="btn btn-primary" type="button">Create Account</button>
+                                    <button className="btn btn-primary" type="button">Search</button>
                                 </div>
                             </div>
                         </div>

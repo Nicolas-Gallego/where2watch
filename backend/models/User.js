@@ -18,11 +18,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    platform:{
+    platforms:[{
         type: String,
         canal: ['Netflix', 'Amazon', 'Disney+','Canal+'],
         required: true
-    },
+    }],
 
     profilePicture: String
 });

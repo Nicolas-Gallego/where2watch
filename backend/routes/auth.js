@@ -26,12 +26,13 @@ router.post('/signup',
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
+        console.log(req.body)
         const user = new UserModel({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
             age: req.body.age,
-            platform: req.body.platform,
+            platforms: req.body.platforms,
             profilePicture: req.body.profilePicture
         })
         try {

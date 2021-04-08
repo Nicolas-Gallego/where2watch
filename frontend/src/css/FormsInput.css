@@ -1,0 +1,40 @@
+.input {
+    padding: 10px;
+    width: 300px;
+    max-width: 90%;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+/* .btn {
+    margin-top: 1rem;
+    padding: 10px 40px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+} */
+
+.multiselect {
+    width: 200px;
+}
+.selectBox {
+    position: relative;
+}
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+.overSelect {
+    position: absolute;
+    left: O; right:0; top:0; bottom:0;
+}
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+}
+#checkboxes label {
+    display: block;
+}
+#checkboxes label:hover{
+    background-color: #1e90ff;
+}
