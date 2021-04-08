@@ -9,13 +9,14 @@ import './App.css';
 import NavbarUnregistered from './components/NavbarUnregistered'
 import NavbarRegistered from './components/NavbarRegistered'
 import FilmPage from './views/FilmPage'
+import Catalog from './views/Catalog';
 
 function App() {
   return (
     <div>
 
-     {/* <NavbarUnregistered/> */}
-     <NavbarRegistered/>
+     <NavbarUnregistered/>
+     {/* <NavbarRegistered/> */}
     
     <BrowserRouter>
       <Route path="/" exact component={Home}></Route>
@@ -24,6 +25,7 @@ function App() {
       <Route path="/profile"  component={Profile}></Route>
       <Route path="/editprofile"  component={EditProfile}></Route>     
       <Route path="/film/id"  component={FilmPage}></Route>     
+      <Route path="/catalog"  component={Catalog}></Route>     
 
 
 {/*     
