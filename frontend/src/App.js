@@ -6,16 +6,24 @@ import Signup from "./views/Signup";
 import Profile from "./views/Profile";
 import EditProfile from "./views/EditProfile";
 import './App.css';
+import NavbarUnregistered from './components/NavbarUnregistered'
+import NavbarRegistered from './components/NavbarRegistered'
+import FilmPage from './views/FilmPage'
 
 function App() {
   return (
+    <div>
+
+     {/* <NavbarUnregistered/> */}
+     <NavbarRegistered/>
+    
     <BrowserRouter>
       <Route path="/" exact component={Home}></Route>
       <Route path="/login"  component={Login}></Route>
       <Route path="/signup" component={Signup}></Route>
       <Route path="/profile"  component={Profile}></Route>
-      <Route path="/editprofile"  component={EditProfile}></Route>
-     
+      <Route path="/editprofile"  component={EditProfile}></Route>     
+      <Route path="/film/id"  component={FilmPage}></Route>     
 
 
 {/*     
@@ -26,6 +34,7 @@ function App() {
 /:user_id/movies/categories=?
 /:user_id/movies/categories=?/:movie_id */}
     </BrowserRouter>
+    </div>
   );
 }
 
