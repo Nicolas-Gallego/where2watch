@@ -31,7 +31,7 @@ router.post('/signup',
             email: req.body.email,
             password: req.body.password,
             age: req.body.age,
-           // platform: req.body.platform,
+            platform: req.body.platform,
             profilePicture: req.body.profilePicture
         })
         try {
