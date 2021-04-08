@@ -84,7 +84,7 @@ router.get('/profile/:id', async (req, res) => {
 
 //updateProfil router
 
-router.put('/updateProfil/:id', async (req, res) => {
+router.put('/updateUsername/:id', async (req, res) => {
     try {
         const updateProfil = await UserModel.updateOne({ _id: req.params.id },
             {
