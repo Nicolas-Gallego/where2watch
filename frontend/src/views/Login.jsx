@@ -21,24 +21,27 @@ const Login = () => {
     }
 
 
-    const onClickLogin = async (event) => {
+    const onClickLogin = async (loginData) => {
         try {
             console.clear();
-            console.log('Success received the value from Form:', event)
-            const result = await fetch('http://localhost:8000/user/login', {
+            console.log('Success received the value of Form:', loginData);
+            const tokenFetch = await fetch('http://localhost:8000/user/login', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify(event)
+                body: JSON.stringify(loginData)
             });
-            console.log('MY Result:', result);
-            const results = await result.json()
-            localStorage.setItem('user-info', JSON.stringify(results))
-            console.log('FINAL Results :', results);
-            history.push("/")
+            console.log('MY TOKEN :', tokenFetch);
+            const tokenObj = await tokenFetch.json();
+            localStorage.setItem('token', tokenObj.token)
+            console.log('FINAL TOKEN :', tokenObj);
+            if (tokenObj) {
+                return history.push("/profile/:id'");
+            }
+
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
     };
 

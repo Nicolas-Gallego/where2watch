@@ -17,11 +17,13 @@ function Signup() {
     const [age, setAge] = useState("");
     // const [platform, setPlatform] = useState("");
     const [platform, setPlatform] = useState([
-        { key: "Netflix", platform: "Group 1" },
-        { key: "Amazon Prime", platform: "Group 1" },
-        { key: "Other", platform: "Group 1" }
+        // "Netflix", "Amazon Prime", "Other"
+        { name: "Netflix", id:1 },
+        { name: "Amazon", id:2 },
+        { name: "Disney+", id: 3 },
+        { name: "Canal+", id: 4 }
     ]);
-
+    const [selectedPlatform, setSelectedPlatform] = useState([]);
     
 
     // const expanded = false;
@@ -37,7 +39,7 @@ function Signup() {
     // }
 
     async function onClickCreate() {
-        let data = { username, email, password, age, platform }
+        let data = { username, email, password, age, platforms:selectedPlatform.map((platform) => {return platform.name}) }
         console.log("user created", data);
 
         let result = await fetch('http://localhost:8000/user/signup', {
@@ -53,7 +55,7 @@ function Signup() {
         if (result.ok) {
             const tokenObj = await result.json();
             localStorage.setItem('token', tokenObj.token);
-            history.push('/profile');
+            history.push('/profile/:id');
         }
     }
 
@@ -140,9 +142,11 @@ function Signup() {
                             <label className="form-label" for="inputGroupSelect01">Platform</label>
                             <Multiselect
                                 options={platform}
-                                displayValue="key"
+                                displayValue="name"
                                 showCheckbox={true}
-                                onChange={(event)=> setPlatform(event.target.value)}
+                                selectedValues={selectedPlatform}
+                                onSelect={(list) => setSelectedPlatform(list)}
+                                onRemove={(list) => setSelectedPlatform(list)}
                             />
                             </div>
 
