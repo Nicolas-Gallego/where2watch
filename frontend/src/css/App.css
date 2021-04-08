@@ -1,0 +1,32 @@
+@font-face{
+    font-family: 'futuraHeavyItalic';
+    src: url('../fonts/Futura\ Heavy\ Italic\ font.ttf');
+}
+@font-face{
+    font-family: 'futuraBook';
+    src: url('../fonts/Futura\ Book\ font.ttf');
+}
+@font-face{
+    font-family: 'futuraLight';
+    src: url('../fonts/futura\ light\ bt.ttf');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'futuraLight';
+}
+
+.mainTitle{
+    font-family: 'futuraHeavyItalic';
+    font-size: 75px;
+}
+
+.msl-vars{
+    width: 300px;
+    max-height: 40px;
+}
+
