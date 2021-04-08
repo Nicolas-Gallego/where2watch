@@ -5,7 +5,7 @@ import Login from "./views/Login";
 import Signup from "./views/Signup";
 import Profile from "./views/Profile";
 import EditProfile from "./views/EditProfile";
-import './App.css';
+import '../src/css/App.css';
 import NavbarUnregistered from './components/NavbarUnregistered'
 import NavbarRegistered from './components/NavbarRegistered'
 import FilmPage from './views/FilmPage'

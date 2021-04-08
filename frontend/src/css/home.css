@@ -1,0 +1,9 @@
+.searchButton{
+    background-color: black;
+    color: white;
+    width: 300px;
+}
+
+.searchButton:hover{
+    color: coral;
+}
