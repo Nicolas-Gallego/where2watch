@@ -3,6 +3,8 @@ const router = express.Router();
 const UserModel = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const passwordValidator = require('password-validator');
+const bcrypt = require('bcryptjs');
+
 
 
 
@@ -30,7 +32,7 @@ router.post('/signup',
         const user = new UserModel({
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password,
+            password: bcrypt.hashSync(req.body.password),
             age: req.body.age,
             platforms: req.body.platforms,
             profilePicture: req.body.profilePicture
