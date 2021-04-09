@@ -1,7 +1,7 @@
    {
-     "username": "ironman",       
-     "email": "ironman@gmail.com",
-     "password":"7575IEon878768%",
+     "username": "spiderman",       
+     "email": "spiderman@gmail.com",
+     "password":"7575ISpider878768%",
      "age": "25",
      "platform": "Netflix"
                       
