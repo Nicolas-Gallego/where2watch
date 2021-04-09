@@ -13,6 +13,7 @@
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-hook-form": "^7.0.4",
+    "react-multi-carousel": "^2.6.2",
     "react-multiple-select-dropdown-lite": "^2.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
