@@ -178,5 +178,21 @@ router.put('/updateAge/:id', async (req, res) => {
     }
 })
 
+//Update platforms router
+router.put('/updatePatforms/:id', async (req, res) => {
+    try {
+        const updateProfil = await UserModel.updateOne({ _id: req.params.id },
+            {
+                $set: {
+                    platforms : req.body.platforms
+                }
+            })
+        res.json(updateProfil)
+
+    } catch (err) {
+        res.json({ message: err })
+    }
+})
+
 module.exports = router;
 
