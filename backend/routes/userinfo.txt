@@ -6,3 +6,12 @@
      "platform": "Netflix"
                       
    }
+
+  {
+     "username": "plastic man",       
+     "email": "plasticman@gmail.com",
+     "password":"7575Plas878768%",
+     "age": "50",
+     "platform": "Netflix"
+                      
+  }
