@@ -84,10 +84,24 @@ router.post('/login', async (req, res) => {
         return res.status(400).send("Email is not found")
     }
     try {
+<<<<<<< HEAD
         if (await bcrypt.compare(req.body.password, user.password)) {
             res.send("Login success")
         } else {
             res.send("Invalid password")
+=======
+        const body = req.body
+        const user = await UserModel.findOne({
+            email: body.email
+        })
+        if (!user) {
+            return res.status(404).send("There are no user")
+        }
+        if (user.password !== body.password) {
+            return res.status(404).json({
+                isConnected: false
+            })
+>>>>>>> yeshi
         }
 
     } catch {
