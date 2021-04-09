@@ -73,19 +73,27 @@ router.post('/signup',
 //Show login router
 router.get("/login", (req, res) => {
     res.render("login")
-  })
+})
 
-// router.post('/login', async(req, res)=>{
-//     const user = await UserModel.find(user => user.name = req.body.name)
-//     if(user == null){
-//         return res.status(400).send("There are no user")
-//     }
-//     try{
+router.post('/login', async (req, res) => {
+    const body = req.body
+    const user = await UserModel.findOne({
+        username: body.username
+    })
+    if (user == null) {
+        return res.status(400).send("Email is not found")
+    }
+    try {
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            res.send("Login success")
+        } else {
+            res.send("Invalid password")
+        }
 
-//     }catch{
-
-//     }
-// })
+    } catch {
+        res.status(500).send()
+    }
+})
 
 
 
