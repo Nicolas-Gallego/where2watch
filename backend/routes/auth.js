@@ -46,28 +46,47 @@ router.post('/signup',
 
 //Login router
 
-router.post('/login', async (req, res) => {
-    try {
-        const body = req.body
-        const user = await UserModel.findOne({
-            username: body.username
-        })
-        if (!user) {
-            return res.status(404).send("There are no user")
-        }
-        if (user.password !== body.password) {
-            return res.status(404).json({
-                isConnected: false
-            })
-        }
+// router.post('/login', async (req, res) => {
+//     try {
+//         const body = req.body
+//         const user = await UserModel.findOne({
+//             username: body.username
+//         })
+//         if (!user) {
+//             return res.status(404).send("There are no user")
+//         }
+//         if (user.password !== body.password) {
+//             return res.status(404).json({
+//                 isConnected: false
+//             })
+//         }
 
-    } catch (err) {
-        console.error(err)
-        res.status(404).json({
-            isConnected: false
-        })
-    }
-})
+//     } catch (err) {
+//         console.error(err)
+//         res.status(404).json({
+//             isConnected: false
+//         })
+//     }
+// })
+//Show login router
+router.get("/login", (req, res) => {
+    res.render("login")
+  })
+
+// router.post('/login', async(req, res)=>{
+//     const user = await UserModel.find(user => user.name = req.body.name)
+//     if(user == null){
+//         return res.status(400).send("There are no user")
+//     }
+//     try{
+
+//     }catch{
+
+//     }
+// })
+
+
+
 
 
 
