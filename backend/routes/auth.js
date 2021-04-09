@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
     try {
         const body = req.body
         const user = await UserModel.findOne({
-            username: body.username
+            email: body.email
         })
         if (!user) {
             return res.status(404).send("There are no user")

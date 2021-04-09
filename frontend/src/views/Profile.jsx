@@ -12,6 +12,7 @@ const Profil = () => {
             setUserInfo(response)
         })
     },[])
+    
     return (
         <div>
             <h1>Profile Page</h1>
