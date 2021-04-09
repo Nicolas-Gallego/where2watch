@@ -146,7 +146,7 @@ router.put('/updateEmail/:id', async (req, res) => {
 })
 
 
-
+//Update password router
 router.put('/updatePassword/:id', async (req, res) => {
     try {
         const updateProfil = await UserModel.updateOne({ _id: req.params.id },
@@ -161,5 +161,22 @@ router.put('/updatePassword/:id', async (req, res) => {
         res.json({ message: err })
     }
 })
+
+//Update age router
+router.put('/updateAge/:id', async (req, res) => {
+    try {
+        const updateProfil = await UserModel.updateOne({ _id: req.params.id },
+            {
+                $set: {
+                    age : req.body.age
+                }
+            })
+        res.json(updateProfil)
+
+    } catch (err) {
+        res.json({ message: err })
+    }
+})
+
 module.exports = router;
 
