@@ -2,11 +2,19 @@ const express = require("express");
 const router = express.Router();
 const FilmModel = require("../models/Film");
 
-router.get("/moovice", (req, res) => {
-  const films = FilmModel.find({});
+router.get("/films", async (req, res) => {
+  const films = await FilmModel.find({});
   res.json({
     films: films,
-    message: "tu as fait une requete GET sur /moovice",
+    message: "tu as fait une requete GET sur /films",
+  });
+});
+
+router.get("/films/:id", async (req, res) => {
+  const film = await FilmModel.findById(req.params.id);
+  res.json({
+    film: film,
+    message: "tu as fait une requete GET sur /films/:id",
   });
 });
 

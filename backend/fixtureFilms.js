@@ -8,7 +8,7 @@ mongoose.connect("mongodb://localhost:27017/w2w", () => {
 
 const createFilms = async () => {
   const searchPopularMovies = request(
-    "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd",
+    "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&language=fr-FR",
     async function (error, response, body) {
       console.error("error searchMovies:", error); // Print the error if one occurred
       console.log("statusCode searchMovies:", response && response.statusCode); // Print the response status code if a response was received
