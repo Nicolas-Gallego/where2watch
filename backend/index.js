@@ -21,11 +21,19 @@ app.use(cors());
 //Route Middlewares
 app.use("/user", () => authRoute);
 
-app.use("/films", async (req, res) => {
+app.get("/films", async (req, res) => {
   const films = await FilmModel.find({});
   res.json({
     films: films,
     message: "tu as fait une requete GET sur /films",
+  });
+});
+
+app.get("/films/:id", async (req, res) => {
+  const film = await FilmModel.findById(req.params.id);
+  res.json({
+    film: film,
+    message: "tu as fait une requete GET sur /films/:id",
   });
 });
 
