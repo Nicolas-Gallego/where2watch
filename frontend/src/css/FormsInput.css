@@ -41,5 +41,9 @@
 
 .error-meassages {
     color: red;
-    font-size: 14px;
+}
+
+.profile-border {
+    background: rgb(95, 91, 91);
+    color: white;
 }

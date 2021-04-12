@@ -1,7 +1,7 @@
 import '../css/home.css'
 import GenreFilter from "../components/GenreFilter";
 import PlatformFilter from "../components/PlatformFilter";
-import Carousel from '../components/Carousel'
+import CarouselMain from '../components/CarouselMain'
 import '../css/carousel.css'
 
 
@@ -31,7 +31,7 @@ function Home() {
           </form>
         </div>
       </div>
-      <Carousel></Carousel>
+      <CarouselMain/>
     </div>
   );
 }

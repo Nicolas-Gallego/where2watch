@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
+import MultiSelect from  'react-multiple-select-dropdown-lite'
+import  'react-multiple-select-dropdown-lite/dist/index.css'
 import { Multiselect } from 'multiselect-react-dropdown';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -8,6 +10,14 @@ import "../css/FormsInput.css"
 import "../css/main.css"
 
 const schema = yup.object().shape({
+    picture: yup.mixed()
+            .required('Upload Profile Photo')
+            .test("fileSize", "The file is to Large", (value) => {
+                return value && value[0].size <= 2000000 //less than 2 MB
+            })
+            .test("types", "We only support jpeg", (value) => {
+                return value && value[0].type === "image/png" ;
+            }),
     username: yup.string().required(),
     email: yup.string().email().required(),
     password: yup
@@ -24,22 +34,8 @@ const schema = yup.object().shape({
 
     age: yup.number().positive().integer().required(),
 
-    // platform: yup.string().required(),
-    platform: yup
-    .array()
-    .of(
-        yup.object({
-            yes: yup
-                .string()
-                .default('Yes')
-        }),
-        yup.object({
-            no: yup
-                .string()
-                .default('No')
-        })
-    )
-    .required('Please select the platform'),
+    platform: yup.string().required(),
+    
 });
 
 export default function Signup() {
@@ -47,6 +43,8 @@ export default function Signup() {
         resolver: yupResolver(schema)
     });
     const history = useHistory();
+
+    
     const [platform, setPlatform] = useState([
         // "Netflix", "Amazon Prime", "Other"
         { name: "Netflix", id: 1 },
@@ -56,34 +54,62 @@ export default function Signup() {
     ]);
     const [selectedPlatform, setSelectedPlatform] = useState([]);
 
-    async function onSubmit(data) {
-        console.log(data)
-        console.log("user created", data);
 
-        let result = await fetch('http://localhost:8000/user/signup', {
-            method: "POST",
-            mode: 'cors',
-            body: JSON.stringify(data),
+    const onSubmit = async (data) => {
+        try {
+          // Should format date value before submit.
+          data.profilePicture = data.profilePicture.file.response.imageUrl;
+          delete data.confirm_password;
+          console.log('Received values of form: ', data);
+          const response = await fetch('http://localhost:8000/user/signup', {
+            method: 'POST',
             headers: {
-                "Content-type": "application/json"
+              'content-type': 'application/json'
             },
-        })
-        result = await result.json()
-        console.warn("Result", result);
-        if (result.ok) {
-            const tokenObj = await result.json();
+            body: JSON.stringify(data)
+          });
+          if (response.ok) {
+            const tokenObj = await response.json();
             localStorage.setItem('token', tokenObj.token);
-            history.push('/profile/:id');
+            history.push('/profile/:id'); 
+          }
+        } catch (err) {
+          console.error(err)
         }
+      };
 
-    };
+    // async function onSubmit(data) {
+    //     console.log(data)
+    //     console.log("user created", data);
+
+    //     let result = await fetch('http://localhost:8000/user/signup', {
+    //         method: "POST",
+    //         mode: 'cors',
+    //         body: JSON.stringify(data),
+    //         headers: {
+    //             "Content-type": "application/json"
+    //         },
+    //     })
+    //     result = await result.json()
+    //     console.warn("Result", result);
+    //     if (result.ok) {
+    //         const tokenObj = await result.json();
+    //         localStorage.setItem('token', tokenObj.token);
+    //         history.push('/profile/:id');
+    //     }
+
+    // };
 
     return (
         <div className="container-fluid">
             <div className="row d-flex justify-content-center">
                 <div className="col-12 col-md-6">
                     <form onSubmit={handleSubmit(onSubmit)}>
-
+                        <div>
+                        <input type="file" name="picture" {...register("picture")}/>
+                        <p className="error-meassages">{errors.picture?.message}</p>
+                        
+                        </div>
                         <label className="form-label">Username</label>
                         <input {...register("username")}
                             className="form-control"
@@ -121,6 +147,7 @@ export default function Signup() {
 
                         <label className="form-label">Platforms</label>
                         <Multiselect
+                        
                             options={platform}
                             displayValue="name"
                             showCheckbox={true}
@@ -130,7 +157,7 @@ export default function Signup() {
                         />
                         
                         <div className="d-grid gap-2">
-                            <input type="submit" className="btn btn-primary" />
+                            <input type="submit" className="btn btn-dark" value="Signup"/>
                         </div>
 
                         <div className="d-grid gap-2">
