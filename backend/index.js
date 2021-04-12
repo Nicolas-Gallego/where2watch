@@ -3,6 +3,10 @@ const app = express();
 const mongoose = require('mongoose');
 const authRoute = require('./routes/auth'); //Import routes
 const cors = require('cors');
+const multer  = require('multer');
+const upload = multer({ dest: 'public/uploads/' })
+//const dotenv = require('dotenv');
+
 
 
 //Connect to db

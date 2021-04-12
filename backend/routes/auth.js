@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 
 
 
+
 //Signup router
 router.post('/signup',
     body('email').isEmail(),

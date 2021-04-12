@@ -1,1 +1,0 @@
-canal: ['Netflix', 'Amazon', 'Disney+','Canal+'],
