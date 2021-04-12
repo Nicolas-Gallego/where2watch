@@ -4,6 +4,8 @@ const UserModel = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const passwordValidator = require('password-validator');
 const bcrypt = require('bcryptjs');
+const multer  = require('multer');
+const upload = multer({ dest: 'public/uploads/' })
 
 
 
