@@ -80,8 +80,9 @@ router.post('/login', async (req, res) => {
     const user = await UserModel.findOne({
         username: body.username
     })
+    
     if (user == null) {
-        return res.status(400).send("Email is not found")
+        return res.status(400).send({message: "Email is not found"})
     }
     try {
         if (await bcrypt.compare(req.body.password, user.password)) {

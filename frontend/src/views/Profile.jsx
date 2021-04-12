@@ -1,24 +1,28 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import "../css/FormsInput.css"
 
 const Profil = () => {
-
+    const { id } = useParams();
+    const url = `http://localhost:8000/user/profile/${id}`
     const [userInfo, setUserInfo] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8000/profile/:id")
-        .then((response) => {return response.json()})
-        .then((response) => {
-            setUserInfo(response)
+        axios.get(url)
+        .then(response => {
+            console.log(response)
+            setUserInfo(response.data)
         })
-    },[])
-    
+    }, [url]);
+
     return (
         <div>
-            <h1>Profile Page</h1>
+
             <div className="container-fluid">
-                <div className="row">
-                    <div className="col-10">
+                <div className="row d-flex justify-content-center ">
+                    <div className="col-10 profile-border">
+                        <h1 className="d-flex justify-content-center">Profile Page</h1>
                         <div className="row">
                             {userInfo ? (
                                 <>
@@ -30,9 +34,9 @@ const Profil = () => {
                                     <div className="col-6 ">
                                         <p>{userInfo.image}</p>
                                         <p>Email : {userInfo.email}</p>
-                                        <p>user Name : {userInfo.pseudo}</p>
-                                        <p>Age : {userInfo.Age}</p>
-                                        <p>Platform : {userInfo.platform}</p>
+                                        <p>user Name : {userInfo.username}</p>
+                                        <p>Age : {userInfo.age}</p>
+                                        <p>Platform : {userInfo.platforms}</p>
                                     </div>
                                 </>
                             )
@@ -40,7 +44,7 @@ const Profil = () => {
                                 <p>Loading...</p>}
                         </div>
 
-                        <div className="col-3 d-flex justify-content-end ">
+                        <div className="d-flex justify-content-end ">
                             <Link to="/editprofile" className="btn btn-primary">Edit</Link>
                         </div>
                     </div>
