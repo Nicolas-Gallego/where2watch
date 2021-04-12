@@ -30,7 +30,7 @@ app.get("/films", async (req, res) => {
 });
 
 app.get("/films/:id", async (req, res) => {
-  const film = await FilmModel.findById(req.params.id);
+  const film = await FilmModel.findOne({id_imdb : req.params.id}).exec();
   res.json({
     film: film,
     message: "tu as fait une requete GET sur /films/:id",
