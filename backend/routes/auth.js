@@ -4,15 +4,16 @@ const UserModel = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const passwordValidator = require('password-validator');
 const bcrypt = require('bcryptjs');
-const multer  = require('multer');
-const upload = multer({ dest: 'public/uploads/' })
+var multer  = require('multer');
 
+
+var upload = multer({ dest: 'public/uploads/' })
 
 
 
 
 //Signup router
-router.post('/signup',
+router.post('/signup',upload.single('profilePicture'),
     body('email').isEmail(),
     body('password').custom((value) => {
         var schema = new passwordValidator();
