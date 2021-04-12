@@ -4,7 +4,6 @@ const FilmModel = require("../models/Film");
 
 
 router.get("/moovice", async (req, res) => {
-  console.log("coucou")
   const films = await FilmModel.find({});
   res.json({
     films: films,
