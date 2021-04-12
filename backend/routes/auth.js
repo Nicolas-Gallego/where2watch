@@ -4,16 +4,30 @@ const UserModel = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const passwordValidator = require('password-validator');
 const bcrypt = require('bcryptjs');
-var multer  = require('multer');
+const path = require('path');
+
+var multer = require('multer');
 
 
-var upload = multer({ dest: 'public/uploads/' })
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+var upload = multer({ 
+    storage: storage
+ })
+
+
 
 
 
 
 //Signup router
-router.post('/signup',upload.single('profilePicture'),
+router.post('/signup', upload.single('profilePicture'),
     body('email').isEmail(),
     body('password').custom((value) => {
         var schema = new passwordValidator();
@@ -39,7 +53,7 @@ router.post('/signup',upload.single('profilePicture'),
             password: bcrypt.hashSync(req.body.password),
             age: req.body.age,
             platforms: req.body.platforms,
-            profilePicture: req.body.profilePicture
+            profilePicture: req.body.file
         })
         try {
             const saveUser = await user.save()
@@ -134,7 +148,7 @@ router.put('/updatePassword/:id', async (req, res) => {
         const updateProfil = await UserModel.updateOne({ _id: req.params.id },
             {
                 $set: {
-                    password : req.body.password
+                    password: req.body.password
                 }
             })
         res.json(updateProfil)
@@ -150,7 +164,7 @@ router.put('/updateAge/:id', async (req, res) => {
         const updateProfil = await UserModel.updateOne({ _id: req.params.id },
             {
                 $set: {
-                    age : req.body.age
+                    age: req.body.age
                 }
             })
         res.json(updateProfil)
@@ -166,7 +180,7 @@ router.put('/updatePatforms/:id', async (req, res) => {
         const updateProfil = await UserModel.updateOne({ _id: req.params.id },
             {
                 $set: {
-                    platforms : req.body.platforms
+                    platforms: req.body.platforms
                 }
             })
         res.json(updateProfil)
