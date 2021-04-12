@@ -55,7 +55,7 @@ router.post('/signup', upload,
             password: bcrypt.hashSync(req.body.password),
             age: req.body.age,
             platforms: req.body.platforms,
-            profilePicture: req.body.file
+            profilePicture: req.file.filename
         })
         try {
             const saveUser = await user.save()
