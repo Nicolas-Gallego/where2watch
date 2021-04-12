@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 })
 var upload = multer({ 
     storage: storage
- })
+ }).single('profilePicture')
 
 
 
@@ -27,7 +27,7 @@ var upload = multer({
 
 
 //Signup router
-router.post('/signup', upload.single('profilePicture'),
+router.post('/signup', upload,
     body('email').isEmail(),
     body('password').custom((value) => {
         var schema = new passwordValidator();
@@ -46,6 +46,8 @@ router.post('/signup', upload.single('profilePicture'),
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
+        console.log(req.file)
+
         console.log(req.body)
         const user = new UserModel({
             username: req.body.username,
