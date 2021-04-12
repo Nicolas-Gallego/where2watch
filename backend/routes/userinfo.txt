@@ -6,3 +6,13 @@
      "platform": "Netflix"
                       
    }
+
+
+    {
+     "username": "spiderman",       
+     "email": "spiderman@gmail.com",
+     "password":"7575IEonDYH8768%",
+     "age": "15",
+     "platform": "Netflix"
+                      
+   }
