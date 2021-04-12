@@ -1,11 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const FilmModel = require('../models/Film');
+const FilmModel = require("../models/Film");
 
-
-router.get('/',
-res.json({message: "tui as fait une requete GET sur /"})
-)
-
+router.get("/moovice", (req, res) => {
+  const films = FilmModel.find({});
+  res.json({
+    films: films,
+    message: "tu as fait une requete GET sur /moovice",
+  });
+});
 
 module.exports = router;
