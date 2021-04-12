@@ -1,11 +1,36 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const filmSchema = new mongoose.Schema({
-   titre : String,
-   image : String,
-   description : String,
-   langue : String,
+  id_imdb: String,
+  titre: String,
+  image: String,
+  description: String,
+//   platforme: [],
+    platforme:{
+      type: [String],
+      default: ['pas trouvé'],
+    },
+  casting: [
+    {
+      nom: String,
+      personnage: String,
+      role : String,
+      image: String,
+    },
+  ],
+  langue: String,
+  note: Number,
+  duree: String,
+  similars: [
+    {
+      id_imdb: String,
+      titre: String,
+      description: String,
+      image: String,
+    },
+  ],
 });
-const FilmModel = mongoose.model('Film', filmSchema);
+
+const FilmModel = mongoose.model("Film", filmSchema);
 
 module.exports = FilmModel;

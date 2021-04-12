@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const authRoute = require('./routes/auth'); //Import routes
+const authRoute = require('./routes/userInfo'); //Import routes
+const filmsRoute = require('./routes/filmInfo'); //Import films
 const cors = require('cors');
 
 
@@ -19,6 +20,8 @@ app.use(cors())
 
 //Route Middlewares
 app.use('/user',authRoute);
+
+app.use('/',filmsRoute);
 
 
 app.listen(8000, ()=> {
