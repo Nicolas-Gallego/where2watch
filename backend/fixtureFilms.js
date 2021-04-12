@@ -77,7 +77,7 @@ const addPlatformFilms = async () => {
   });
 };
 
-const addCreditsFilms = async () => {
+const addCastFilms = async () => {
   const myFilms = await FilmModel.find({});
 
   await myFilms.map((myfilm) => {
@@ -103,14 +103,42 @@ const addCreditsFilms = async () => {
     );
   });
 };
+const addDirectorFilms = async () => {
+  const myFilms = await FilmModel.find({});
+
+  await myFilms.map((myfilm) => {
+    request(
+      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd&language=fr-FR`,
+      async function (error, response, content) {
+        console.error("error search Casting:", error); // Print the error if one occurred
+        console.log(
+          "statusCode search Casting:",
+          response && response.statusCode
+        ); // Print the response status code if a response was received
+        directeursByFilms = JSON.parse(content);
+        directeurs = directeursByFilms.crew
+          .filter((dir) => {
+            return dir.job === "Director";
+          })
+          .map((director) => {
+            return {
+              nom: director.name,
+              role: director.department,
+            };
+          });
+        await myfilm.updateOne({ directeurs: directeurs });
+      }
+    );
+  });
+};
 
 const tkt = async () => {
-
   createFilms();
   setTimeout(() => {
     addSimilarsFilms();
     addPlatformFilms();
-    addCreditsFilms();
+    addCastFilms();
+    addDirectorFilms();
   }, 2000);
 };
 

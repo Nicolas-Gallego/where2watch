@@ -5,17 +5,23 @@ const filmSchema = new mongoose.Schema({
   titre: String,
   image: String,
   description: String,
-//   platforme: [],
-    platforme:{
-      type: [String],
-      default: ['pas trouvé'],
-    },
+  //   platforme: [],
+  platforme: {
+    type: [String],
+    default: ["pas trouvé"],
+  },
   casting: [
     {
       nom: String,
       personnage: String,
-      role : String,
+      role: String,
       image: String,
+    },
+  ],
+  directeurs: [
+    {
+      nom: String,
+      role: String,
     },
   ],
   langue: String,
