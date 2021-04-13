@@ -18,6 +18,8 @@ const createFilms = async () => {
           response && response.statusCode
         ); // Print the response status code if a response was received
         body = JSON.parse(body);
+        
+
         const filmList = await body.results.map((film) => {
           return {
             id_imdb: film.id,
@@ -164,7 +166,7 @@ const addGenreFilms = async () => {
 };
 
 const tkt = async () => {
-  createFilms();
+  // createFilms();
 
   // setTimeout(() => {
   //   addGenreFilms();
