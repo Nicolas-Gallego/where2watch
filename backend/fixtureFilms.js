@@ -7,7 +7,8 @@ mongoose.connect("mongodb://localhost:27017/w2w", () => {
 });
 
 const createFilms = async () => {
-  for (let i = 1; i <= 5; i++) {
+  FilmModel.deleteMany({}).exec();
+  for (let i = 1; i <= 600; i++) {
     const searchPopularMovies = request(
       `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&language=fr-FR&page=${i}`,
       async function (error, response, body) {
@@ -17,7 +18,7 @@ const createFilms = async () => {
           response && response.statusCode
         ); // Print the response status code if a response was received
         body = JSON.parse(body);
-        await FilmModel.deleteMany({}).exec();
+        
 
         const filmList = await body.results.map((film) => {
           return {
@@ -165,15 +166,15 @@ const addGenreFilms = async () => {
 };
 
 const tkt = async () => {
-  createFilms();
+  // createFilms();
 
   // setTimeout(() => {
   //   addGenreFilms();
   // }, 60000);
 
-  // setTimeout(() => {
-  //   addDirectorFilms();
-  // }, 60000);
+  setTimeout(() => {
+    addDirectorFilms();
+  }, 6);
 
   // setTimeout(() => {
   //   addCastFilms();
