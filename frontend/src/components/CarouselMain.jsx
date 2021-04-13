@@ -67,7 +67,7 @@ export default class CarouselMain extends Component {
             itemClass="carousel-item-padding-0-px"
             // className="carousel"
           >
-            {this.state.movies.map((movie) => {
+            {this.state.movies.slice(0,20).map((movie) => {
               return (
                 <Link to={`/films/${movie.id_imdb}`}>
                   <img

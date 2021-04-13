@@ -20,6 +20,7 @@ function App() {
     
     <BrowserRouter>
       <Route path="/" exact component={Home}></Route>
+      <Route path="/:cat" component={Home}></Route>
       <Route path="/login"  component={Login}></Route>
       <Route path="/signup" component={Signup}></Route>
       <Route path="/profile/:id"  component={Profile}></Route>
