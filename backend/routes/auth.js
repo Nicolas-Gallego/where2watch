@@ -5,6 +5,7 @@ const { body, validationResult } = require('express-validator');
 const passwordValidator = require('password-validator');
 const bcrypt = require('bcryptjs');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 var multer = require('multer');
 
@@ -20,10 +21,6 @@ var storage = multer.diskStorage({
 var upload = multer({ 
     storage: storage
  }).single('profilePicture')
-
-
-
-
 
 
 //Signup router
