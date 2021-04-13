@@ -4,7 +4,7 @@ const NavbarUnregistered = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           <img src="/w2w_logo.png" alt="logo" className="logo" />
         </a>
         <button

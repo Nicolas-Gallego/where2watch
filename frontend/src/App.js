@@ -24,7 +24,7 @@ function App() {
       <Route path="/signup" component={Signup}></Route>
       <Route path="/profile/:id"  component={Profile}></Route>
       <Route path="/editprofile"  component={EditProfile}></Route>     
-      <Route path="/film/id"  component={FilmPage}></Route>     
+      <Route path="/films/:id"  component={FilmPage}></Route>     
       <Route path="/catalog"  component={Catalog}></Route>     
 
 
