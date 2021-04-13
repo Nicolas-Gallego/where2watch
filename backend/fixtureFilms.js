@@ -7,9 +7,11 @@ mongoose.connect("mongodb://localhost:27017/w2w", () => {
 });
 
 const createFilms = async () => {
-  for (let i = 1; i <= 5; i++) {
+  await FilmModel.deleteMany({}).exec();
+
+  for (let i = 1; i <= 500; i++) {
     const searchPopularMovies = request(
-      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&language=fr-FR&page=${i}`,
+      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&page=${i}`,
       async function (error, response, body) {
         console.error("error searchMovies:", error); // Print the error if one occurred
         console.log(
@@ -17,8 +19,6 @@ const createFilms = async () => {
           response && response.statusCode
         ); // Print the response status code if a response was received
         body = JSON.parse(body);
-        await FilmModel.deleteMany({}).exec();
-
         const filmList = await body.results.map((film) => {
           return {
             id_imdb: film.id,
@@ -27,7 +27,7 @@ const createFilms = async () => {
             description: film.overview,
             langue: film.original_language,
             genres: film.genre_ids,
-            note: film.vote_average
+            note: film.vote_average,
           };
         });
 
@@ -91,7 +91,7 @@ const addCastFilms = async () => {
 
   await myFilms.map((myfilm) => {
     request(
-      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd&language=fr-FR`,
+      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd`,
       async function (error, response, content) {
         console.error("error search Casting:", error); // Print the error if one occurred
         console.log(
@@ -117,7 +117,7 @@ const addDirectorFilms = async () => {
 
   await myFilms.map((myfilm) => {
     request(
-      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd&language=fr-FR`,
+      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd&`,
       async function (error, response, content) {
         console.error("error search Director:", error); // Print the error if one occurred
         console.log(

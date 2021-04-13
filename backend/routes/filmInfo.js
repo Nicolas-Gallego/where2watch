@@ -19,8 +19,9 @@ router.get("/moovice/:id", async (req, res) => {
   });
 });
 
-router.get("/moovice?catégories=cat", async (req, res) => {
+router.get("/:cat=netflix", async (req, res) => {
   res.json({message:"coucou"})
+  console.log("coucou")
 });
 
 module.exports = router;
