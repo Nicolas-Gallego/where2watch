@@ -5,9 +5,13 @@ const { body, validationResult } = require('express-validator');
 const passwordValidator = require('password-validator');
 const bcrypt = require('bcryptjs');
 const path = require('path');
+const dotenv = require('dotenv')
+const jwt = require('jsonwebtoken');
+
+dotenv.config();
+
 
 var multer = require('multer');
-
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -17,13 +21,9 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
-var upload = multer({ 
+var upload = multer({
     storage: storage
- }).single('profilePicture')
-
-
-
-
+}).single('profilePicture')
 
 
 //Signup router
@@ -78,13 +78,15 @@ router.post('/login', async (req, res) => {
     const user = await UserModel.findOne({
         username: body.username
     })
-    
+
     if (user == null) {
-        return res.status(400).send({message: "Email is not found"})
+        return res.status(400).send({ message: "Email is not found" })
     }
     try {
         if (await bcrypt.compare(req.body.password, user.password)) {
-            res.send("Login success")
+            const token = jwt.sign({ _id: user.id }, process.env.TOKEN_SECRET);
+            res.header('auth-token', token).send(token);
+            //res.send("Login success")
         } else {
             res.send("Invalid password")
         }
@@ -92,11 +94,8 @@ router.post('/login', async (req, res) => {
     } catch {
         res.status(500).send()
     }
+
 })
-
-
-
-
 
 
 //Profil router

@@ -7,7 +7,6 @@
                       
    }
 
-<<<<<<< HEAD
   {
      "username": "plastic man",       
      "email": "plasticman@gmail.com",
@@ -16,14 +15,3 @@
      "platform": "Netflix"
                       
   }
-=======
-
-    {
-     "username": "spiderman",       
-     "email": "spiderman@gmail.com",
-     "password":"7575IEonDYH8768%",
-     "age": "15",
-     "platform": "Netflix"
-                      
-   }
->>>>>>> 5700e5e2eddc0bc7a86599b0637cc430869282fd
