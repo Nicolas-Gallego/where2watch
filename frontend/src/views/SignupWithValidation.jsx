@@ -76,9 +76,8 @@ function Signup() {
         <div className="container-fluid">
             <div className="row d-flex justify-content-center">
                 <div className="col-12 col-md-6">
-
                     <form>
-                        <h1 className="title">Sign Up</h1>
+                        <h2 className="title">Sign Up</h2>
                         <div className="mb-3">
                             <input type="file"
                                 placeholder="image"
@@ -93,7 +92,6 @@ function Signup() {
                                 value={username}
                                 onChange={(event) => setUsername(event.target.value)}
                             />
-
                             <label className="form-label">Email address</label>
                             <input type="email"
                                 className="form-control"
@@ -101,7 +99,6 @@ function Signup() {
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
                             />
-
                             <label className="form-label">Password</label>
                             <input type="password"
                                 className="form-control"
@@ -109,7 +106,6 @@ function Signup() {
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
                             />
-
                             <label className="form-label">Confirm Password</label>
                             <input type="password"
                                 className="form-control"
@@ -117,7 +113,6 @@ function Signup() {
                                 value={confirmPassword}
                                 onChange={(event) => setConfirmPassword(event.target.value)}
                             />
-
                             <label className="form-label">Age</label>
                             <input type="number"
                                 className="form-control"
@@ -126,7 +121,6 @@ function Signup() {
                                 value={age}
                                 onChange={(event) => setAge(event.target.value)}
                             />
-
                             <div className="mb-3">
                             <label className="form-label" for="inputGroupSelect01">Platform</label>
                             <Multiselect
@@ -138,7 +132,6 @@ function Signup() {
                                 onRemove={(list) => setSelectedPlatform(list)}
                             />
                             </div>
-
                             <div className="d-grid gap-2">
                                 <button className="btn btn-primary" type="button"
                                     onClick={onClickCreate}>Create Account</button>

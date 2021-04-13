@@ -45,18 +45,7 @@ const FilmPage = ({ match }) => {
                 <span>{filmInfos.description}</span>
                 <h5>Availble on </h5>
                 <div className="logos d-flex justify-content-start">
-                  <a href="#">
-                    {" "}
-                    <img src="/netflix.png" alt="" className="logoPlatform" />
-                  </a>
-                  <a href="#">
-                    {" "}
-                    <img src="/prime.png" alt="" className="logoPlatform" />
-                  </a>
-                  <a href="#">
-                    {" "}
-                    <img src="/disney.png" alt="" className="logoPlatform" />
-                  </a>
+                  
                 </div>
                 <div className="filmInfos">
                   <h5>Casting</h5>
@@ -72,22 +61,20 @@ const FilmPage = ({ match }) => {
                 </div>
                 <div>
                   <span>
-                    <h6>Genre</h6>Drama, Thriller
+                    <h6>Genre</h6>
+                    {filmInfos.genres.map((genre) => {
+                    return <span>{genre}, </span>;
+                  })}
                   </span>
                 </div>
                 <div>
                   <span>
-                    <h6>Note</h6>****
-                  </span>
-                </div>
-                <div>
-                  <span>
-                    <h6>Duration</h6>2h55
+                    <h6>Note</h6>
+                    {filmInfos.note}/10
                   </span>
                 </div>
                 <div className="other">
                   <h4>Similar movies</h4>
-
                   <div
                     id="carouselExampleIndicators"
                     class="carousel slide"
