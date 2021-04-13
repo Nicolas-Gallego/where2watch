@@ -50,7 +50,6 @@ function Home() {
     <div className="container-fluid">
       <div className="row d-flex justify-content-center">
         <div className="col-10">
-          <h1 className="mainTitle">Where 2 Watch</h1>
           <form>
             <div className="input-group mb-3 ">
               <span className="input-group-text" id="basic-addon1">

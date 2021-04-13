@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import Home from "./views/Home";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
+import SignupWithValidation from "./views/SignupWithValidation";
 import Profile from "./views/Profile";
 import EditProfile from "./views/EditProfile";
 import '../src/css/App.css';
@@ -21,7 +22,7 @@ function App() {
     <BrowserRouter>
       <Route path="/home" exact component={Home}></Route>
       <Route path="/login"  component={Login}></Route>
-      <Route path="/signup" component={Signup}></Route>
+      <Route path="/signup" component={SignupWithValidation}></Route>
       <Route path="/profile/:id"  component={Profile}></Route>
       <Route path="/editprofile"  component={EditProfile}></Route>     
       <Route path="/films/:id"  component={FilmPage}></Route>     

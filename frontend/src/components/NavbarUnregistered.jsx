@@ -2,10 +2,11 @@ import "../css/navbar.css";
 
 const NavbarUnregistered = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-xl navbar-light bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          <img src="/w2w_logo.png" alt="logo" className="logo" />
+        <a className="navbar-brand d-flex justify-content-start align-items-center flex-wrap" href="/home">
+          <img src="/w2w_logo.png" alt="logo" className="logo"/>
+          <h1 className="mainTitle">Where 2 Watch</h1>
         </a>
         <button
           className="navbar-toggler"
@@ -20,7 +21,7 @@ const NavbarUnregistered = () => {
         </button>
         <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-link active" aria-current="page" href="/">
+            <a className="nav-link active" aria-current="page" href="/home">
               Home
             </a>
             <a className="nav-link" href="/catalog">

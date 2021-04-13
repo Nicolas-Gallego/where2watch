@@ -1,5 +1,12 @@
+.mainTitle{
+    font-family: 'futuraHeavyItalic';
+    font-size: 75px;
+    margin-bottom: 0px;
+}
+
 .navbar{
     font-family: 'futuraBook';
+    margin-bottom: 32px;
 }
 .logo{
     height: 75px;
@@ -12,3 +19,4 @@
 .profilePicture{
     height: 50px;
 }
+

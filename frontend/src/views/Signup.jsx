@@ -103,6 +103,7 @@ export default function Signup() {
     return (
         <div className="container-fluid">
             <div className="row d-flex justify-content-center">
+            <h2 className="title">Sign Up</h2>
                 <div className="col-12 col-md-6">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>

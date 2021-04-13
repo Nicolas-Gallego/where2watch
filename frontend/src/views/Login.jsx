@@ -69,7 +69,7 @@ const Login = () => {
                 <div className="col-12 col-md-6">
 
 
-                    <h1 className="title">Login Up</h1>
+                    <h2 className="title">Login</h2>
                     <form>
                         <div className="mb-3">
                             <h5 className="error-meassages">{logInStatus}</h5>

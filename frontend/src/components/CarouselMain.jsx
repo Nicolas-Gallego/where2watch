@@ -32,12 +32,12 @@ export default class CarouselMain extends Component {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
         items: 4,
-        slidesToSlide: 4, // optional, default to 1.
+        slidesToSlide: 1, // optional, default to 1.
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
         items: 2,
-        slidesToSlide: 2, // optional, default to 1.
+        slidesToSlide: 1, // optional, default to 1.
       },
       mobile: {
         breakpoint: { max: 464, min: 0 },
@@ -51,7 +51,7 @@ export default class CarouselMain extends Component {
           <Carousel
             swipeable={true}
             draggable={true}
-            showDots={true}
+            showDots={false}
             responsive={responsive}
             ssr={true} // means to render carousel on server-side.
             infinite={true}
@@ -61,13 +61,13 @@ export default class CarouselMain extends Component {
             customTransition="transform 300ms ease-in-out"
             transitionDuration={500}
             containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
+            removeArrowOnDeviceType={["mobile"]}
             deviceType={this.props.deviceType}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-0-px"
             // className="carousel"
           >
-            {this.state.movies.slice(0,20).map((movie) => {
+            {this.state.movies.slice(0, 20).map((movie) => {
               return (
                 <Link to={`/films/${movie.id_imdb}`}>
                   <img
