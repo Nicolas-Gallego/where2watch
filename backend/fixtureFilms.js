@@ -7,8 +7,8 @@ mongoose.connect("mongodb://localhost:27017/w2w", () => {
 });
 
 const createFilms = async () => {
-  FilmModel.deleteMany({}).exec();
-  for (let i = 1; i <= 600; i++) {
+  await FilmModel.deleteMany({}).exec();
+  for (let i = 1; i <= 500; i++) {
     const searchPopularMovies = request(
       `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&page=${i}`,
       async function (error, response, body) {
@@ -28,7 +28,7 @@ const createFilms = async () => {
             description: film.overview,
             langue: film.original_language,
             genres: film.genre_ids,
-            note: film.vote_average,
+            note: film.vote_average
           };
         });
 
@@ -168,25 +168,25 @@ const addGenreFilms = async () => {
 const tkt = async () => {
   // createFilms();
 
-  // setTimeout(() => {
-  //   addGenreFilms();
-  // }, 60000);
+  setTimeout(() => {
+    addGenreFilms();
+  }, 60000);
 
   // setTimeout(() => {
   //   addDirectorFilms();
   // }, 6);
 
-  // setTimeout(() => {
-  //   addCastFilms();
-  // }, 60000);
+  setTimeout(() => {
+    addCastFilms();
+  }, 60000);
 
-  // setTimeout(() => {
-  //   addPlatformFilms();
-  // }, 60000);
+  setTimeout(() => {
+    addPlatformFilms();
+  }, 60000);
 
-  // setTimeout(() => {
-  //   addSimilarsFilms();
-  // }, 60000);
+  setTimeout(() => {
+    addSimilarsFilms();
+  }, 60000);
 };
 
 tkt();
