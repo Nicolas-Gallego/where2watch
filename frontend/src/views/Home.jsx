@@ -31,7 +31,9 @@ function Home() {
           </form>
         </div>
       </div>
+      <div >
       <CarouselMain/>
+      </div>
     </div>
   );
 }
