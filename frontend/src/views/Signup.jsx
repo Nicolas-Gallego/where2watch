@@ -106,7 +106,7 @@ export default function Signup() {
                 <div className="col-12 col-md-6">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
-                        <input type="file" name="picture" {...register("picture")}/>
+                        <input placeholder='ma bite' type="file" name="picture" {...register("picture")}/>
                         <p className="error-meassages">{errors.picture?.message}</p>
                         
                         </div>

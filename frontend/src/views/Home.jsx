@@ -4,29 +4,43 @@ import PlatformFilter from "../components/PlatformFilter";
 import CarouselMain from "../components/CarouselMain";
 import "../css/carousel.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [platformFilterValue, setPlatformFilterValue] = useState([]);
+  const [films, setfilms] = useState("");
 
   const fetchfilms = () => {
-    console.log(`http://localhost:8000/home/${platformFilterValue}`)
-    fetch(`http://localhost:8000/home/${platformFilterValue}`)
+    fetch(`http://localhost:8000/home`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        cat: platformFilterValue,
+      }),
+    })
       .then((response) => {
         return response.json();
       })
       .then((response) => {
         console.log(response);
+        setfilms(response.films);
       });
   };
 
   useEffect(() => {
-    console.log(platformFilterValue);
-  }, [platformFilterValue]);
+    if (films) {
+      return;
+    } else {
+      fetchfilms();
+    }
+  }, [films]);
 
-  function tkt (e) {
+  function tkt(e) {
     fetchfilms();
     e.preventDefault();
-  };
+  }
 
   const checkFilter = (data) => {
     setPlatformFilterValue(data);
@@ -61,6 +75,20 @@ function Home() {
       </div>
       <div>
         <CarouselMain />
+      </div>
+      <div>
+        {films ? (
+          films.slice(0, 100).map((item) => (
+            <Link to={`/films/${item.id_imdb}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w300/${item.image}`}
+                alt=""
+              />{" "}
+            </Link>
+          ))
+        ) : (
+          <h1>LOADING</h1>
+        )}
       </div>
     </div>
   );

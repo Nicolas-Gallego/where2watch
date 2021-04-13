@@ -23,12 +23,16 @@ app.use(cors());
 app.use("/user", authRoute);
 app.use("/films", filmRoute);
 
-app.get("/home/:cat", async (req, res) => {
-  const myFilms = await FilmModel.find({ platforme: req.params.cat }).exec();
-  console.log(myFilms);
-  res.json({ films: myFilms, message: "coucou" });
-  console.log(req.params.cat);
-  console.log("coucou");
+app.post("/home", async (req, res) => {
+  if (req.body.cat.length) {
+    const myFilms = await FilmModel.find({
+      platforme: { $in: req.body.cat },
+    }).exec();
+    res.json({ films: myFilms, message: "coucou" });
+  } else {
+    const myFilms = await FilmModel.find({}).exec();
+    res.json({ films: myFilms, message: "coucou" });
+  }
 });
 
 app.listen(8000, () => {

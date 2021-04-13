@@ -8,10 +8,12 @@ const PlatformFilter = ({ checkFilter }) => {
 
 
   const handleOnchange = (val) => {
-    // checkFilter(val);
-    test.push(val)
-    console.log(test)
-
+    
+    let tkt =[]
+    tkt = val.map((plat) => {
+      return plat.value
+    })
+    checkFilter(tkt);
   };
 
   const options = [
@@ -29,6 +31,7 @@ const PlatformFilter = ({ checkFilter }) => {
       onChange={handleOnchange}
       placeholder={"Platform"}
       options={options}
+      jsonValue={true}
     />
   );
 };

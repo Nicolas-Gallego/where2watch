@@ -20,7 +20,6 @@ function App() {
     
     <BrowserRouter>
       <Route path="/home" exact component={Home}></Route>
-      <Route path="/home/:cat" component={Home}></Route>
       <Route path="/login"  component={Login}></Route>
       <Route path="/signup" component={Signup}></Route>
       <Route path="/profile/:id"  component={Profile}></Route>
