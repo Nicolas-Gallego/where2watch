@@ -166,25 +166,25 @@ const addGenreFilms = async () => {
 const tkt = async () => {
   createFilms();
 
-  setTimeout(() => {
-    addGenreFilms();
-  }, 60000);
+  // setTimeout(() => {
+  //   addGenreFilms();
+  // }, 60000);
 
-  setTimeout(() => {
-    addDirectorFilms();
-  }, 60000);
+  // setTimeout(() => {
+  //   addDirectorFilms();
+  // }, 60000);
 
-  setTimeout(() => {
-    addCastFilms();
-  }, 60000);
+  // setTimeout(() => {
+  //   addCastFilms();
+  // }, 60000);
 
-  setTimeout(() => {
-    addPlatformFilms();
-  }, 60000);
+  // setTimeout(() => {
+  //   addPlatformFilms();
+  // }, 60000);
 
-  setTimeout(() => {
-    addSimilarsFilms();
-  }, 60000);
+  // setTimeout(() => {
+  //   addSimilarsFilms();
+  // }, 60000);
 };
 
 tkt();
