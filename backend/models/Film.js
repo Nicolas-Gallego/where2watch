@@ -26,7 +26,6 @@ const filmSchema = new mongoose.Schema({
   ],
   langue: String,
   note: Number,
-  duree: String,
   similars: [
     {
       id_imdb: String,
@@ -35,6 +34,7 @@ const filmSchema = new mongoose.Schema({
       image: String,
     },
   ],
+  genres: [String],
 });
 
 const FilmModel = mongoose.model("Film", filmSchema);

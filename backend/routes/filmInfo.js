@@ -19,4 +19,8 @@ router.get("/moovice/:id", async (req, res) => {
   });
 });
 
+router.get("/moovice?catégories=cat", async (req, res) => {
+  res.json({message:"coucou"})
+});
+
 module.exports = router;
