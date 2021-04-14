@@ -176,17 +176,17 @@ const tkt = async () => {
   //   addDirectorFilms();
   // }, 60);
 
-  // setTimeout(() => {
-  //   addCastFilms();
-  // }, 60);
+  setTimeout(() => {
+    addCastFilms();
+  }, 60);
 
   // setTimeout(() => {
   //   addPlatformFilms();
   // }, 60);
 
-  setTimeout(() => {
-    addSimilarsFilms();
-  }, 60);
+  // setTimeout(() => {
+  //   addSimilarsFilms();
+  // }, 60);
 };
 
 tkt();

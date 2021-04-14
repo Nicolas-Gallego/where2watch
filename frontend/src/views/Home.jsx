@@ -10,6 +10,9 @@ function Home() {
   const [platformFilterValue, setPlatformFilterValue] = useState([]);
   const [films, setfilms] = useState("");
 
+  const [searchValue, setSearchValue] = useState("");
+  const [test, setTest] = useState("");
+
   const fetchfilms = () => {
     fetch(`http://localhost:8000/home`, {
       method: "POST",
@@ -24,7 +27,6 @@ function Home() {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         setfilms(response.films);
       });
   };
@@ -35,7 +37,11 @@ function Home() {
     } else {
       fetchfilms();
     }
-  }, [films]);
+  }, [films, searchValue]);
+
+  useEffect(() => {
+    searchBarResulut();
+  }, [searchValue]);
 
   function tkt(e) {
     fetchfilms();
@@ -46,6 +52,21 @@ function Home() {
     setPlatformFilterValue(data);
   };
 
+  const searchBarResulut = () => {
+    if (searchValue) {
+      fetch(`http://localhost:8000/films/moovice/${searchValue}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          setTest(response);
+          console.log(response);
+        }).catch((err) => {
+          console.log(err)
+        })
+    }
+  };
+
   return (
     <div className="container-fluid">
       <div className="row d-flex justify-content-center">
@@ -53,13 +74,13 @@ function Home() {
           <form>
             <div className="input-group mb-3 ">
               <span className="input-group-text" id="basic-addon1">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </span>
               <input
-                type="text"
+                type="search"
                 className="form-control"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
               />
             </div>
             <div className="d-flex flex-row justify-content-evenly filter">

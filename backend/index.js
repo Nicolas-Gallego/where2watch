@@ -24,15 +24,22 @@ app.use("/user", authRoute);
 app.use("/films", filmRoute);
 
 app.post("/home", async (req, res) => {
+  console.log("requete faite a POST /home ");
   if (req.body.cat.length) {
     const myFilms = await FilmModel.find({
       platforme: { $in: req.body.cat },
     }).exec();
     res.json({ films: myFilms, message: "coucou" });
-  } else {
-    const myFilms = await FilmModel.find({}).exec();
+    
+  }else if(req.body.genre.length){
+    const myFilms = await FilmModel.find({
+      genres: { $in: req.body.cat },
+    }).exec();
     res.json({ films: myFilms, message: "coucou" });
   }
+
+  const myFilms = await FilmModel.find({}).limit(100).exec();
+  res.json({ films: myFilms, message: "coucou" });
 });
 
 app.listen(8000, () => {

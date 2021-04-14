@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import "../css/filmPage.css";
 const FilmPage = ({ match }) => {
   const [filmInfos, setFilmInfos] = useState("");
+  const [filmId, setFilmId] = useState(match.params.id);
+
   useEffect(() => {
-    if (!filmInfos) {
-      searchFilmInfos();
-    }
-  }, [filmInfos]);
+    searchFilmInfos();
+  }, [filmId]);
+
   const searchFilmInfos = () => {
-    fetch(`http://localhost:8000/films/moovice/${match.params.id}`, {
+    fetch(`http://localhost:8000/films/moovice/${filmId}`, {
       method: "GET",
     })
       .then((response) => {
@@ -44,9 +45,7 @@ const FilmPage = ({ match }) => {
                 {/* must be replace by film Synopsis */}
                 <span>{filmInfos.description}</span>
                 <h5>Availble on </h5>
-                <div className="logos d-flex justify-content-start">
-                  
-                </div>
+                <div className="logos d-flex justify-content-start"></div>
                 <div className="filmInfos">
                   <h5>Casting</h5>
                   <span>
@@ -63,8 +62,8 @@ const FilmPage = ({ match }) => {
                   <span>
                     <h6>Genre</h6>
                     {filmInfos.genres.map((genre) => {
-                    return <span>{genre}, </span>;
-                  })}
+                      return <span>{genre}, </span>;
+                    })}
                   </span>
                 </div>
                 <div>
@@ -77,61 +76,67 @@ const FilmPage = ({ match }) => {
                   <h4>Similar movies</h4>
                   <div
                     id="carouselExampleIndicators"
-                    class="carousel slide"
+                    className="carousel slide"
                     data-bs-ride="carousel"
                   >
-                    <div class="carousel-inner">
+                    <div className="carousel-inner">
                       {filmInfos.similars.map((simi, index) => {
                         if (index === 0) {
                           return (
-                            <div class="carousel-item active">
-                              <Link to={`/films/${simi.id_imdb}`}>
+                            <Link
+                              to={`/films/${simi.id_imdb}`}
+                              className="carousel-item active"
+                            >
+                              <div onClick={() => setFilmId(simi.id_imdb)}>
                                 <img
                                   src={`https://image.tmdb.org/t/p/w300/${simi.image}`}
-                                  class="d-block w-100"
+                                  className="d-block w-100"
                                   alt="..."
                                 />
-                              </Link>
-                            </div>
+                              </div>
+                            </Link>
                           );
                         } else {
                           return (
-                            <div class="carousel-item">
-                              <Link to={`/films/${simi.id_imdb}`}>
+                            <Link
+                              to={`/films/${simi.id_imdb}`}
+                              className="carousel-item"
+                            >
+                              <div onClick={() => setFilmId(simi.id_imdb)}>
                                 <img
                                   src={`https://image.tmdb.org/t/p/w300/${simi.image}`}
-                                  class="d-block w-100"
+                                  className="d-block w-100"
                                   alt="..."
                                 />
-                              </Link>
-                            </div>
+                              </div>
+                            </Link>
                           );
                         }
                       })}
                     </div>
                     <button
-                      class="carousel-control-prev"
+                      className="carousel-control-prev"
                       type="button"
                       data-bs-target="#carouselExampleIndicators"
                       data-bs-slide="prev"
                     >
                       <span
-                        class="carousel-control-prev-icon"
+                        className="carousel-control-prev-icon"
                         aria-hidden="true"
                       ></span>
-                      <span class="visually-hidden">Previous</span>
+                      <span className="visually-hidden">Previous</span>
                     </button>
                     <button
-                      class="carousel-control-next"
+                      className="carousel-control-next"
                       type="button"
                       data-bs-target="#carouselExampleIndicators"
                       data-bs-slide="next"
                     >
                       <span
-                        class="carousel-control-next-icon"
+                        className="carousel-control-next-icon"
                         aria-hidden="true"
                       ></span>
-                      <span class="visually-hidden">Next</span>
+                      <span className="visually-hidden">Next</span>
                     </button>
                   </div>
                 </div>

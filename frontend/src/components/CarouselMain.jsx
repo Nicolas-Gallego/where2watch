@@ -14,7 +14,6 @@ export default class CarouselMain extends Component {
     this.loadMovies();
   }
   loadMovies() {
-    console.log("load movies");
     fetch(`http://localhost:8000/films/moovice`)
       .then((response) => {
         return response.json();
@@ -23,7 +22,6 @@ export default class CarouselMain extends Component {
         this.setState({
           movies: response.films,
         });
-        console.log(response);
       });
   }
 
