@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import "../css/filmPage.css";
 const FilmPage = ({ match }) => {
   const [filmInfos, setFilmInfos] = useState("");
+  const [filmId, setFilmId] = useState(match.params.id);
+
   useEffect(() => {
-    if (!filmInfos) {
-      searchFilmInfos();
-    }
-  }, [filmInfos]);
+    searchFilmInfos();
+  }, [filmId]);
+
   const searchFilmInfos = () => {
-    fetch(`http://localhost:8000/films/moovice/${match.params.id}`, {
+    fetch(`http://localhost:8000/films/moovice/${filmId}`, {
       method: "GET",
     })
       .then((response) => {
@@ -86,7 +87,7 @@ const FilmPage = ({ match }) => {
                               to={`/films/${simi.id_imdb}`}
                               className="carousel-item active"
                             >
-                              <div>
+                              <div onClick={() => setFilmId(simi.id_imdb)}>
                                 <img
                                   src={`https://image.tmdb.org/t/p/w300/${simi.image}`}
                                   className="d-block w-100"
@@ -101,7 +102,7 @@ const FilmPage = ({ match }) => {
                               to={`/films/${simi.id_imdb}`}
                               className="carousel-item"
                             >
-                              <div>
+                              <div onClick={() => setFilmId(simi.id_imdb)}>
                                 <img
                                   src={`https://image.tmdb.org/t/p/w300/${simi.image}`}
                                   className="d-block w-100"

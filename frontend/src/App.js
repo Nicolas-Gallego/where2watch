@@ -19,12 +19,12 @@ function App() {
       {/* <NavbarRegistered/> */}
 
       <BrowserRouter>
-        <Route path="/home" exact component={Home}></Route>
+        <Route exact path="/home" component={Home}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/signup" component={SignupWithValidation}></Route>
         <Route path="/profile/:id" component={Profile}></Route>
         <Route path="/editprofile" component={EditProfile}></Route>
-        <Route path="/films/:id" component={FilmPage}></Route>
+        <Route exact path="/films/:id" component={FilmPage}></Route>
         <Route path="/catalog" component={Catalog}></Route>
 
         {/*     

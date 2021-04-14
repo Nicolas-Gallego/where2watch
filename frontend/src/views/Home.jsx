@@ -10,6 +10,9 @@ function Home() {
   const [platformFilterValue, setPlatformFilterValue] = useState([]);
   const [films, setfilms] = useState("");
 
+  const [searchValue, setSearchValue] = useState("");
+  const [test, setTest] = useState("");
+
   const fetchfilms = () => {
     fetch(`http://localhost:8000/home`, {
       method: "POST",
@@ -24,7 +27,6 @@ function Home() {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         setfilms(response.films);
       });
   };
@@ -33,8 +35,13 @@ function Home() {
     if (films) {
       return;
     } else {
+      fetchfilms();
     }
-  }, [films]);
+  }, [films, searchValue]);
+
+  useEffect(() => {
+    searchBarResulut();
+  }, [searchValue]);
 
   function tkt(e) {
     fetchfilms();
@@ -43,6 +50,21 @@ function Home() {
 
   const checkFilter = (data) => {
     setPlatformFilterValue(data);
+  };
+
+  const searchBarResulut = () => {
+    if (searchValue) {
+      fetch(`http://localhost:8000/films/moovice/${searchValue}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          setTest(response);
+          console.log(response);
+        }).catch((err) => {
+          console.log(err)
+        })
+    }
   };
 
   return (
@@ -55,10 +77,10 @@ function Home() {
                 <i className="fas fa-search"></i>
               </span>
               <input
-                type="text"
+                type="search"
                 className="form-control"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
               />
             </div>
             <div className="d-flex flex-row justify-content-evenly">
@@ -77,7 +99,7 @@ function Home() {
       <div>
         {films ? (
           films.slice(0, 100).map((item) => (
-            <Link key={item} to={`/films/${item.id_imdb}`}>
+            <Link to={`/films/${item.id_imdb}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w300/${item.image}`}
                 alt=""
