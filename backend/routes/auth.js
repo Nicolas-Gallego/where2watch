@@ -70,7 +70,7 @@ router.post(
       password: bcrypt.hashSync(req.body.password),
       age: req.body.age,
       platforms: req.body.platforms,
-      profilePicture: req.file.filename,
+      //profilePicture: req.file.filename
     });
     try {
       const saveUser = await user.save();

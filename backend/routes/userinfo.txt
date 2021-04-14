@@ -15,3 +15,13 @@
      "platform": "Netflix"
                       
   }
+
+
+  {
+     "username": "wonder woman",       
+     "email": "wonderwoman@gmail.com",
+     "password":"7575888768",
+     "age": "21",
+     "platform": "Netflix"
+                      
+  }
