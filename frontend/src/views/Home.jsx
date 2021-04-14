@@ -53,6 +53,7 @@ function Home() {
   };
 
   const searchBarResulut = () => {
+    console.log(searchValue)
     if (searchValue) {
       fetch(`http://localhost:8000/films/moovice/${searchValue}`)
         .then((response) => {

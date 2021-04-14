@@ -3,16 +3,13 @@ import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 
 const PlatformFilter = ({ checkFilter }) => {
-
   const [test, setTest] = useState([]);
 
-
   const handleOnchange = (val) => {
-    
-    let tkt =[]
+    let tkt = [];
     tkt = val.map((plat) => {
-      return plat.value
-    })
+      return plat.value;
+    });
     checkFilter(tkt);
   };
 
