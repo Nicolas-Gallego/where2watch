@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 
-const GenreFilter = () => {
-    const [value, setvalue] = useState("");
+const GenreFilter = ({ checkGenreFilter }) => {
+  const [value, setvalue] = useState("");
 
   const handleOnchange = (val) => {
-    setvalue(val);
+    let filterGenre = [];
+    filterGenre = val.map((type) => {
+      return type.value;
+    });
+    checkGenreFilter(filterGenre);
   };
 
   const options = [
@@ -29,8 +33,13 @@ const GenreFilter = () => {
     { label: "War", value: "option_18" },
     { label: "Western", value: "option_19" },
   ];
-    return(
-<MultiSelect onChange={handleOnchange} placeholder={'Genre'} options={options} />
-    )
-}
-export default GenreFilter
+  return (
+    <MultiSelect
+      onChange={handleOnchange}
+      placeholder={"Genre"}
+      options={options}
+      jsonValue={true}
+    />
+  );
+};
+export default GenreFilter;

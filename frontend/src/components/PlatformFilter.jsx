@@ -32,7 +32,6 @@ const PlatformFilter = ({ checkFilter }) => {
       placeholder={"Platform"}
       options={options}
       jsonValue={true}
-      className="platformFilter"
     />
   );
 };

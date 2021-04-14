@@ -30,16 +30,18 @@ app.post("/home", async (req, res) => {
       platforme: { $in: req.body.cat },
     }).exec();
     res.json({ films: myFilms, message: "coucou" });
-    
-  }else if(req.body.genre.length){
+
+  } else if (req.body.genres.length) {
     const myFilms = await FilmModel.find({
-      genres: { $in: req.body.cat },
+      genres: { $in: req.body.genres },
     }).exec();
+    res.json({ films: myFilms, message: "coucou" });
+  } else {
+    const myFilms = await FilmModel.find({}).limit(100).exec();
     res.json({ films: myFilms, message: "coucou" });
   }
 
-  const myFilms = await FilmModel.find({}).limit(100).exec();
-  res.json({ films: myFilms, message: "coucou" });
+
 });
 
 app.listen(8000, () => {

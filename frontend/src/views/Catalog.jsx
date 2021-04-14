@@ -5,6 +5,7 @@ import PlatformFilter from "../components/PlatformFilter";
 
 const Catalog = () => {
   const [platformFilterValue, setPlatformFilterValue] = useState([]);
+  const [genreFilterValue, setGenreFilterValue] = useState([]);
   const [films, setfilms] = useState("");
 
   const fetchfilms = () => {
@@ -15,6 +16,7 @@ const Catalog = () => {
       },
       body: JSON.stringify({
         cat: platformFilterValue,
+        genres: genreFilterValue,
       }),
     })
       .then((response) => {
@@ -38,6 +40,9 @@ const Catalog = () => {
     fetchfilms();
     e.preventDefault();
   }
+  const checkGenreFilter = (type) => {
+    setGenreFilterValue(type)
+  }
 
   const checkFilter = (data) => {
     setPlatformFilterValue(data);
@@ -50,7 +55,7 @@ const Catalog = () => {
         </div>
         <div className="row">
           <div className="d-flex flex-row justify-content-evenly filterCatalog">
-            <GenreFilter></GenreFilter>
+            <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
             <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
             <button className="btn searchButton" onClick={tkt}>
               Filter
