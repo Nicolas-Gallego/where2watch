@@ -15,8 +15,8 @@ const Catalog = () => {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        cat: platformFilterValue,
-        genres: genreFilterValue,
+        cat: platformFilterValue ? platformFilterValue : null ,
+        genres: genreFilterValue ? genreFilterValue : null,
       }),
     })
       .then((response) => {
@@ -41,8 +41,8 @@ const Catalog = () => {
     e.preventDefault();
   }
   const checkGenreFilter = (type) => {
-    setGenreFilterValue(type)
-  }
+    setGenreFilterValue(type);
+  };
 
   const checkFilter = (data) => {
     setPlatformFilterValue(data);
@@ -64,7 +64,7 @@ const Catalog = () => {
 
           <div className="d-flex justify-content-center flex-wrap">
             {films ? (
-              films.map((item) => (
+              films.slice(0, 20).map((item) => (
                 <Link to={`/films/${item.id_imdb}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w300/${item.image}`}

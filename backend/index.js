@@ -25,23 +25,30 @@ app.use("/films", filmRoute);
 
 app.post("/home", async (req, res) => {
   console.log("requete faite a POST /home ");
-  if (req.body.cat.length) {
+  // si je recois un genre et une platforme
+  if (req.body.cat.length && req.body.genres.length) {
     const myFilms = await FilmModel.find({
       platforme: { $in: req.body.cat },
+      genres: { $in: req.body.genres },
     }).exec();
     res.json({ films: myFilms, message: "coucou" });
-
   } else if (req.body.genres.length) {
+    //sinon si je recois juste un genre
     const myFilms = await FilmModel.find({
       genres: { $in: req.body.genres },
     }).exec();
     res.json({ films: myFilms, message: "coucou" });
+  } else if (req.body.cat.length) {
+    //sinon si je recois juste une platforme
+    const myFilms = await FilmModel.find({
+      platforme: { $in: req.body.cat },
+    }).exec();
+    res.json({ films: myFilms, message: "coucou" });
   } else {
+    // par défaut je recois 100 films
     const myFilms = await FilmModel.find({}).limit(100).exec();
     res.json({ films: myFilms, message: "coucou" });
   }
-
-
 });
 
 app.listen(8000, () => {
