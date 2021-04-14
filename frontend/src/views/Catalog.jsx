@@ -52,7 +52,6 @@ const Catalog = () => {
   };
 
   const searchBarResulut = () => {
-    console.log(searchValue)
     if (searchValue) {
       fetch(`http://localhost:8000/films/moovice/search/${searchValue}`)
         .then((response) => {
