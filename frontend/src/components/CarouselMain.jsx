@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default class CarouselMain extends Component {
   constructor(props) {
@@ -79,7 +81,9 @@ export default class CarouselMain extends Component {
         </div>
       );
     } else {
-      return <h1>Loading</h1>;
+      return (
+        <span>loading</span>
+      );
     }
   }
 }
