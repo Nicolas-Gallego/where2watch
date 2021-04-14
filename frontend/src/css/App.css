@@ -1,39 +1,55 @@
-@font-face{
-    font-family: 'futuraHeavyItalic';
-    src: url('../fonts/Futura\ Heavy\ Italic\ font.ttf');
+@font-face {
+  font-family: "futuraHeavyItalic";
+  src: url("../fonts/Futura\ Heavy\ Italic\ font.ttf");
 }
-@font-face{
-    font-family: 'futuraBook';
-    src: url('../fonts/Futura\ Book\ font.ttf');
+@font-face {
+  font-family: "futuraBook";
+  src: url("../fonts/Futura\ Book\ font.ttf");
 }
-@font-face{
-    font-family: 'futuraLight';
-    src: url('../fonts/futura\ light\ bt.ttf');
-}
-
-*{
-    margin: 0;
-    padding: 0;
+@font-face {
+  font-family: "futuraLight";
+  src: url("../fonts/futura\ light\ bt.ttf");
 }
 
-body{
-    font-family: 'futuraLight';
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.mainTitle{
-    font-family: 'futuraHeavyItalic';
-    font-size: 75px;
+body {
+  font-family: "futuraLight";
 }
 
-.msl-vars{
-    width: 300px;
-    max-height: 40px;
+.mainTitle {
+  font-family: "futuraHeavyItalic";
+  font-size: 75px;
 }
 
-h2, h3, h4, h5, h6{
-    font-weight: 600;
+.msl-vars {
+  width: 300px;
+  /* max-height: 40px; */
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
 }
 
 h2 {
-    font-size: 50px;
+  font-size: 50px;
 }
+
+.filter {
+  z-index: 1;
+}
+.filterCatalog{
+margin-bottom: 16px;
+}
+
+.filmDispo{
+margin: 8px;
+}
+

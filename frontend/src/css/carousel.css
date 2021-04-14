@@ -1,27 +1,15 @@
-
-
 .react-multi-carousel-item{
-    width: 300px !important;
-    
+    width: 300px !important;  
 }
-
-.react-multi-carousel-item:hover {
+.react-multi-carousel-track:hover, .react-multi-carousel-item{
     transform: translateX(-5%);
-    transition-duration: 0.2s;
-
- }
-
- .react-multi-carousel-item:hover ~.react-multi-carousel-item {
+}
+.react-multi-carousel-item:hover ~ .react-multi-carousel-item {
     transform: translateX(5%);
-    transition-duration: 0.2s;
-
  }
-
  .react-multi-carousel-item:hover {
     transform: scale(1.1) !important;
-    transition-duration: 0.2s;
   }
-
   .carousel-container{
       margin-top: 50px;
       margin-bottom: 100px;

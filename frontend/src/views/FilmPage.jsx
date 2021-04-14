@@ -45,7 +45,20 @@ const FilmPage = ({ match }) => {
                 {/* must be replace by film Synopsis */}
                 <span>{filmInfos.description}</span>
                 <h5>Availble on </h5>
-                <div className="logos d-flex justify-content-start"></div>
+                <div className=" d-flex justify-content-start">
+                  {filmInfos.platforme.map((platforme) => {
+                    if (platforme === "pas trouvé") {
+                      <span>Pas trouvé</span>;
+                    } else {
+                      return (
+                        <img
+                          className="logoPlatform"
+                          src={`/${platforme}.png`}
+                        />
+                      );
+                    }
+                  })}
+                </div>
                 <div className="filmInfos">
                   <h5>Casting</h5>
                   <span>

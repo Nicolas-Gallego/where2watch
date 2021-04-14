@@ -84,7 +84,7 @@ function Home() {
                 onChange={(e) => setSearchValue(e.target.value)}
               />
             </div>
-            <div className="d-flex flex-row justify-content-evenly">
+            <div className="d-flex flex-row justify-content-evenly filter">
               <GenreFilter></GenreFilter>
               <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
               <button className="btn searchButton" onClick={tkt}>
