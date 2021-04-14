@@ -2,6 +2,8 @@ import "../css/home.css";
 import GenreFilter from "../components/GenreFilter";
 import PlatformFilter from "../components/PlatformFilter";
 import CarouselMain from "../components/CarouselMain";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "../css/carousel.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -53,7 +55,7 @@ function Home() {
   };
 
   const searchBarResulut = () => {
-    console.log(searchValue)
+    console.log(searchValue);
     if (searchValue) {
       fetch(`http://localhost:8000/films/moovice/${searchValue}`)
         .then((response) => {
@@ -62,9 +64,10 @@ function Home() {
         .then((response) => {
           setTest(response);
           console.log(response);
-        }).catch((err) => {
-          console.log(err)
         })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -97,18 +100,27 @@ function Home() {
       <div>
         <CarouselMain />
       </div>
-      <div>
+      <div className="d-flex justify-content-center flex-wrap">
         {films ? (
           films.slice(0, 100).map((item) => (
             <Link to={`/films/${item.id_imdb}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w300/${item.image}`}
                 alt=""
+                className="filmDispo"
               />{" "}
             </Link>
           ))
         ) : (
-          <h1>LOADING</h1>
+          <div className=" d-flex justify-content-center loader">
+            <Loader
+              type="Circles"
+              color="#000000"
+              height={100}
+              width={100}
+              timeout={20000}
+            />
+          </div>
         )}
       </div>
     </div>

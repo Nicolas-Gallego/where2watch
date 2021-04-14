@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GenreFilter from "../components/GenreFilter";
 import PlatformFilter from "../components/PlatformFilter";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Catalog = () => {
   const [platformFilterValue, setPlatformFilterValue] = useState([]);
@@ -74,7 +76,15 @@ const Catalog = () => {
                 </Link>
               ))
             ) : (
-              <h1>LOADING</h1>
+              <div className=" d-flex justify-content-center loader">
+              <Loader
+                type="Circles"
+                color="#000000"
+                height={100}
+                width={100}
+                timeout={10000}
+              />
+            </div>
             )}
           </div>
         </div>

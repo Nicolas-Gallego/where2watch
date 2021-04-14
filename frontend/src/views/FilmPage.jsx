@@ -2,6 +2,9 @@ import NavbarUnregistered from "../components/NavbarUnregistered";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/filmPage.css";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 const FilmPage = ({ match }) => {
   const [filmInfos, setFilmInfos] = useState("");
   const [filmId, setFilmId] = useState(match.params.id);
@@ -51,10 +54,12 @@ const FilmPage = ({ match }) => {
                       <span>Pas trouvé</span>;
                     } else {
                       return (
+                        <>
                         <img
                           className="logoPlatform"
                           src={`/${platforme}.png`}
                         />
+                        </>
                       );
                     }
                   })}
@@ -161,7 +166,15 @@ const FilmPage = ({ match }) => {
       </>
     );
   } else {
-    return <h1>Loading</h1>;
+    return  <div className=" d-flex justify-content-center loader">
+    <Loader
+      type="Circles"
+      color="#000000"
+      height={100}
+      width={100}
+      timeout={10000}
+    />
+  </div>
   }
 };
 
