@@ -13,7 +13,6 @@ const Catalog = () => {
   const [filmsSearch, setFilmsSearch] = useState("");
 
   const fetchfilms = () => {
-    setfilms();
     fetch(`http://localhost:8000/home`, {
       method: "POST",
       headers: {
@@ -33,21 +32,19 @@ const Catalog = () => {
       });
   };
 
-  useEffect(() => {
-    if (!films) {
-      fetchfilms();
-    }
 
-    if (searchValue.length >= 3) {
-      setTimeout(() => {
-        searchBarResulut();
-      }, 30);
+  useEffect(() => {
+    if (!searchValue) {
+      setfilms();
+      fetchfilms();
+    } else {
+      searchBarResulut();
     }
-  }, [films, searchValue]);
+  }, [searchValue]);
 
   function tkt(e) {
-    fetchfilms();
     e.preventDefault();
+    fetchfilms();
   }
   const checkGenreFilter = (type) => {
     console.log(type);
@@ -60,7 +57,6 @@ const Catalog = () => {
   };
 
   const searchBarResulut = () => {
-    console.log(searchValue);
 
     fetch(`http://localhost:8000/films/moovice/search/${searchValue}`)
       .then((response) => {
@@ -75,69 +71,115 @@ const Catalog = () => {
       });
   };
 
-  return (
-    <>
-      <div className="container-fluid">
-        <div className=" d-flex justify-content-center titleCatalog">
-          <h2>catalog</h2>
-        </div>
-        <div className="row">
-          <div className="input-group mb-3 ">
-            <span className="input-group-text" id="basic-addon1">
-              <i className="fas fa-search"></i>
-            </span>
-            <input
-              type="search"
-              className="form-control"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
+  if (searchValue) {
+    return (
+      <>
+        <div className="container-fluid">
+          <div className=" d-flex justify-content-center titleCatalog">
+            <h2>catalog</h2>
           </div>
-          <div className="d-flex flex-row justify-content-evenly filterCatalog">
-            <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
-            <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
-            <button className="btn searchButton" onClick={tkt}>
-              Filter
-            </button>
-          </div>
+          <div className="row">
+            <div className="input-group mb-3 ">
+              <span className="input-group-text" id="basic-addon1">
+                <i className="fas fa-search"></i>
+              </span>
+              <input
+                type="search"
+                className="form-control"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </div>
+            <div className="d-flex flex-row justify-content-evenly filterCatalog">
+              <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
+              <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
+              <button className="btn searchButton" onClick={tkt}>
+                Filter
+              </button>
+            </div>
 
-          <div className="d-flex justify-content-center flex-wrap">
-            {filmsSearch ? (
-              filmsSearch.slice(0, 20).map((item) => (
-                <Link to={`/films/${item.id_imdb}`}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300/${item.image}`}
-                    alt=""
-                    className="filmDispo"
-                  />{" "}
-                </Link>
-              ))
-            ) : films ? (
-              films.slice(0, 20).map((item) => (
-                <Link to={`/films/${item.id_imdb}`}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300/${item.image}`}
-                    alt=""
-                    className="filmDispo"
-                  />{" "}
-                </Link>
-              ))
-            ) : (
-              <div className=" d-flex justify-content-center loader">
-                <Loader
-                  type="Circles"
-                  color="#000000"
-                  height={100}
-                  width={100}
-                  timeout={10000}
-                />
-              </div>
-            )}
+            <div className="d-flex justify-content-center flex-wrap">
+              {filmsSearch ? (
+                filmsSearch.slice(0, 100).map((item, key) => (
+                  <Link key={key} to={`/films/${item.id_imdb}`}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300/${item.image}`}
+                      alt=""
+                      className="filmDispo"
+                    />{" "}
+                  </Link>
+                ))
+              ) : (
+                <div className=" d-flex justify-content-center loader">
+                  <Loader
+                    type="Circles"
+                    color="#000000"
+                    height={100}
+                    width={100}
+                    timeout={10000}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="container-fluid">
+          <div className=" d-flex justify-content-center titleCatalog">
+            <h2>catalog</h2>
+          </div>
+          <div className="row">
+            <div className="input-group mb-3 ">
+              <span className="input-group-text" id="basic-addon1">
+                <i className="fas fa-search"></i>
+              </span>
+              <input
+                type="search"
+                className="form-control"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </div>
+            <div className="d-flex flex-row justify-content-evenly filterCatalog">
+              <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
+              <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
+              <button className="btn searchButton" onClick={tkt}>
+                Filter
+              </button>
+            </div>
+
+            <div className="d-flex justify-content-center flex-wrap">
+              {films ? (
+                films.slice(0, 100).map((item, key) => (
+                  <Link key={key} to={`/films/${item.id_imdb}`}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300/${item.image}`}
+                      alt=""
+                      className="filmDispo"
+                    />{" "}
+                  </Link>
+                ))
+              ) : (
+                <div className=" d-flex justify-content-center loader">
+                  <Loader
+                    type="Circles"
+                    color="#000000"
+                    height={100}
+                    width={100}
+                    timeout={10000}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 };
 
 export default Catalog;
