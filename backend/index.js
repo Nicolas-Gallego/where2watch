@@ -25,6 +25,9 @@ app.use("/films", filmRoute);
 
 app.post("/home", async (req, res) => {
   console.log("requete faite a POST /home ");
+
+
+
   // si je recois un genre et une platforme
   if (req.body.cat.length && req.body.genres.length) {
     const myFilms = await FilmModel.find({
@@ -49,6 +52,7 @@ app.post("/home", async (req, res) => {
     const myFilms = await FilmModel.find({}).limit(100).exec();
     res.json({ films: myFilms, message: "coucou" });
   }
+  
 });
 
 app.listen(8000, () => {

@@ -10,7 +10,7 @@ router.get("/moovice", async (req, res) => {
   });
 });
 
-router.get("/moovice/:name", async (req, res) => {
+router.get("/moovice/search/:name", async (req, res) => {
   console.log("req.params.name", req.params.name);
   const films = await FilmModel.find({titre : new RegExp(req.params.name)});
   console.log(films);
@@ -22,12 +22,12 @@ router.get("/moovice/:name", async (req, res) => {
   }
 });
 
-// router.get("/moovice/:id", async (req, res) => {
-//   const film = await FilmModel.findOne({ id_imdb: req.params.id }).exec();
-//   res.json({
-//     film: film,
-//     message: "tu as fait une requete GET sur /films/:id",
-//   });
-// });
+router.get("/moovice/:id", async (req, res) => {
+  const film = await FilmModel.findOne({ id_imdb: req.params.id }).exec();
+  res.json({
+    film: film,
+    message: "tu as fait une requete GET sur /films/:id",
+  });
+});
 
 module.exports = router;
