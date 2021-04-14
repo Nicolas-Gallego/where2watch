@@ -65,7 +65,7 @@ export default class CarouselMain extends Component {
             deviceType={this.props.deviceType}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-0-px"
-            // className="carousel"
+            className="sibling-fade"
           >
             {this.state.movies.slice(0, 20).map((movie) => {
               return (
@@ -73,6 +73,7 @@ export default class CarouselMain extends Component {
                   <img
                     src={`https://image.tmdb.org/t/p/w300/${movie.image}`}
                     alt="..."
+                    className='posterCarousel'
                   />
                 </Link>
               );
@@ -81,9 +82,15 @@ export default class CarouselMain extends Component {
         </div>
       );
     } else {
-      return (
-        <span>loading</span>
-      );
+      return  <div className=" d-flex justify-content-center loader">
+      <Loader
+        type="Circles"
+        color="#000000"
+        height={100}
+        width={100}
+        timeout={10000}
+      />
+    </div>
     }
   }
 }
