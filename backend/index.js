@@ -26,33 +26,41 @@ app.use("/films", filmRoute);
 app.post("/home", async (req, res) => {
   console.log("requete faite a POST /home ");
 
-
+  console.log("req.body.platform", req.body.platform);
+  console.log("req.body.genres", req.body.genres);
 
   // si je recois un genre et une platforme
-  if (req.body.cat.length && req.body.genres.length) {
+  if (req.body.platform && req.body.genres) {
+    console.log("jai les deux");
     const myFilms = await FilmModel.find({
-      platforme: { $in: req.body.cat },
-      genres: { $in: req.body.genres },
-    }).exec();
+      platforme: { $in: req.body.platform },
+    })
+      .find({ genres: { $in: req.body.genres } })
+      .exec();
+    console.log(myFilms);
+
     res.json({ films: myFilms, message: "coucou" });
-  } else if (req.body.genres.length) {
+  } else if (req.body.genres) {
+    console.log("jai un genre");
     //sinon si je recois juste un genre
     const myFilms = await FilmModel.find({
       genres: { $in: req.body.genres },
     }).exec();
     res.json({ films: myFilms, message: "coucou" });
-  } else if (req.body.cat.length) {
+  } else if (req.body.platform) {
+    console.log("jai une platform");
+    console.log("tkt", `/${req.body.platform.join("|")}/gi`);
     //sinon si je recois juste une platforme
     const myFilms = await FilmModel.find({
-      platforme: { $in: req.body.cat },
+      platforme: "Netflix" || "Disney Plus",
     }).exec();
     res.json({ films: myFilms, message: "coucou" });
   } else {
+    console.log("jai pas de params");
     // par défaut je recois 100 films
     const myFilms = await FilmModel.find({}).limit(100).exec();
     res.json({ films: myFilms, message: "coucou" });
   }
-  
 });
 
 app.listen(8000, () => {

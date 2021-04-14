@@ -2,23 +2,26 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GenreFilter from "../components/GenreFilter";
 import PlatformFilter from "../components/PlatformFilter";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const Catalog = () => {
-  const [platformFilterValue, setPlatformFilterValue] = useState([]);
-  const [genreFilterValue, setGenreFilterValue] = useState([]);
+  const [platformFilterValue, setPlatformFilterValue] = useState();
+  const [genreFilterValue, setGenreFilterValue] = useState();
   const [films, setfilms] = useState("");
   const [searchValue, setSearchValue] = useState("");
-
+  const [filmsSearch, setFilmsSearch] = useState("");
 
   const fetchfilms = () => {
+    setfilms();
     fetch(`http://localhost:8000/home`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        cat: platformFilterValue ? platformFilterValue : 0,
-        genres: genreFilterValue ? genreFilterValue : 0,
+        platform: platformFilterValue,
+        genres: genreFilterValue,
       }),
     })
       .then((response) => {
@@ -31,12 +34,15 @@ const Catalog = () => {
   };
 
   useEffect(() => {
-    if (films) {
-      return;
-    } else {
+    if (!films) {
       fetchfilms();
     }
-    searchBarResulut()
+
+    if (searchValue.length >= 3) {
+      setTimeout(() => {
+        searchBarResulut();
+      }, 30);
+    }
   }, [films, searchValue]);
 
   function tkt(e) {
@@ -44,27 +50,30 @@ const Catalog = () => {
     e.preventDefault();
   }
   const checkGenreFilter = (type) => {
+    console.log(type);
     setGenreFilterValue(type);
   };
 
-  const checkFilter = (data) => {
-    setPlatformFilterValue(data);
+  const checkFilter = (type) => {
+    console.log(type);
+    setPlatformFilterValue(type);
   };
 
   const searchBarResulut = () => {
-    if (searchValue) {
-      fetch(`http://localhost:8000/films/moovice/search/${searchValue}`)
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          console.log(response);
-        }).catch((err) => {
-          console.log(err)
-        })
-    }
-  };
+    console.log(searchValue);
 
+    fetch(`http://localhost:8000/films/moovice/search/${searchValue}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        setFilmsSearch(response.films);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -93,7 +102,17 @@ const Catalog = () => {
           </div>
 
           <div className="d-flex justify-content-center flex-wrap">
-            {films ? (
+            {filmsSearch ? (
+              filmsSearch.slice(0, 20).map((item) => (
+                <Link to={`/films/${item.id_imdb}`}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300/${item.image}`}
+                    alt=""
+                    className="filmDispo"
+                  />{" "}
+                </Link>
+              ))
+            ) : films ? (
               films.slice(0, 20).map((item) => (
                 <Link to={`/films/${item.id_imdb}`}>
                   <img
@@ -104,7 +123,15 @@ const Catalog = () => {
                 </Link>
               ))
             ) : (
-              <h1>LOADING</h1>
+              <div className=" d-flex justify-content-center loader">
+                <Loader
+                  type="Circles"
+                  color="#000000"
+                  height={100}
+                  width={100}
+                  timeout={10000}
+                />
+              </div>
             )}
           </div>
         </div>
