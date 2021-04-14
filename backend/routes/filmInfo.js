@@ -11,12 +11,12 @@ router.get("/moovice", async (req, res) => {
 });
 
 router.get("/moovice/:name", async (req, res) => {
-  console.log(req.params.name);
-  const films = await FilmModel.find({ titre: { $regex : `/${req.params.name}/`, $options : "gi"} });
+  console.log("req.params.name", req.params.name);
+  const films = await FilmModel.find({titre : new RegExp(req.params.name)});
   console.log(films);
   if (films) {
     res.json({
-      films : films,
+      films: films,
       message: "tu as fait une requete GET sur /films/:name",
     });
   }
