@@ -81,7 +81,7 @@ const Catalog = () => {
             </span>
             <input
               type="search"
-              className="form-control"
+              className="form-control ok"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
