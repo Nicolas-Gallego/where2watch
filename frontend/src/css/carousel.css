@@ -1,7 +1,8 @@
 .react-multi-carousel-item{
+    height: 450px !important;  
     width: 300px !important;  
 }
-.react-multi-carousel-track:hover, .react-multi-carousel-item{
+/* .react-multi-carousel-track:hover, .react-multi-carousel-item{
     transform: translateX(-5%);
 }
 .react-multi-carousel-item:hover ~ .react-multi-carousel-item {
@@ -13,5 +14,31 @@
   .carousel-container{
       margin-top: 50px;
       margin-bottom: 100px;
+  } */ */
+
+  .react-multi-carousel-track {
+    visibility: hidden;
+  }
+  
+  .react-multi-carousel-track > * {
+    visibility: visible;
+  }
+  
+  .react-multi-carousel-track > * {
+    transition: opacity 150ms linear 100ms, transform 150ms ease-in-out 100ms;
+  }
+  
+  .react-multi-carousel-track:hover > * {
+    transform: scale(0.95);
+  }
+  
+  .react-multi-carousel-track > *:hover {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0ms, 0ms;
   }
 
+  .posterCarousel{
+      height: 450px;
+      width: 300px;
+  }

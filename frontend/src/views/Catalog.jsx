@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import '../css/catalog.css'
 import { Link } from "react-router-dom";
 import GenreFilter from "../components/GenreFilter";
 import PlatformFilter from "../components/PlatformFilter";
@@ -80,9 +81,10 @@ const Catalog = () => {
       <div className="container-fluid">
         <div className=" d-flex justify-content-center titleCatalog">
           <h2>catalog</h2>
-        </div>
-        <div className="row">
-          <div className="input-group mb-3 ">
+        </div >
+        <div className="row d-flex justify-content-center">
+          <div className=" col-10">
+          <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">
               <i className="fas fa-search"></i>
             </span>
@@ -92,6 +94,7 @@ const Catalog = () => {
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
+          </div>
           </div>
           <div className="d-flex flex-row justify-content-evenly filterCatalog">
             <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>

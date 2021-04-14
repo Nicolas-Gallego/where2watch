@@ -23,11 +23,33 @@ const FilmPage = ({ match }) => {
       .then((response) => {
         console.log(response);
         setFilmInfos(response.film);
+        
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const platformLink = (platform) => {
+      if (platform === "Disney Plus") {
+        return('https://www.disneyplus.com/fr-fr/home')
+      } else if (platform === "Netflix") {
+        return('https://www.netflix.com/browse')
+      } else if (platform === "Canal+") {
+        return('https://www.canalplus.com//')
+      } else if (platform === "Amazon Prime Video") {
+        return('https://www.primevideo.com/')
+      } else if (platform === "La Cinetek") {
+        return('https://www.lacinetek.com/fr/')
+      } else if (platform === "OCS Go") {
+        return('https://www.ocs.fr//')
+      } else if (platform === "Anime Digital Networks") {
+        return('https://animedigitalnetwork.fr/')
+      }  else {
+        return('#')
+      } 
+    
+  }
 
   if (filmInfos) {
     return (
@@ -35,7 +57,7 @@ const FilmPage = ({ match }) => {
         <div>
           <div className="container-fluid">
             {/* must be replace by film title */}
-            <h2 className="title">{filmInfos.titre}</h2>
+            <h2 className="d-flex flex-wrap title">{filmInfos.titre}</h2>
             <div className="row d-flex justify-content-center">
               {/* must be replace by film poster  */}
               <img
@@ -54,12 +76,12 @@ const FilmPage = ({ match }) => {
                       <span>Pas trouvé</span>;
                     } else {
                       return (
-                        <>
+                        <a href={platformLink(platforme)} target={"blank"}>
                         <img
                           className="logoPlatform"
                           src={`/${platforme}.png`}
                         />
-                        </>
+                        </a>
                       );
                     }
                   })}

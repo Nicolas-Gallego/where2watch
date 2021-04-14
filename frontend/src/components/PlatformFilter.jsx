@@ -16,9 +16,8 @@ const PlatformFilter = ({ checkFilter }) => {
   const options = [
     { label: "Disney Plus", value: "Disney Plus" },
     { label: "Netflix", value: "Netflix" },
-    { label: "MyCanal", value: "MyCanal" },
+    { label: "MyCanal", value: "Canal+" },
     { label: "Amazon Prime Video", value: "Amazon Prime Video" },
-    { label: "Canal+", value: "Canal+" },
     { label: "La Cinetek", value: "La Cinetek" },
     { label: "OCS Go", value: "OCS Go" },
     { label: "Anime Digital Networks", value: "Anime Digital Networks" },
