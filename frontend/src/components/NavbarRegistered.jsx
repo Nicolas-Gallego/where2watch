@@ -21,7 +21,7 @@ const NavbarUnregistered = () => {
         </button>
         <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div className="navbar-nav  align-items-center">
-            <a className="nav-link active" aria-current="page" href="/home">
+            <a className="nav-link" aria-current="page" href="/home">
               Home
             </a>
             <a className="nav-link" href="/catalog">

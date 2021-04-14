@@ -2,31 +2,44 @@ import React, { useState } from "react";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 
-const GenreFilter = () => {
-    const [value, setvalue] = useState("");
+const GenreFilter = ({ checkGenreFilter }) => {
+  const [value, setvalue] = useState("");
 
   const handleOnchange = (val) => {
-    setvalue(val);
+    let filterGenre = [];
+    filterGenre = val.map((type) => {
+      return type.value;
+    });
+    checkGenreFilter(filterGenre);
   };
 
   const options = [
-    { label: "Action", value: "option_1" },
-    { label: "Anime / Manga", value: "option_2" },
-    { label: "Comedy", value: "option_3" },
-    { label: "Documentary", value: "option_4" },
-    { label: "Drama", value: "option_5" },
-    { label: "Fantasy", value: "option_6" },
-    { label: "Horror", value: "option_7" },
-    { label: "Indie", value: "option_8" },
-    { label: "Music & Musical Comedy ", value: "option_10" },
-    { label: "Police Film ", value: "option_11" },
-    { label: "Romance", value: "option_12" },
-    { label: "Sci-Fi", value: "option_13" },
-    { label: "Thriller", value: "option_14" },
-    { label: "Youth & Family", value: "option_9" },
+    { label: "Action", value: "Action" },
+    { label: "Animation", value: "Animation" },
+    { label: "Comedy", value: "Comedy" },
+    { label: "Crime", value: "Crime" },
+    { label: "Documentary", value: "Documentary" },
+    { label: "Drama", value: "Drama" },
+    { label: "Family", value: "Family" },
+    { label: "Fantasy", value: "Fantasy" },
+    { label: "History", value: "History" },
+    { label: "Horror", value: "Horror" },
+    { label: "Music", value: "Music" },
+    { label: "Mystery", value: "Mystery" },
+    { label: "Romance", value: "Romance" },
+    { label: "Science Fiction", value: "Science Fiction" },
+    { label: "TV Movie", value: "TV Movie" },
+    { label: "Thriller", value: "Thriller" },
+    { label: "War", value: "War" },
+    { label: "Western", value: "Western" },
   ];
-    return(
-<MultiSelect onChange={handleOnchange} placeholder={'Genre'} options={options} />
-    )
-}
-export default GenreFilter
+  return (
+    <MultiSelect
+      onChange={handleOnchange}
+      placeholder={"Genre"}
+      options={options}
+      jsonValue={true}
+    />
+  );
+};
+export default GenreFilter;

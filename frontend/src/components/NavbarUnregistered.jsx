@@ -6,7 +6,8 @@ const NavbarUnregistered = () => {
       <div className="container-fluid">
         <a className="navbar-brand d-flex justify-content-start align-items-center flex-wrap" href="/home">
           <img src="/w2w_logo.png" alt="logo" className="logo"/>
-          <h1 className="mainTitle">Where 2 Watch</h1>
+          <div className="d-flex flex-wrap-reverse"><h1 className="mainTitle">Where 2 Watch</h1></div>
+         
         </a>
         <button
           className="navbar-toggler"
@@ -21,7 +22,7 @@ const NavbarUnregistered = () => {
         </button>
         <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-link active" aria-current="page" href="/home">
+            <a className="nav-link " aria-current="page" href="/home">
               Home
             </a>
             <a className="nav-link" href="/catalog">
