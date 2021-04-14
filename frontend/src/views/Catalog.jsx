@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import '../css/catalog.css'
+import "../css/catalog.css";
 import { Link } from "react-router-dom";
 import GenreFilter from "../components/GenreFilter";
 import PlatformFilter from "../components/PlatformFilter";
@@ -33,7 +33,6 @@ const Catalog = () => {
       });
   };
 
-
   useEffect(() => {
     if (!searchValue) {
       setfilms();
@@ -58,7 +57,6 @@ const Catalog = () => {
   };
 
   const searchBarResulut = () => {
-
     fetch(`http://localhost:8000/films/moovice/search/${searchValue}`)
       .then((response) => {
         return response.json();
@@ -77,19 +75,23 @@ const Catalog = () => {
       <>
         <div className="container-fluid">
           <div className=" d-flex justify-content-center titleCatalog">
-            <h2>catalog</h2>
+            <h2>Catalog</h2>
           </div>
           <div className="row">
-            <div className="input-group mb-3 ">
-              <span className="input-group-text" id="basic-addon1">
-                <i className="fas fa-search"></i>
-              </span>
-              <input
-                type="search"
-                className="form-control"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-              />
+            <div className="d-flex justify-content-center">
+              <div className="col-10">
+                <div className="input-group mb-3 ">
+                  <span className="input-group-text" id="basic-addon1">
+                    <i className="fas fa-search"></i>
+                  </span>
+                  <input
+                    type="search"
+                    className="form-control"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  />
+                </div>
+              </div>
             </div>
             <div className="d-flex flex-row justify-content-evenly filterCatalog">
               <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
@@ -99,28 +101,30 @@ const Catalog = () => {
               </button>
             </div>
 
-            <div className="d-flex justify-content-center flex-wrap">
-              {filmsSearch ? (
-                filmsSearch.slice(0, 100).map((item, key) => (
-                  <Link key={key} to={`/films/${item.id_imdb}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w300/${item.image}`}
-                      alt=""
-                      className="filmDispo"
-                    />{" "}
-                  </Link>
-                ))
-              ) : (
-                <div className=" d-flex justify-content-center loader">
-                  <Loader
-                    type="Circles"
-                    color="#000000"
-                    height={100}
-                    width={100}
-                    timeout={10000}
-                  />
-                </div>
-              )}
+            <div className="d-flex justify-content-center ">
+              <div className="col-10 d-flex justify-content-center flex-wrap sibling-fade">
+                {filmsSearch ? (
+                  filmsSearch.slice(0, 100).map((item, key) => (
+                    <Link key={key} to={`/films/${item.id_imdb}`}>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w300/${item.image}`}
+                        alt=""
+                        className="filmDispo"
+                      />{" "}
+                    </Link>
+                  ))
+                ) : (
+                  <div className=" d-flex justify-content-center loader">
+                    <Loader
+                      type="Circles"
+                      color="#000000"
+                      height={100}
+                      width={100}
+                      timeout={10000}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -131,19 +135,23 @@ const Catalog = () => {
       <>
         <div className="container-fluid">
           <div className=" d-flex justify-content-center titleCatalog">
-            <h2>catalog</h2>
+            <h2>Catalog</h2>
           </div>
           <div className="row">
-            <div className="input-group mb-3 ">
-              <span className="input-group-text" id="basic-addon1">
-                <i className="fas fa-search"></i>
-              </span>
-              <input
-                type="search"
-                className="form-control"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-              />
+            <div className="d-flex justify-content-center">
+              <div className="col-10">
+                <div className="input-group mb-3 ">
+                  <span className="input-group-text" id="basic-addon1">
+                    <i className="fas fa-search"></i>
+                  </span>
+                  <input
+                    type="search"
+                    className="form-control"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  />
+                </div>
+              </div>
             </div>
             <div className="d-flex flex-row justify-content-evenly filterCatalog">
               <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
@@ -153,28 +161,30 @@ const Catalog = () => {
               </button>
             </div>
 
-            <div className="d-flex justify-content-center flex-wrap">
-              {films ? (
-                films.slice(0, 100).map((item, key) => (
-                  <Link key={key} to={`/films/${item.id_imdb}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w300/${item.image}`}
-                      alt=""
-                      className="filmDispo"
-                    />{" "}
-                  </Link>
-                ))
-              ) : (
-                <div className=" d-flex justify-content-center loader">
-                  <Loader
-                    type="Circles"
-                    color="#000000"
-                    height={100}
-                    width={100}
-                    timeout={10000}
-                  />
-                </div>
-              )}
+            <div className="d-flex justify-content-center">
+              <div className="col-10 d-flex justify-content-center flex-wrap sibling-fade">
+                {films ? (
+                  films.slice(0, 100).map((item, key) => (
+                    <Link key={key} to={`/films/${item.id_imdb}`}>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w300/${item.image}`}
+                        alt=""
+                        className="filmDispo"
+                      />{" "}
+                    </Link>
+                  ))
+                ) : (
+                  <div className=" d-flex justify-content-center loader">
+                    <Loader
+                      type="Circles"
+                      color="#000000"
+                      height={100}
+                      width={100}
+                      timeout={10000}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
