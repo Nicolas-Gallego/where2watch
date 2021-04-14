@@ -20,7 +20,7 @@
   {
      "username": "wonder woman",       
      "email": "wonderwoman@gmail.com",
-     "password":"7575888768",
+     "password":"757W%on88768",
      "age": "21",
      "platform": "Netflix"
                       
