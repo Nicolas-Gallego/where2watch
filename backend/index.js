@@ -24,6 +24,7 @@ app.use("/user", authRoute);
 app.use("/films", filmRoute);
 
 app.post("/home", async (req, res) => {
+  console.log("requete faite a POST /home ");
   if (req.body.cat.length) {
     const myFilms = await FilmModel.find({
       platforme: { $in: req.body.cat },

@@ -33,7 +33,6 @@ function Home() {
     if (films) {
       return;
     } else {
-      fetchfilms();
     }
   }, [films]);
 
@@ -53,7 +52,7 @@ function Home() {
           <form>
             <div className="input-group mb-3 ">
               <span className="input-group-text" id="basic-addon1">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
               </span>
               <input
                 type="text"
@@ -78,7 +77,7 @@ function Home() {
       <div>
         {films ? (
           films.slice(0, 100).map((item) => (
-            <Link to={`/films/${item.id_imdb}`}>
+            <Link key={item} to={`/films/${item.id_imdb}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w300/${item.image}`}
                 alt=""
