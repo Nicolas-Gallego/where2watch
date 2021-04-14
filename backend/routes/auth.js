@@ -7,6 +7,7 @@ const bcrypt = require("bcryptjs");
 const path = require("path");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
+const passValidator = require("../middlewares/auth.middlewares")
 
 dotenv.config();
 
@@ -27,32 +28,34 @@ var upload = multer({
   storage: storage,
 }).single("profilePicture");
 
+router.use(passValidator);
+
 //Signup router
 router.post(
   "/signup",
-  upload,
-  body("email").isEmail(),
-  body("password").custom((value) => {
-    var schema = new passwordValidator();
-    schema
-      .is()
-      .min(8)
-      .is()
-      .max(100)
-      .has()
-      .uppercase()
-      .has()
-      .lowercase()
-      .has()
-      .digits(2)
-      .has()
-      .not()
-      .spaces()
-      .is()
-      .not()
-      .oneOf(["Passw0rd", "Password123"]);
-    return schema.validate(value);
-  }),
+  upload,passValidator,
+  // body("email").isEmail(),
+  // body("password").custom((value) => {
+  //   var schema = new passwordValidator();
+  //   schema
+  //     .is()
+  //     .min(8)
+  //     .is()
+  //     .max(100)
+  //     .has()
+  //     .uppercase()
+  //     .has()
+  //     .lowercase()
+  //     .has()
+  //     .digits(2)
+  //     .has()
+  //     .not()
+  //     .spaces()
+  //     .is()
+  //     .not()
+  //     .oneOf(["Passw0rd", "Password123"]);
+  //   return schema.validate(value);
+  // }),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
