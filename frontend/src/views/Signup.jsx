@@ -4,11 +4,11 @@ import { Link, useHistory } from "react-router-dom";
 import MultiSelect from "react-multiple-select-dropdown-lite";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { Multiselect } from "multiselect-react-dropdown";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+
 import "../css/FormsInput.css";
 import "../css/main.css";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 export default function Signup() {
   const schema = yup.object().shape({
     picture: yup
@@ -59,7 +59,7 @@ export default function Signup() {
 
   const [selectedPlatform, setSelectedPlatform] = useState([]);
 
-  const submitForm = async (data) => {
+  const submitForm = (data) => {
     console.log(data);
     try {
       // Should format date value before submit.
@@ -106,102 +106,6 @@ export default function Signup() {
   // };
 
   return (
-    <div className="container-fluid">
-      <div className="row d-flex justify-content-center">
-        <h2 className="title">Sign Up</h2>
-        <div className="col-12 col-md-6">
-          <form onSubmit={handleSubmit(submitForm)}>
-            <div>
-              <input
-                placeholder="profilepicture"
-                type="file"
-                name="picture"
-                {...register("picture")}
-              />
-              <p className="error-meassages">{errors.picture?.message}</p>
-            </div>
-            <label className="form-label">Username</label>
-            <input
-              {...register("username")}
-              className={
-                errors.username ? "form-control is-invalid" : "form-control"
-              }
-              placeholder="Username"
-            />
-            <p className="error-meassages">{errors.username?.message}</p>
-
-            <label className="form-label">Email</label>
-            <input
-              {...register("email")}
-              className={
-                errors.email ? "form-control is-invalid" : "form-control"
-              }
-              placeholder="Email"
-            />
-            <p className="error-meassages">{errors.email?.message}</p>
-
-            <label className="form-label">password</label>
-            <input
-              {...register("password")}
-              className={
-                errors.password ? "form-control is-invalid" : "form-control"
-              }
-              placeholder="Password"
-              type="password"
-            />
-            <p className="error-meassages">{errors.password?.message}</p>
-
-            <label className="form-label">Confirm-Password</label>
-            <input
-              {...register("confirmpassword")}
-              className={
-                errors.confirmpassword
-                  ? "form-control is-invalid"
-                  : "form-control"
-              }
-              placeholder="Confirmpassword"
-              type="password"
-            />
-            <p className="error-meassages">{errors.confirmpassword?.message}</p>
-
-            <label className="form-label">Age</label>
-            <input
-              {...register("age")}
-              className={
-                errors.age ? "form-control is-invalid" : "form-control"
-              }
-              placeholder="Select age"
-            />
-            <p className="error-meassages">{errors.age?.message}</p>
-
-            <label className="form-label">Platforms</label>
-            <Controller
-              control={control}
-              name="Platforms"
-              render={({ field: { onChange, value } }) => (
-                <Multiselect
-                  options={platform}
-                  displayValue="name"
-                  showCheckbox={true}
-                  selectedValues={value}
-                  onSelect={onChange}
-                  onRemove={onChange}
-                />
-              )}
-            />
-
-            <div className="d-grid gap-2 mt-4">
-              <input type="submit" className="btn btn-dark" value="Signup" />
-            </div>
-
-            <div className="d-grid gap-2">
-              <Link to="/login" className="d-flex justify-content-end">
-                Login
-              </Link>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    
   );
 }
