@@ -11,18 +11,19 @@ var multer = require("multer");
 const fs = require("fs");
 // const passValidator = require("../middlewares/auth.middlewares")
 const upload = multer({ dest: "Public/profilePicture" });
+router.use(express.static("Public"));
 
 dotenv.config();
+
 
 //Signup router
 router.post("/signup", upload.single("profilePicture"), async (req, res) => {
   if (req.file) {
     let pP = fs.renameSync(
       req.file.path,
-      path.join(req.file.destination, `${req.body.firstName}.png`)
+      path.join(req.file.destination, `${req.body.username}.png`)
     );
   }
-
   console.log("req.body", req.body);
 
   const user = new UserModel({
@@ -31,11 +32,11 @@ router.post("/signup", upload.single("profilePicture"), async (req, res) => {
     password: bcrypt.hashSync(req.body.password),
     age: req.body.age,
     platforms: req.body.Platforms,
-    profilePicture: `userPP/${req.body.username}.png`,
+    profilePicture: `profilePicture/${req.body.username}.png`,
   });
   try {
     await user.save();
-    res.json({ message: "utilisateur enregister", saveUser: user });
+    res.json({ message: "utilisateur enregister", saveUser: user._id });
   } catch (err) {
     res.json({ message: err });
   }
@@ -71,8 +72,8 @@ router.post("/login", async (req, res) => {
 //Profil router
 router.get("/profile/:id", async (req, res) => {
   try {
-    const userProfil = await UserModel.findById("id: " + req.params.id);
-    res.json(userProfil);
+    const userProfil = await UserModel.findById(req.params.id);
+    res.json({userProfil });
   } catch (err) {
     res.json({ message: err });
   }
