@@ -26,7 +26,6 @@ export default class CarouselMain extends Component {
         });
       });
   }
-
   render() {
     const responsive = {
       desktop: {

@@ -6,6 +6,7 @@ import '../css/catalog.css'
 function Home() {
   return (
     <div >
+      <h2 className="m-3">Popular Movies</h2>
       <CarouselMain/>
     </div>
   );

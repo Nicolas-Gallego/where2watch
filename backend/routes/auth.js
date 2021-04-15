@@ -7,6 +7,7 @@ const bcrypt = require("bcryptjs");
 const path = require("path");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
+// const passValidator = require("../middlewares/auth.middlewares")
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ var storage = multer.diskStorage({
 var upload = multer({
   storage: storage,
 }).single("profilePicture");
+
 
 //Signup router
 router.post(
@@ -67,7 +69,7 @@ router.post(
       password: bcrypt.hashSync(req.body.password),
       age: req.body.age,
       platforms: req.body.platforms,
-      profilePicture: req.file.filename,
+      //profilePicture: req.file.filename
     });
     try {
       const saveUser = await user.save();
@@ -108,7 +110,7 @@ router.post("/login", async (req, res) => {
 //Profil router
 router.get("/profile/:id", async (req, res) => {
   try {
-    const userProfil = await UserModel.findById(req.params.id);
+    const userProfil = await UserModel.findById('id: ' + req.params.id);
     res.json(userProfil);
   } catch (err) {
     res.json({ message: err });
