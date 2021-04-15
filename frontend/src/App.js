@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import "animate.css/animate.min.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Home from "./views/Home";
 import Login from "./views/Login";

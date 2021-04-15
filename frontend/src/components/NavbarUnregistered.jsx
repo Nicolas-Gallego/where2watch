@@ -8,7 +8,7 @@ const NavbarUnregistered = () => {
           className="navbar-brand d-flex justify-content-start align-items-center flex-wrap"
           href="/home"
         >
-          <img src="/w2w_logo.png" alt="logo" className="logo" />
+          <img src="/w2w_logo_white.png" alt="logo" className="logo" />
           <div>
             <h1 className="mainTitle d-flex flex-wrap">
               <span>Where</span>&thinsp;

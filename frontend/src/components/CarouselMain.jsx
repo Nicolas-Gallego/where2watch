@@ -54,7 +54,7 @@ export default class CarouselMain extends Component {
             responsive={responsive}
             ssr={true} // means to render carousel on server-side.
             infinite={true}
-            // autoPlay={this.props.deviceType !== "mobile" ? true : false}
+            autoPlay={this.props.deviceType !== "mobile" ? true : false}
             autoPlaySpeed={3000}
             keyBoardControl={true}
             customTransition="transform 300ms ease-in-out"
@@ -64,7 +64,6 @@ export default class CarouselMain extends Component {
             deviceType={this.props.deviceType}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-0-px"
-            className="sibling-fade"
           >
             {this.state.movies.slice(0, 20).map((movie) => {
               return (
@@ -84,7 +83,7 @@ export default class CarouselMain extends Component {
       return  <div className=" d-flex justify-content-center loader">
       <Loader
         type="Circles"
-        color="#000000"
+        color="#F0F8FF"
         height={100}
         width={100}
         timeout={10000}

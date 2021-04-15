@@ -2,21 +2,35 @@
     font-family: 'futuraHeavyItalic';
     font-size: 75px;
     margin-bottom: 0px;
+    color:aliceblue ;
 }
 
 .navbar{
     font-family: 'futuraBook';
     margin-bottom: 32px;
+    background-color: #020a17 !important;
 }
 .logo{
     height: 75px;
 }
+.logo:hover{
+    -webkit-animation:spin 1s linear infinite;
+    -moz-animation:spin 1s linear infinite;
+    animation:spin 1s linear infinite;
+}
 
 .nav-link{
    margin-right: 50px;
+   color: rgb(160, 160, 160) !important;
+}
+.nav-link:hover{
+    color: white !important;
 }
 
 .profilePicture{
     height: 50px;
 }
 
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

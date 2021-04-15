@@ -57,7 +57,7 @@ const FilmPage = ({ match }) => {
         <div>
           <div className="container-fluid">
             {/* must be replace by film title */}
-            <h2 className="d-flex flex-wrap title">{filmInfos.titre}</h2>
+            <h2 className="title">{filmInfos.titre}</h2>
             <div className="row d-flex justify-content-center">
               {/* must be replace by film poster  */}
               <img
@@ -191,7 +191,7 @@ const FilmPage = ({ match }) => {
     return  <div className=" d-flex justify-content-center loader">
     <Loader
       type="Circles"
-      color="#000000"
+      color="#F0F8FF"
       height={100}
       width={100}
       timeout={10000}
