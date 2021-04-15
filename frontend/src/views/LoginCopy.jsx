@@ -74,13 +74,16 @@ const Login = () => {
     <div className="container-fluid">
       <div className="row d-flex justify-content-center">
         <div className="col-12 col-md-6">
+
           <form onSubmit={handleSubmit(onSubmit)}>
+
             <label className="form-label">Email</label>
             <input
               {...register("email")}
               className="form-control"
               placeholder="Email"
             />
+            
             <p className="error-meassages">{errors.email?.message}</p>
 
             <label className="form-label">password</label>
