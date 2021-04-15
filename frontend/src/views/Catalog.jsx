@@ -16,7 +16,7 @@ const Catalog = () => {
   const [page, setPage] = useState(0);
 
   const fetchfilms = () => {
-    fetch(`http://localhost:8000/home?limit=100&page=${page}`, {
+    fetch(`http://localhost:8000/home?limit=20&page=${page}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -31,7 +31,8 @@ const Catalog = () => {
       })
       .then((response) => {
         console.log(response);
-        setNumberOfPage(Math.floor(response.count/ 100));
+        setNumberOfPage(Math.floor(response.count/20));
+        console.log(response.count);
         setfilms(response.films);
       });
   };
@@ -164,7 +165,7 @@ const Catalog = () => {
   } else {
     return (
       <>
-       <nav aria-label="Page navigation example">
+      <nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item">
               <button
