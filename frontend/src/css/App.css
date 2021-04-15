@@ -10,6 +10,10 @@
   font-family: "futuraLight";
   src: url("../fonts/futura\ light\ bt.ttf");
 }
+@font-face {
+  font-family: "futuraMedium";
+  src: url("../fonts/futura\ medium\ bt.ttf");
+}
 
 * {
   margin: 0;
@@ -20,11 +24,6 @@ body {
   font-family: "futuraBook";
   background-color: #020a17;
   color: aliceblue;
-}
-
-.mainTitle {
-  font-family: "futuraHeavyItalic";
-  font-size: 75px;
 }
 
 .msl-vars {

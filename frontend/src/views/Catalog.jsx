@@ -90,6 +90,7 @@ const Catalog = () => {
       return;
     } else {
       setPage(page + 1);
+      window.scrollTo({top: 300, behavior: 'smooth'});
       console.log(page);
     }
   };
@@ -129,12 +130,14 @@ const Catalog = () => {
     return (
       <>
         <div className="container-fluid">
-          <div className=" d-flex justify-content-center titleCatalog">
-          </div>
-          <div className="row">
+          <div className=" d-flex justify-content-center titleCatalog"></div>
+          <div className="row d-flex">
             <div className="d-flex justify-content-center">
               <div className="col-10">
-              <h3 className="secondTitle"> Corresponding movies for: {searchValue}</h3>
+                <h3 className="secondTitle">
+                  {" "}
+                  Corresponding movies for: {searchValue}
+                </h3>
                 <div className="input-group mb-3">
                   <div class="search-box">
                     <input
@@ -155,10 +158,11 @@ const Catalog = () => {
               <div className="heightFit">
                 <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
               </div>
-
-              <button className="btn  searchButton" onClick={tkt}>
-                Filter
-              </button>
+              <div className="heightFit">
+                <button className="btn  searchButton" onClick={tkt}>
+                  Filter
+                </button>
+              </div>
             </div>
 
             <div className="d-flex justify-content-center ">
@@ -194,13 +198,11 @@ const Catalog = () => {
     return (
       <>
         <div className="container-fluid">
-          <div className=" d-flex justify-content-center titleCatalog">
-            
-          </div>
+          <div className=" d-flex justify-content-center titleCatalog"></div>
           <div className="row">
             <div className="d-flex justify-content-center">
               <div className="col-10">
-              <h3 className="secondTitle"> Search for a movie</h3>
+                <h3 className="secondTitle"> Search for a movie</h3>
                 <div className="input-group mb-3">
                   <div class="search-box">
                     <input
@@ -215,15 +217,17 @@ const Catalog = () => {
               </div>
             </div>
             <div className="d-flex flex-row justify-content-evenly filterCatalog">
-              <div className="heightFit">
+              <div className="heightFit shadowFilter">
                 <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
               </div>
-              <div className="heightFit">
+              <div className="heightFit shadowFilter">
                 <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
               </div>
-              <button className="btn searchButton" onClick={tkt}>
-                Filter
-              </button>
+              <div className="heightFit">
+                <button className="btn  searchButton" onClick={tkt}>
+                  Filter
+                </button>
+              </div>
             </div>
 
             <div className="d-flex justify-content-center moviesContainer">
@@ -252,7 +256,7 @@ const Catalog = () => {
               </div>
             </div>
             <nav aria-label="Page navigation example">
-              <ul className="pagination">
+              <ul className="pagination ">
                 <li className="page-item">
                   <button
                     className="page-link"

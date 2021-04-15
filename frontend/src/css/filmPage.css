@@ -9,6 +9,7 @@
 }
 
 .logoPlatform {
+  background-color: aliceblue;
   margin: 12px;
   padding: 5px;
   max-height: 50px;
@@ -19,7 +20,7 @@
 }
 
 .logoPlatform:hover {
-  box-shadow: 0 0 11px rgba(255, 255, 255, 0.427);
+  box-shadow: 0 2px 3px #e5e2fa
 }
 h4{
     margin-bottom: 0;
@@ -46,4 +47,11 @@ h5 {
 .carousel {
   max-width: 250px;
   max-height: 350px;
+}
+
+.carousel-control-next:hover{
+  background-color: rgba(0, 0, 0, 0.536);
+}
+.carousel-control-prev:hover{
+  background-color: rgba(0, 0, 0, 0.536);
 }

@@ -37,7 +37,7 @@ const NavbarUnregistered = () => {
               Home
             </a>
             <a className="nav-link" href="/catalog">
-              Catalog
+              Search
             </a>
             <a className="nav-link" href="/home">
               Logout

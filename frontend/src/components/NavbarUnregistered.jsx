@@ -1,5 +1,6 @@
 import "../css/navbar.css";
 
+
 const NavbarUnregistered = () => {
   return (
     <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
@@ -9,8 +10,8 @@ const NavbarUnregistered = () => {
           href="/home"
         >
           <img src="/w2w_logo_white.png" alt="logo" className="logo shadowfilter" />
-          <div>
-            <h1 className="mainTitle d-flex flex-wrap">
+          <div className="">
+            <h1 className="mainTitle d-flex flex-wrap shadowfilter">
               <span>Where</span>&thinsp;
               <span>2</span>&thinsp;
               <span>Watch</span>
@@ -37,7 +38,7 @@ const NavbarUnregistered = () => {
               Home
             </a>
             <a className="nav-link" href="/catalog">
-              Catalog
+              Search
             </a>
             <a className="nav-link" href="/login">
               Login
