@@ -16,13 +16,7 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [age, setAge] = useState("");
   // const [platform, setPlatform] = useState("");
-  const [platform, setPlatform] = useState([
-    // "Netflix", "Amazon Prime", "Other"
-    { name: "Netflix", id: 1 },
-    { name: "Amazon", id: 2 },
-    { name: "Disney+", id: 3 },
-    { name: "Canal+", id: 4 },
-  ]);
+
   const [selectedPlatform, setSelectedPlatform] = useState([]);
 
   async function onClickCreate() {
@@ -37,14 +31,6 @@ function Signup() {
     };
     console.log("user created", data);
 
-    let result = await fetch("http://localhost:8000/user/signup", {
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
     result = await result.json();
     console.warn("Result", result);
     if (result.ok) {
