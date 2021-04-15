@@ -12,9 +12,11 @@ const Catalog = () => {
   const [films, setfilms] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [filmsSearch, setFilmsSearch] = useState("");
+  const [numberOfPage, setNumberOfPage] = useState(0);
+  const [page, setPage] = useState(0);
 
   const fetchfilms = () => {
-    fetch(`http://localhost:8000/home`, {
+    fetch(`http://localhost:8000/home?limit=20&page=${page}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -29,6 +31,8 @@ const Catalog = () => {
       })
       .then((response) => {
         console.log(response);
+        setNumberOfPage(Math.floor(response.count/20));
+        console.log(response.count);
         setfilms(response.films);
       });
   };
@@ -38,9 +42,9 @@ const Catalog = () => {
       setfilms();
       fetchfilms();
     } else {
-      searchBarResulut();
+      searchBarResult();
     }
-  }, [searchValue]);
+  }, [searchValue, page]);
 
   function tkt(e) {
     e.preventDefault();
@@ -56,7 +60,7 @@ const Catalog = () => {
     setPlatformFilterValue(type);
   };
 
-  const searchBarResulut = () => {
+  const searchBarResult = () => {
     fetch(`http://localhost:8000/films/moovice/search/${searchValue}`)
       .then((response) => {
         return response.json();
@@ -68,6 +72,29 @@ const Catalog = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+  const previousPage = () => {
+    if (page >= 1) {
+      setPage(page - 1);
+    }
+  };
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
+  const paginationItem = () => {
+    const pages = [];
+    for (let i = 0; i < numberOfPage; i++) {
+      pages.push(
+        <li class="page-item">
+          <button class="page-link" onClick={() => setPage(i * 1)}>
+            {i + 1}
+          </button>
+        </li>
+      );
+    }
+
+    return pages;
   };
 
   if (searchValue) {
@@ -115,7 +142,7 @@ const Catalog = () => {
                         src={`https://image.tmdb.org/t/p/w300/${item.image}`}
                         alt=""
                         className="filmDispo"
-                      />{" "}
+                      />
                     </Link>
                   ))
                 ) : (
@@ -138,6 +165,25 @@ const Catalog = () => {
   } else {
     return (
       <>
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <button
+                class="page-link"
+                aria-label="Previous"
+                onClick={previousPage}
+              >
+                <span aria-hidden="true">&laquo;</span>
+              </button>
+            </li>
+            {paginationItem()}
+            <li class="page-item">
+              <button class="page-link" aria-label="Next" onClick={nextPage}>
+                <span aria-hidden="true">&raquo;</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
         <div className="container-fluid">
           <div className=" d-flex justify-content-center titleCatalog">
             <h2>Catalog</h2>
@@ -159,7 +205,7 @@ const Catalog = () => {
               </div>
             </div>
             <div className="d-flex flex-row justify-content-evenly filterCatalog">
-            <div className="heightFit">
+              <div className="heightFit">
                 <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
               </div>
               <div className="heightFit">
@@ -197,6 +243,7 @@ const Catalog = () => {
             </div>
           </div>
         </div>
+       
       </>
     );
   }
