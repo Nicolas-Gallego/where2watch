@@ -8,9 +8,7 @@ import '../css/catalog.css'
 function Home() {
   return (
     <div>
-      <ScrollAnimation animteIn="fadeIn">
       <h2 className="m-3">Popular Movies</h2>
-      </ScrollAnimation>
       <CarouselMain/>
     </div>
   );

@@ -2,13 +2,13 @@ import "../css/navbar.css";
 
 const NavbarUnregistered = () => {
   return (
-    <nav className="navbar navbar-expand-xl navbar-light bg-light">
+    <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
       <div className="container-fluid">
         <a
           className="navbar-brand d-flex justify-content-start align-items-center flex-wrap"
           href="/home"
         >
-          <img src="/w2w_logo_white.png" alt="logo" className="logo" />
+          <img src="/w2w_logo_white.png" alt="logo" className="logo shadowfilter" />
           <div>
             <h1 className="mainTitle d-flex flex-wrap">
               <span>Where</span>&thinsp;

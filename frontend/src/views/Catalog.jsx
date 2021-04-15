@@ -94,8 +94,13 @@ const Catalog = () => {
               </div>
             </div>
             <div className="d-flex flex-row justify-content-evenly filterCatalog">
-              <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
-              <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
+              <div className="heightFit">
+                <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
+              </div>
+              <div className="heightFit">
+                <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
+              </div>
+
               <button className="btn searchButton" onClick={tkt}>
                 Filter
               </button>
@@ -117,7 +122,7 @@ const Catalog = () => {
                   <div className=" d-flex justify-content-center loader">
                     <Loader
                       type="Circles"
-                      color="#000000"
+                      color="#f0f8ff "
                       height={100}
                       width={100}
                       timeout={10000}
@@ -154,8 +159,12 @@ const Catalog = () => {
               </div>
             </div>
             <div className="d-flex flex-row justify-content-evenly filterCatalog">
-              <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
-              <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
+            <div className="heightFit">
+                <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
+              </div>
+              <div className="heightFit">
+                <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
+              </div>
               <button className="btn searchButton" onClick={tkt}>
                 Filter
               </button>
@@ -177,7 +186,7 @@ const Catalog = () => {
                   <div className=" d-flex justify-content-center loader">
                     <Loader
                       type="Circles"
-                      color="#000000"
+                      color="#f0f8ff"
                       height={100}
                       width={100}
                       timeout={10000}
