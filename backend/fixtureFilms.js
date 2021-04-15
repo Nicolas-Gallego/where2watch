@@ -8,7 +8,7 @@ mongoose.connect("mongodb://localhost:27017/w2w", () => {
 
 const createFilms = async () => {
   await FilmModel.deleteMany({}).exec();
-  for (let i = 1; i <= 500; i++) {
+  for (let i = 1; i <= 30; i++) {
     const searchPopularMovies = request(
       `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&page=${i}`,
       async function (error, response, body) {
@@ -120,11 +120,11 @@ const addDirectorFilms = async () => {
     request(
       `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd&`,
       async function (error, response, content) {
-        // console.error("error search Director:", error); // Print the error if one occurred
-        // console.log(
-        //   "statusCode search Director:",
-        //   response && response.statusCode
-        // ); // Print the response status code if a response was received
+        console.error("error search Director:", error); // Print the error if one occurred
+        console.log(
+          "statusCode search Director:",
+          response && response.statusCode
+        ); // Print the response status code if a response was received
         directeursByFilms = JSON.parse(content);
         directeurs = directeursByFilms.crew
           .filter((dir) => {
@@ -139,7 +139,6 @@ const addDirectorFilms = async () => {
         await myfilm.updateOne({ directeurs: directeurs });
       }
     );
-    console.log("done")
   });
 };
 
@@ -167,27 +166,27 @@ const addGenreFilms = async () => {
 };
 
 const tkt = async () => {
-  // createFilms();
+  createFilms();
 
-  // setTimeout(() => {
-  //   addGenreFilms();
-  // }, 1);
+  setTimeout(() => {
+    addGenreFilms();
+  }, 10000);
 
-  // setTimeout(() => {
-  //   addDirectorFilms();
-  // }, 1);
+  setTimeout(() => {
+    addDirectorFilms();
+  }, 10000);
 
-  // setTimeout(() => {
-  //   addCastFilms();
-  // }, 1);
+  setTimeout(() => {
+    addCastFilms();
+  }, 10000);
 
-  // setTimeout(() => {
-  //   addPlatformFilms();
-  // }, 1);
+  setTimeout(() => {
+    addPlatformFilms();
+  }, 10000);
 
-  // setTimeout(() => {
-  //   addSimilarsFilms();
-  // }, 1);
+  setTimeout(() => {
+    addSimilarsFilms();
+  }, 10000);
 };
 
 tkt();

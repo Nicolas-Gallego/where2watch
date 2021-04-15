@@ -24,10 +24,27 @@ app.use("/user", authRoute);
 app.use("/films", filmRoute);
 
 app.post("/home", async (req, res) => {
+  let limit = 2
+  let offset = 0
+  let page = 0
+
+  if (req.query.limit) {
+    if (!parseInt(req.query.limit) || parseInt(req.query.limit) < 1) {
+      res.status(400).json({ message: "Limit must be a positive number" });
+    }
+    limit = req.query.limit;
+  }
+  if (req.query.page) {
+    page = req.query.page
+  }
+
+
+  console.log("lol", req.query)
   console.log("requete faite a POST /home ");
 
   console.log("req.body.platform", req.body.platform);
   console.log("req.body.genres", req.body.genres);
+
 
   // si je recois un genre et une platforme
   if (req.body.platform && req.body.genres) {
@@ -58,10 +75,11 @@ app.post("/home", async (req, res) => {
     res.json({ films: myFilms, message: `voici les films` });
 
   } else {
+    console.log(limit, offset)
     console.log("jai pas de params");
     // par défaut je recois 100 films
-    const myFilms = await FilmModel.find({}).limit(100).exec();
-    res.json({ films: myFilms, message: `voici les films` });
+    const myFilms = await FilmModel.aggregate().skip(parseInt(offset * limit)).limit(parseInt(limit)).exec();
+    res.json({ films: myFilms, message: `voici les films`,count: await FilmModel.count() });
   }
 });
 
