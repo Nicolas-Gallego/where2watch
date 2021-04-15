@@ -1,3 +1,10 @@
+.titleCatalog{
+  margin: 32px;
+}
+
+.secondTitle{
+  margin-bottom: 8px;
+}
 .sibling-fade {
   visibility: hidden;
 }
@@ -20,17 +27,42 @@
   transform: scale(1);
   transition-delay: 0ms, 0ms;
 }
+.msl{
+  border-width: 1px !important;
+  border-style: solid !important;
+  border: #020a17 !important;
+}
 
+.msl-input, .msl-input::before{
+  color: aliceblue !important;
+}
 .msl-options {
   background-color: #020a17 !important;
 }
-
+.msl-arrow-btn:hover, .msl-clear-btn:hover{
+  background-color: #020a17 !important;
+}
+.msl-clear-btn:hover{
+  color: #e73c7e !important;
+}
+.msl-arrow-btn:hover, .msl-arrow-icn:hover{
+  color:#ee7752;
+}
+.msl-option:focus, .msl-options .msl-option:hover{
+  background-color:#e5e2fa!important;
+  color: #020a17;
+}
+.msl-option-active {
+  background: #020a17 !important;
+  color:#23d5ab !important;
+}
 .msl-active {
   background-color: #020a17 !important;
 }
 
 .msl-chip {
   background-color: #020a17 !important;
+  color: #23d5ab;
 }
 
 .msl-chip-delete {
@@ -38,15 +70,65 @@
   color: aliceblue !important;
 }
 .msl-chip-delete:hover {
-  color: #ff0b0b !important;
+  color: #e73c7e !important;
 }
 
 
 .heightFit{
   height: fit-content;
+  box-shadow: 0 2px 3px #e5e2fa;
+  border-radius: 5px;
 }
 
 .is-active{
   background-color: greenyellow;
   transition: background-color ;
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  -webkit-animation: fadeIn 3s;
+  animation: fadeIn 3s;
+  margin-bottom: 16px;
+}
+
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.moviesContainer{
+  min-height: 500px;
+}
+.searchButton{
+  color: aliceblue;
+  width: 300px;
+  max-height: 40px;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+.btn:focus,.btn:active {
+  box-shadow: none;
 }

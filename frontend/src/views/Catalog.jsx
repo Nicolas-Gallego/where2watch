@@ -3,6 +3,7 @@ import "../css/catalog.css";
 import { Link } from "react-router-dom";
 import GenreFilter from "../components/GenreFilter";
 import PlatformFilter from "../components/PlatformFilter";
+import SearchBar from "../components/SearchBar";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -129,21 +130,21 @@ const Catalog = () => {
       <>
         <div className="container-fluid">
           <div className=" d-flex justify-content-center titleCatalog">
-            <h2>Catalog</h2>
           </div>
           <div className="row">
             <div className="d-flex justify-content-center">
               <div className="col-10">
-                <div className="input-group mb-3 ">
-                  <span className="input-group-text" id="basic-addon1">
-                    <i className="fas fa-search"></i>
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control"
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                  />
+              <h3 className="secondTitle"> Corresponding movies for: {searchValue}</h3>
+                <div className="input-group mb-3">
+                  <div class="search-box">
+                    <input
+                      type="text"
+                      // className="form-control"
+                      value={searchValue}
+                      onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                    <i id="icon" class="search"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,7 +156,7 @@ const Catalog = () => {
                 <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
               </div>
 
-              <button className="btn searchButton" onClick={tkt}>
+              <button className="btn  searchButton" onClick={tkt}>
                 Filter
               </button>
             </div>
@@ -192,42 +193,24 @@ const Catalog = () => {
   } else {
     return (
       <>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <button
-                class="page-link"
-                aria-label="Previous"
-                onClick={previousPage}
-              >
-                <span aria-hidden="true">&laquo;</span>
-              </button>
-            </li>
-            {paginationItem()}
-            <li class="page-item">
-              <button class="page-link" aria-label="Next" onClick={nextPage}>
-                <span aria-hidden="true">&raquo;</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
         <div className="container-fluid">
           <div className=" d-flex justify-content-center titleCatalog">
-            <h2>Catalog</h2>
+            
           </div>
           <div className="row">
             <div className="d-flex justify-content-center">
               <div className="col-10">
-                <div className="input-group mb-3 ">
-                  <span className="input-group-text" id="basic-addon1">
-                    <i className="fas fa-search"></i>
-                  </span>
-                  <input
-                    type="search"
-                    className="form-control"
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                  />
+              <h3 className="secondTitle"> Search for a movie</h3>
+                <div className="input-group mb-3">
+                  <div class="search-box">
+                    <input
+                      type="search"
+                      // className="form-control"
+                      value={searchValue}
+                      onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                    <i id="icon" class="search"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -243,10 +226,10 @@ const Catalog = () => {
               </button>
             </div>
 
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center moviesContainer">
               <div className="col-10 d-flex justify-content-center flex-wrap sibling-fade">
                 {films ? (
-                  films.slice(0, 100).map((item, key) => (
+                  films.map((item, key) => (
                     <Link key={key} to={`/films/${item.id_imdb}`}>
                       <img
                         src={`https://image.tmdb.org/t/p/w300/${item.image}`}
@@ -268,6 +251,29 @@ const Catalog = () => {
                 )}
               </div>
             </div>
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">
+                <li className="page-item">
+                  <button
+                    className="page-link"
+                    aria-label="Previous"
+                    onClick={previousPage}
+                  >
+                    <span aria-hidden="true">&laquo;</span>
+                  </button>
+                </li>
+                {paginationItem()}
+                <li className="page-item">
+                  <button
+                    className="page-link"
+                    aria-label="Next"
+                    onClick={nextPage}
+                  >
+                    <span aria-hidden="true">&raquo;</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </>

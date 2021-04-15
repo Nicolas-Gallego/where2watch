@@ -29,7 +29,7 @@ body {
 
 .msl-vars {
   width: 300px;
-  
+
   /* max-height: 40px; */
 }
 
@@ -48,13 +48,12 @@ h2 {
 .filter {
   z-index: 1;
 }
-.filterCatalog{
-margin-bottom: 16px;
+.filterCatalog {
+  margin-bottom: 16px;
 }
 
-.filmDispo{
-margin: 8px;
-max-height: 400px;
-max-width: 350px;
+.filmDispo {
+  margin: 8px;
+  height: 401px;
+  max-width: 267px;
 }
-

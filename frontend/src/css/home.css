@@ -1,11 +1,5 @@
-.searchButton{
-    background-color: black;
-    color: white;
-    width: 300px;
-    max-height: 40px;
-}
-
-.searchButton:hover{
-    color: coral;
-}
+/* type="search"
+                    className="form-control"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)} */
 
