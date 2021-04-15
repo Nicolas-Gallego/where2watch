@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth"); //Import routes
 const filmRoute = require("./routes/filmInfo"); //Import films
-const cors = require("cors");
 const FilmModel = require("./models/Film");
 
 //Connect to db
@@ -13,11 +14,11 @@ mongoose.connect(
   () => {
     console.log("db connect........");
   }
-);
-
-//Middlewares
+  );
+  
+  //Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(express.static("Public"));
 
 //Route Middlewares
 app.use("/user", authRoute);

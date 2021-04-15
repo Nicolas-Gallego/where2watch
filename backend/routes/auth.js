@@ -7,78 +7,39 @@ const bcrypt = require("bcryptjs");
 const path = require("path");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
+var multer = require("multer");
+const fs = require("fs");
 // const passValidator = require("../middlewares/auth.middlewares")
+const upload = multer({ dest: "Public/profilePicture" });
 
 dotenv.config();
 
-var multer = require("multer");
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-var upload = multer({
-  storage: storage,
-}).single("profilePicture");
-
-
 //Signup router
-router.post(
-  "/signup",
-  upload,
-  // body("email").isEmail(),
-  // body("password").custom((value) => {
-  //   var schema = new passwordValidator();
-  //   schema
-  //     .is()
-  //     .min(8)
-  //     .is()
-  //     .max(100)
-  //     .has()
-  //     .uppercase()
-  //     .has()
-  //     .lowercase()
-  //     .has()
-  //     .digits(2)
-  //     .has()
-  //     .not()
-  //     .spaces()
-  //     .is()
-  //     .not()
-  //     .oneOf(["Passw0rd", "Password123"]);
-  //   return schema.validate(value);
-  // }),
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    console.log(req.file);
-
-    console.log(req.body);
-    const user = new UserModel({
-      username: req.body.username,
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password),
-      age: req.body.age,
-      platforms: req.body.platforms,
-      //profilePicture: req.file.filename
-    });
-    try {
-      const saveUser = await user.save();
-      res.json(saveUser);
-    } catch (err) {
-      res.json({ message: err });
-    }
+router.post("/signup", upload.single("profilePicture"), async (req, res) => {
+  if (req.file) {
+    let pP = fs.renameSync(
+      req.file.path,
+      path.join(req.file.destination, `${req.body.firstName}.png`)
+    );
   }
-);
+
+  console.log("req.body", req.body);
+
+  const user = new UserModel({
+    username: req.body.username,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password),
+    age: req.body.age,
+    platforms: req.body.Platforms,
+    profilePicture: `userPP/${req.body.username}.png`,
+  });
+  try {
+    await user.save();
+    res.json({ message: "utilisateur enregister", saveUser: user });
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 
 //Show login router
 router.get("/login", (req, res) => {
@@ -110,7 +71,7 @@ router.post("/login", async (req, res) => {
 //Profil router
 router.get("/profile/:id", async (req, res) => {
   try {
-    const userProfil = await UserModel.findById('id: ' + req.params.id);
+    const userProfil = await UserModel.findById("id: " + req.params.id);
     res.json(userProfil);
   } catch (err) {
     res.json({ message: err });
