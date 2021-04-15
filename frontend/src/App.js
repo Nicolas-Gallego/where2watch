@@ -13,7 +13,7 @@ import NavbarUnregistered from "./components/NavbarUnregistered";
 // import NavbarRegistered from './components/NavbarRegistered'
 import FilmPage from "./views/FilmPage";
 import Catalog from "./views/Catalog";
-import Signup from "./views/Signup";
+import SingupTest from "./views/SingupTest";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Route exact path="/home" component={Home}></Route>
         <Route path="/login" component={Login}></Route>
-        <Route path="/signup" component={Signup}></Route>
+        <Route path="/signup" component={SingupTest}></Route>
         <Route path="/profile/:id" component={Profile}></Route>
         <Route path="/editprofile" component={EditProfile}></Route>
         <Route exact path="/films/:id" component={FilmPage}></Route>

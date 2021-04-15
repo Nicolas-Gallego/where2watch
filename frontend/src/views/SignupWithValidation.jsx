@@ -26,32 +26,32 @@ function Signup() {
   const [selectedPlatform, setSelectedPlatform] = useState([]);
 
   async function onClickCreate() {
-    // let data = {
-    //   username,
-    //   email,
-    //   password,
-    //   age,
-    //   platforms: selectedPlatform.map((platform) => {
-    //     return platform.name;
-    //   }),
-    // };
-    // console.log("user created", data);
+    let data = {
+      username,
+      email,
+      password,
+      age,
+      platforms: selectedPlatform.map((platform) => {
+        return platform.name;
+      }),
+    };
+    console.log("user created", data);
 
-    // let result = await fetch("http://localhost:8000/user/signup", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    // });
-    // result = await result.json();
-    // console.warn("Result", result);
-    // if (result.ok) {
-    //   const tokenObj = await result.json();
-    //   localStorage.setItem("token", tokenObj.token);
-    //   history.push("/profile/:id");
-    // }
+    let result = await fetch("http://localhost:8000/user/signup", {
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    result = await result.json();
+    console.warn("Result", result);
+    if (result.ok) {
+      const tokenObj = await result.json();
+      localStorage.setItem("token", tokenObj.token);
+      history.push("/profile/:id");
+    }
   }
 
   // const onClickCreate = (event) => {
