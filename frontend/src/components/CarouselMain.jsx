@@ -21,6 +21,7 @@ export default class CarouselMain extends Component {
         return response.json();
       })
       .then((response) => {
+        console.log(response)
         this.setState({
           movies: response.films,
         });
@@ -65,7 +66,7 @@ export default class CarouselMain extends Component {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-0-px"
           >
-            {this.state.movies.slice(0, 15).map((movie) => {
+            {this.state.movies.slice(0, 20).map((movie) => {
               return (
                 <Link to={`/films/${movie.id_imdb}`}>
                   <img

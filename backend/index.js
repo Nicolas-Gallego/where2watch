@@ -36,6 +36,7 @@ app.post("/home", async (req, res) => {
   if (req.query.page) {
     page = req.query.page;
   }
+
   console.log(" début limit", limit);
   console.log(" début page", page);
 
@@ -48,29 +49,65 @@ app.post("/home", async (req, res) => {
   // si je recois un genre et une platforme
   if (req.body.platform && req.body.genres) {
     console.log("jai les deux");
-    const myFilms = await FilmModel.find({
+    const setCount = await FilmModel.aggregate().match({
       platforme: { $in: req.body.platform },
-    })
-      .find({ genres: { $in: req.body.genres } })
+      genres: { $in: req.body.genres },
+    });
+    const myFilms = await FilmModel.aggregate()
+      .match({
+        platforme: { $in: req.body.platform },
+        genres: { $in: req.body.genres },
+      })
+      .skip(parseInt(page * limit))
+      .limit(parseInt(limit))
       .exec();
-    res.json({ films: myFilms, message: `voici les films` });
+
+    res.json({
+      films: myFilms,
+      message: `voici les films`,
+      count: setCount.length,
+    });
   } else if (req.body.genres) {
     console.log("jai un genre");
     //sinon si je recois juste un genre
-    const myFilms = await FilmModel.find({
+    const setCount = await FilmModel.aggregate().match({
       genres: { $in: req.body.genres },
-    }).exec();
-    res.json({ films: myFilms, message: `voici les films` });
+    });
+
+    const myFilms = await FilmModel.aggregate()
+      .match({
+        genres: { $in: req.body.genres },
+      })
+      .skip(parseInt(page * limit))
+      .limit(parseInt(limit))
+      .exec();
+
+    res.json({
+      films: myFilms,
+      message: `voici les films`,
+      count: setCount.length,
+    });
   } else if (req.body.platform) {
     console.log("jai une platform");
-    // console.log("tkt", `/${req.body.platform.join("|")}/gi`);
     //sinon si je recois juste une platforme
 
-    const myFilms = await FilmModel.find({
+    const setCount = await FilmModel.aggregate().match({
       platforme: { $in: req.body.platform },
-    }).exec();
+    });
 
-    res.json({ films: myFilms, message: `voici les films` });
+    const myFilms = await FilmModel.aggregate()
+      .match({
+        platforme: { $in: req.body.platform },
+      })
+      .skip(parseInt(page * limit))
+      .limit(parseInt(limit))
+      .exec();
+
+    res.json({
+      films: myFilms,
+      message: `voici les films`,
+      count: setCount.length,
+    });
   } else {
     console.log(" fin limit", limit);
     console.log(" fin page", page);
@@ -80,11 +117,13 @@ app.post("/home", async (req, res) => {
       .skip(parseInt(page * limit))
       .limit(parseInt(limit))
       .exec();
-      console.log(myFilms)
+
+    const setCount = await FilmModel.countDocuments();
+
     res.json({
       films: myFilms,
       message: `voici les films`,
-      count: await FilmModel.countDocuments(),
+      count: setCount,
     });
   }
 });

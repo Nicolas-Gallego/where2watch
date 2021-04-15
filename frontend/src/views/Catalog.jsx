@@ -31,8 +31,12 @@ const Catalog = () => {
       })
       .then((response) => {
         console.log(response);
-        setNumberOfPage(Math.floor(response.count/20));
-        console.log(response.count);
+        setNumberOfPage(Math.floor(response.count / 20));
+        console.log(
+          "Math.floor(response.count / 20)",
+          Math.floor(response.count / 20)
+        );
+        console.log("response.count", response.count);
         setfilms(response.films);
       });
   };
@@ -77,23 +81,46 @@ const Catalog = () => {
     if (page >= 1) {
       setPage(page - 1);
     }
+    console.log(page);
   };
+
   const nextPage = () => {
-    setPage(page + 1);
+    if (page === numberOfPage) {
+      return;
+    } else {
+      setPage(page + 1);
+      console.log(page);
+    }
   };
 
   const paginationItem = () => {
     const pages = [];
-    for (let i = 0; i < numberOfPage; i++) {
-      pages.push(
-        <li class="page-item">
-          <button class="page-link" onClick={() => setPage(i * 1)}>
-            {i + 1}
-          </button>
-        </li>
-      );
+    for (
+      let i = Math.max(0, page - 2);
+      i < Math.min(numberOfPage + 1, Math.max(5, page + 3));
+      i++
+    ) {
+      if (i === page) {
+        pages.push(
+          <li className="page-item">
+            <button
+              className="page-link is-active"
+              onClick={() => setPage(i * 1)}
+            >
+              {i + 1}
+            </button>
+          </li>
+        );
+      } else {
+        pages.push(
+          <li className="page-item">
+            <button className="page-link" onClick={() => setPage(i * 1)}>
+              {i + 1}
+            </button>
+          </li>
+        );
+      }
     }
-
     return pages;
   };
 
@@ -165,7 +192,7 @@ const Catalog = () => {
   } else {
     return (
       <>
-      <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item">
               <button
@@ -243,7 +270,6 @@ const Catalog = () => {
             </div>
           </div>
         </div>
-       
       </>
     );
   }

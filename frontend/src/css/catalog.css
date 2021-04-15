@@ -45,3 +45,8 @@
 .heightFit{
   height: fit-content;
 }
+
+.is-active{
+  background-color: greenyellow;
+  transition: background-color ;
+}
