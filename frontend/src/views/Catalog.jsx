@@ -16,7 +16,7 @@ const Catalog = () => {
   const [page, setPage] = useState(0);
 
   const fetchfilms = () => {
-    fetch(`http://localhost:8000/home?limit=100&offset=${page}`, {
+    fetch(`http://localhost:8000/home?limit=100&page=${page}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -73,12 +73,12 @@ const Catalog = () => {
       });
   };
   const previousPage = () => {
-    if (page >= 100) {
-      setPage(page - 100);
+    if (page >= 1) {
+      setPage(page - 1);
     }
   };
   const nextPage = () => {
-    setPage(page + 100);
+    setPage(page + 1);
   };
 
   const paginationItem = () => {
@@ -86,7 +86,7 @@ const Catalog = () => {
     for (let i = 0; i < numberOfPage; i++) {
       pages.push(
         <li class="page-item">
-          <button class="page-link" onClick={() => setPage(i * 100)}>
+          <button class="page-link" onClick={() => setPage(i * 1)}>
             {i + 1}
           </button>
         </li>

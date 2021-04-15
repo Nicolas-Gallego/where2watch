@@ -24,9 +24,8 @@ app.use("/user", authRoute);
 app.use("/films", filmRoute);
 
 app.post("/home", async (req, res) => {
-  let limit = 2
-  let offset = 0
-  let page = 0
+  let limit = 2;
+  let page = 0;
 
   if (req.query.limit) {
     if (!parseInt(req.query.limit) || parseInt(req.query.limit) < 1) {
@@ -35,16 +34,16 @@ app.post("/home", async (req, res) => {
     limit = req.query.limit;
   }
   if (req.query.page) {
-    page = req.query.page
+    page = req.query.page;
   }
+  console.log(" début limit", limit);
+  console.log(" début page", page);
 
-
-  console.log("lol", req.query)
+  console.log("lol", req.query);
   console.log("requete faite a POST /home ");
 
   console.log("req.body.platform", req.body.platform);
   console.log("req.body.genres", req.body.genres);
-
 
   // si je recois un genre et une platforme
   if (req.body.platform && req.body.genres) {
@@ -63,7 +62,6 @@ app.post("/home", async (req, res) => {
     }).exec();
     res.json({ films: myFilms, message: `voici les films` });
   } else if (req.body.platform) {
-
     console.log("jai une platform");
     // console.log("tkt", `/${req.body.platform.join("|")}/gi`);
     //sinon si je recois juste une platforme
@@ -73,13 +71,21 @@ app.post("/home", async (req, res) => {
     }).exec();
 
     res.json({ films: myFilms, message: `voici les films` });
-
   } else {
-    console.log(limit, offset)
+    console.log(" fin limit", limit);
+    console.log(" fin page", page);
     console.log("jai pas de params");
     // par défaut je recois 100 films
-    const myFilms = await FilmModel.aggregate().skip(parseInt(offset * limit)).limit(parseInt(limit)).exec();
-    res.json({ films: myFilms, message: `voici les films`,count: await FilmModel.count() });
+    const myFilms = await FilmModel.aggregate()
+      .skip(parseInt(page * limit))
+      .limit(parseInt(limit))
+      .exec();
+      console.log(myFilms)
+    res.json({
+      films: myFilms,
+      message: `voici les films`,
+      count: await FilmModel.countDocuments(),
+    });
   }
 });
 
