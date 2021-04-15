@@ -1,23 +1,30 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-// import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "react-multiple-select-dropdown-lite/dist/index.css";
 import { Multiselect } from "multiselect-react-dropdown";
 import "../css/FormsInput.css";
 import "../css/main.css";
 
+
 const SingupTest = () => {
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitted, isSubmitting },
   } = useForm({
     mode: "onChange",
   });
+  const [dbErorrs, setDbErrors] = useState("");
 
   const onSubmit = (data) => {
-    console.log("DATA", data);
+    if (data.password !== data.confirmpassword) {
+      console.log("mdp pas bon");
+      return;
+    }
 
     if (data.Platforms) {
       data.Platforms = data.Platforms.map((plat) => {
@@ -30,7 +37,7 @@ const SingupTest = () => {
     formData.append("username", data.username);
     formData.append("email", data.email);
     formData.append("password", data.password);
-    formData.append("secondPassword", data.secondPassword);
+    formData.append("confirmpassword", data.confirmpassword);
     formData.append("age", data.age);
     formData.append("Platforms", data.Platforms);
 
@@ -43,6 +50,10 @@ const SingupTest = () => {
       })
       .then((response) => {
         console.log(response);
+        if (response.message === "utilisateur enregister") {
+          let path = `/profile/${response.saveUser}`;
+          history.push(path);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -70,42 +81,50 @@ const SingupTest = () => {
                   name="profilePicture"
                   {...register("profilePicture")}
                 />
-                <p className="error-meassages">{errors.picture?.message}</p>
               </div>
               <label className="form-label">Username</label>
               <input
                 {...register("username")}
-                className={
-                  errors.username ? "form-control is-invalid" : "form-control"
-                }
+                className="form-control"
                 placeholder="Username"
               />
-              <p className="error-meassages">{errors.username?.message}</p>
 
               <label className="form-label">Email</label>
               <input
-                {...register("email")}
+                {...register("email", {
+                  required: "vous devez enter une addresse mail",
+                  pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                })}
                 className={
                   errors.email ? "form-control is-invalid" : "form-control"
                 }
                 placeholder="Email"
+                type="text"
               />
-              <p className="error-meassages">{errors.email?.message}</p>
 
               <label className="form-label">password</label>
               <input
-                {...register("password")}
+                {...register("password", {
+                  required:
+                    "merci d'indiquer un mot de passe minimum 5 caratères",
+                  minLength: 5,
+                  maxLength: 99,
+                })}
                 className={
                   errors.password ? "form-control is-invalid" : "form-control"
                 }
                 placeholder="Password"
                 type="password"
               />
-              <p className="error-meassages">{errors.password?.message}</p>
 
               <label className="form-label">Confirm-Password</label>
               <input
-                {...register("confirmpassword")}
+                {...register("confirmpassword", {
+                  required:
+                    "merci d'indiquer un mot de passe minimum 5 caratères",
+                  minLength: 5,
+                  maxLength: 99,
+                })}
                 className={
                   errors.confirmpassword
                     ? "form-control is-invalid"
@@ -114,21 +133,17 @@ const SingupTest = () => {
                 placeholder="Confirmpassword"
                 type="password"
               />
-              <p className="error-meassages">
-                {errors.confirmpassword?.message}
-              </p>
 
               <label className="form-label">Age</label>
               <input
                 type="number"
                 name="age"
-                {...register("age")}
+                {...register("age", { min: 1, max: 99 })}
                 className={
                   errors.age ? "form-control is-invalid" : "form-control"
                 }
                 placeholder="Select age"
               />
-              <p className="error-meassages">{errors.age?.message}</p>
 
               <label className="form-label">Platforms</label>
               <Controller
@@ -147,13 +162,18 @@ const SingupTest = () => {
               />
 
               <div className="d-grid gap-2 mt-4">
-                <input type="submit" className="btn btn-dark" value="Signup" />
+                <input
+                  type="submit"
+                  className="btn btn-dark"
+                  value="Signup"
+                  disabled={!isValid || isSubmitting}
+                />
               </div>
 
               <div className="d-grid gap-2">
-                {/* <Link to="/login" className="d-flex justify-content-end">
+                <Link to="/login" className="d-flex justify-content-end">
                   Login
-                </Link> */}
+                </Link>
               </div>
             </form>
           </div>

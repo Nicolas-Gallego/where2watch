@@ -12,7 +12,7 @@ const Profil = () => {
         axios.get(url)
         .then(response => {
             console.log(response)
-            setUserInfo(response.data)
+            setUserInfo(response.data.userProfil)
         })
     }, [url]);
 
@@ -26,11 +26,11 @@ const Profil = () => {
                         <div className="row">
                             {userInfo ? (
                                 <>
-                                    {/* <div className="col-4">
-                                        <img src={}
+                                    <div className="col-4">
+                                        <img src={`http://localhost:8000/Public/${userInfo.image}`}
                                             className="profileImage"
                                             alt={`UserName : ${userInfo.pseudo}`} />
-                                    </div> */}
+                                    </div>
                                     <div className="col-6 ">
                                         <p>{userInfo.image}</p>
                                         <p>Email : {userInfo.email}</p>
