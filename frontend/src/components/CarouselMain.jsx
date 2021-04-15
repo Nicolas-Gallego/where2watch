@@ -16,7 +16,7 @@ export default class CarouselMain extends Component {
     this.loadMovies();
   }
   loadMovies() {
-    fetch(`http://localhost:8000/films/moovice`)
+    fetch(`http://localhost:8000/films/popular`)
       .then((response) => {
         return response.json();
       })
@@ -31,8 +31,8 @@ export default class CarouselMain extends Component {
     const responsive = {
       desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 4,
-        slidesToSlide: 1, // optional, default to 1.
+        items: 5,
+        slidesToSlide: 3, // optional, default to 1.
       },
       tablet: {
         breakpoint: { max: 1024, min: 464 },
@@ -58,7 +58,7 @@ export default class CarouselMain extends Component {
             autoPlay={this.props.deviceType !== "mobile" ? true : false}
             autoPlaySpeed={3000}
             keyBoardControl={true}
-            customTransition="transform 300ms ease-in-out"
+            customTransition="transform 750ms ease-in-out"
             transitionDuration={500}
             containerClass="carousel-container"
             removeArrowOnDeviceType={["mobile"]}

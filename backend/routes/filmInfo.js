@@ -1,9 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const FilmModel = require("../models/Film");
+const PopularModel = require("../models/Popular")
 
 router.get("/moovice", async (req, res) => {
   const films = await FilmModel.find({}).limit(20);
+  res.json({
+    films: films,
+    message: "tu as fait une requete GET sur /films/moovice",
+  });
+});
+
+router.get('/popular', async (req, res) => {
+  const films = await PopularModel.find();
   res.json({
     films: films,
     message: "tu as fait une requete GET sur /films/moovice",
