@@ -21,3 +21,27 @@
   transition-delay: 0ms, 0ms;
 }
 
+.msl-options {
+  background-color: #020a17 !important;
+}
+
+.msl-active {
+  background-color: #020a17 !important;
+}
+
+.msl-chip {
+  background-color: #020a17 !important;
+}
+
+.msl-chip-delete {
+  background-color: #020a17 !important;
+  color: aliceblue !important;
+}
+.msl-chip-delete:hover {
+  color: #ff0b0b !important;
+}
+
+
+.heightFit{
+  height: fit-content;
+}
