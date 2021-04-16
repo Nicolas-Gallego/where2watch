@@ -5,6 +5,7 @@ const filmSchema = new mongoose.Schema({
   titre: String,
   image: String,
   description: String,
+  date: String,
   //   platforme: [],
   platforme: {
     type: [String],

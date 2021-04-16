@@ -26,6 +26,7 @@ const createFilms = async () => {
             titre: film.original_title,
             image: film.poster_path,
             description: film.overview,
+            date: film.release_date,
             langue: film.original_language,
             genres: film.genre_ids,
             note: film.vote_average
