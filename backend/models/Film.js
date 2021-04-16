@@ -6,11 +6,7 @@ const filmSchema = new mongoose.Schema({
   image: String,
   description: String,
   date: String,
-  //   platforme: [],
-  platforme: {
-    type: [String],
-    default: ["Netflix"],
-  },
+  platforme: [],
   casting: [
     {
       nom: String,

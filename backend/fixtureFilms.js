@@ -8,7 +8,7 @@ mongoose.connect("mongodb://localhost:27017/w2w", () => {
 
 const createFilms = async () => {
   await FilmModel.deleteMany({}).exec();
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= 500; i++) {
     const searchPopularMovies = request(
       `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&page=${i}`,
       async function (error, response, body) {
@@ -18,7 +18,6 @@ const createFilms = async () => {
           response && response.statusCode
         ); // Print the response status code if a response was received
         body = JSON.parse(body);
-        
 
         const filmList = await body.results.map((film) => {
           return {
@@ -29,7 +28,7 @@ const createFilms = async () => {
             date: film.release_date,
             langue: film.original_language,
             genres: film.genre_ids,
-            note: film.vote_average
+            note: film.vote_average,
           };
         });
 
@@ -80,9 +79,12 @@ const addPlatformFilms = async () => {
         ); // Print the response status code if a response was received
         PlatformByFilms = JSON.parse(content);
         platforms = PlatformByFilms.results.FR.flatrate.map((item) => {
-          return item.provider_name;
+          setTimeout(() => {
+            console.log(item.provider_name);
+            // return item.provider_name;
+          }, 1000);
         });
-        await myfilm.updateOne({ platforme: platforms });
+        // await myfilm.updateOne({ platforme: platforms });
       }
     );
   });
@@ -167,27 +169,22 @@ const addGenreFilms = async () => {
 };
 
 const tkt = async () => {
-  createFilms();
-
-  setTimeout(() => {
-    addGenreFilms();
-  }, 10000);
-
-  setTimeout(() => {
-    addDirectorFilms();
-  }, 10000);
-
-  setTimeout(() => {
-    addCastFilms();
-  }, 10000);
-
+  // createFilms();
+  // setTimeout(() => {
+  //   addGenreFilms();
+  // }, 10000);
+  // setTimeout(() => {
+  //   addDirectorFilms();
+  // }, 10000);
+  // setTimeout(() => {
+  //   addCastFilms();
+  // }, 10000);
   setTimeout(() => {
     addPlatformFilms();
-  }, 10000);
-
-  setTimeout(() => {
-    addSimilarsFilms();
-  }, 10000);
+  }, 1000);
+  // setTimeout(() => {
+  //   addSimilarsFilms();
+  // }, 10000);
 };
 
 tkt();
