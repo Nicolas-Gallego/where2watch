@@ -13,6 +13,10 @@ const FilmPage = ({ match }) => {
     searchFilmInfos();
   }, [filmId]);
 
+  useEffect(()=> {
+    setFilmId(match.params.id)
+  }, [match.params.id]);
+  
   const searchFilmInfos = () => {
     fetch(`http://localhost:8000/films/moovice/${filmId}`, {
       method: "GET",
@@ -23,7 +27,6 @@ const FilmPage = ({ match }) => {
       .then((response) => {
         console.log(response);
         setFilmInfos(response.film);
-        
       })
       .catch((err) => {
         console.log(err);
@@ -31,25 +34,24 @@ const FilmPage = ({ match }) => {
   };
 
   const platformLink = (platform) => {
-      if (platform === "Disney Plus") {
-        return('https://www.disneyplus.com/fr-fr/home')
-      } else if (platform === "Netflix") {
-        return('https://www.netflix.com/browse')
-      } else if (platform === "Canal+") {
-        return('https://www.canalplus.com//')
-      } else if (platform === "Amazon Prime Video") {
-        return('https://www.primevideo.com/')
-      } else if (platform === "La Cinetek") {
-        return('https://www.lacinetek.com/fr/')
-      } else if (platform === "OCS Go") {
-        return('https://www.ocs.fr//')
-      } else if (platform === "Anime Digital Networks") {
-        return('https://animedigitalnetwork.fr/')
-      }  else {
-        return('#')
-      } 
-    
-  }
+    if (platform === "Disney Plus") {
+      return "https://www.disneyplus.com/fr-fr/home";
+    } else if (platform === "Netflix") {
+      return "https://www.netflix.com/browse";
+    } else if (platform === "Canal+") {
+      return "https://www.canalplus.com//";
+    } else if (platform === "Amazon Prime Video") {
+      return "https://www.primevideo.com/";
+    } else if (platform === "La Cinetek") {
+      return "https://www.lacinetek.com/fr/";
+    } else if (platform === "OCS Go") {
+      return "https://www.ocs.fr//";
+    } else if (platform === "Anime Digital Networks") {
+      return "https://animedigitalnetwork.fr/";
+    } else {
+      return "#";
+    }
+  };
 
   if (filmInfos) {
     return (
@@ -77,14 +79,20 @@ const FilmPage = ({ match }) => {
                     } else {
                       return (
                         <a href={platformLink(platforme)} target={"blank"}>
-                        <img
-                          className="logoPlatform"
-                          src={`/${platforme}.png`}
-                        />
+                          <img
+                            className="logoPlatform"
+                            src={`/${platforme}.png`}
+                          />
                         </a>
                       );
                     }
                   })}
+                </div>
+                <div>
+                  <span>
+                    <h6>Release date</h6>
+                    {filmInfos.date}
+                  </span>
                 </div>
                 <div className="filmInfos">
                   <h5>Casting</h5>
@@ -112,7 +120,7 @@ const FilmPage = ({ match }) => {
                     {filmInfos.note}/10
                   </span>
                 </div>
-                <div className="other">
+               {filmInfos.similars.length > 0 && <div className="other">
                   <h4>Similar movies</h4>
                   <div
                     id="carouselExampleIndicators"
@@ -179,7 +187,7 @@ const FilmPage = ({ match }) => {
                       <span className="visually-hidden">Next</span>
                     </button>
                   </div>
-                </div>
+                </div> }
               </div>
             </div>
             <div className="container2"></div>
@@ -188,15 +196,17 @@ const FilmPage = ({ match }) => {
       </>
     );
   } else {
-    return  <div className=" d-flex justify-content-center loader">
-    <Loader
-      type="Circles"
-      color="#F0F8FF"
-      height={100}
-      width={100}
-      timeout={10000}
-    />
-  </div>
+    return (
+      <div className=" d-flex justify-content-center loader">
+        <Loader
+          type="Circles"
+          color="#F0F8FF"
+          height={100}
+          width={100}
+          timeout={10000}
+        />
+      </div>
+    );
   }
 };
 
