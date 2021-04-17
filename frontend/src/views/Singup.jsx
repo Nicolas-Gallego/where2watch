@@ -165,7 +165,7 @@ const SingupTest = () => {
                   type="submit"
                   className="btn btn-dark"
                   value="Signup"
-                  disabled={!isValid }
+                  disabled={!isValid || isSubmitting}
                 />
               </div>
 

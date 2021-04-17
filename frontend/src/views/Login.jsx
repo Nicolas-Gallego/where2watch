@@ -80,7 +80,7 @@ const Login = () => {
                 <button
                   className="btn btn-primary"
                   type="submit"
-                  disabled={!isValid || isSubmitted}
+                  disabled={!isValid}
                 >
                   Login
                 </button>
