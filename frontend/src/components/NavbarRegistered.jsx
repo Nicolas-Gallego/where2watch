@@ -1,16 +1,47 @@
 import "../css/navbar.css";
+import { useEffect, useState } from "react";
 
 const NavbarUnregistered = () => {
+  const [myToken, setMyToken] = useState(localStorage.getItem("token"));
+  const [myInfos, setMyInfos] = useState("");
+
+  useEffect(() => {
+    checkToken();
+  }, [myToken]);
+
+  const checkToken = () => {
+    fetch(`http://localhost:8000/user/nav`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${myToken}`,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then(async (response) => {
+        setMyInfos(response.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <nav className="navbar navbar-expand-xl">
+    <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
       <div className="container-fluid">
         <a
           className="navbar-brand d-flex justify-content-start align-items-center"
           href="/home"
         >
-          <img src="/w2w_logo.png" alt="logo" className="logo shadowfilter" />
+          <img
+            src="/w2w_logo_white.png"
+            alt="logo"
+            className="logo shadowfilter"
+          />
           <div>
-            <h1 className="mainTitle d-flex flex-wrap">
+            <h1 className="mainTitle d-flex flex-wrap shadowfilter">
               <span>Where</span>
               <span>2</span>
               <span>Watch</span>
@@ -39,13 +70,27 @@ const NavbarUnregistered = () => {
             <a className="nav-link" href="/catalog">
               Search
             </a>
-            <a className="nav-link" href="/home">
+            <a
+              className="nav-link"
+              href="/home"
+              onClick={() => {
+                localStorage.clear();
+              }}
+            >
               Logout
             </a>
-            <a className="nav-link" href="/profile">
+            <a
+              className="nav-link"
+              href={`/profile/${myInfos._id}`}
+              onClick={() => checkToken()}
+            >
               {/* must be replace by pp from user */}
               <img
-                src="pp.png"
+                src={
+                  myInfos.profilePicture
+                    ? `http://localhost:8000/${myInfos.profilePicture}`
+                    : "pp.png"
+                }
                 alt="profile picture"
                 className="profilePicture"
               />

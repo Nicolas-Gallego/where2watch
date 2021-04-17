@@ -49,9 +49,8 @@ const SingupTest = () => {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         if (response.message === "utilisateur enregister") {
-          let path = `/profile/${response.saveUser}`;
+          let path = `/login`;
           history.push(path);
         }
       })
@@ -166,7 +165,7 @@ const SingupTest = () => {
                   type="submit"
                   className="btn btn-dark"
                   value="Signup"
-                  disabled={!isValid || isSubmitting}
+                  disabled={!isValid }
                 />
               </div>
 

@@ -1,15 +1,18 @@
 import "../css/navbar.css";
 
-
 const NavbarUnregistered = () => {
   return (
     <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
       <div className="container-fluid">
         <a
-          className="navbar-brand d-flex justify-content-start align-items-center flex-wrap"
+          className="navbar-brand d-flex justify-content-start align-items-center"
           href="/home"
         >
-          <img src="/w2w_logo_white.png" alt="logo" className="logo shadowfilter" />
+          <img
+            src="/w2w_logo_white.png"
+            alt="logo"
+            className="logo shadowfilter"
+          />
           <div className="">
             <h1 className="mainTitle d-flex flex-wrap shadowfilter">
               <span>Where</span>&thinsp;
@@ -30,10 +33,10 @@ const NavbarUnregistered = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div
-          className="collapse navbar-collapse justify-content-end"
+          className="collapse navbar-collapse justify-content-end "
           id="navbarNavAltMarkup"
         >
-          <div className="navbar-nav">
+          <div className="navbar-nav align-items-center">
             <a className="nav-link " aria-current="page" href="/home">
               Home
             </a>

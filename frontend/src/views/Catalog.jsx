@@ -31,13 +31,6 @@ const Catalog = () => {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
-        setNumberOfPage(Math.floor(response.count / 20));
-        console.log(
-          "Math.floor(response.count / 20)",
-          Math.floor(response.count / 20)
-        );
-        console.log("response.count", response.count);
         setfilms(response.films);
       });
   };
@@ -56,12 +49,10 @@ const Catalog = () => {
     fetchfilms();
   }
   const checkGenreFilter = (type) => {
-    console.log(type);
     setGenreFilterValue(type);
   };
 
   const checkFilter = (type) => {
-    console.log(type);
     setPlatformFilterValue(type);
   };
 
@@ -71,7 +62,6 @@ const Catalog = () => {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         setFilmsSearch(response.films);
       })
       .catch((err) => {
@@ -82,7 +72,6 @@ const Catalog = () => {
     if (page >= 1) {
       setPage(page - 1);
     }
-    console.log(page);
   };
 
   const nextPage = () => {
@@ -91,7 +80,6 @@ const Catalog = () => {
     } else {
       setPage(page + 1);
       window.scrollTo({top: 300, behavior: 'smooth'});
-      console.log(page);
     }
   };
 

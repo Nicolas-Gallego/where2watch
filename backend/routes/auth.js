@@ -11,12 +11,23 @@ var multer = require("multer");
 const fs = require("fs");
 // const passValidator = require("../middlewares/auth.middlewares")
 
-
 const upload = multer({ dest: "Public/profilePicture" });
-
 
 dotenv.config();
 
+const verifyToken = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const result = jwt.verify(token.split(" ")[1], process.env.TOKEN_SECRET);
+    const user = await UserModel.findOne({
+      _id: result._id,
+    }).exec();
+    req.user = user;
+    next();
+  } catch (err) {
+    res.send("vous n'etes pas authorisé");
+  }
+};
 
 //Signup router
 router.post("/signup", upload.single("profilePicture"), async (req, res) => {
@@ -38,36 +49,37 @@ router.post("/signup", upload.single("profilePicture"), async (req, res) => {
   });
   try {
     await user.save();
-    res.json({ message: "utilisateur enregister", saveUser: user._id });
+    res.json({ message: "utilisateur enregister", saveUser: user._id});
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-//Show login router
-router.get("/login", (req, res) => {
-  res.render("login");
-});
-
 //Login router
 router.post("/login", async (req, res) => {
+  console.log(req.body);
+  console.log(req.body.username);
+  console.log(req.body.password);
+
   const user = await UserModel.findOne({
     username: req.body.username,
   });
 
   if (user == null) {
-    return res.status(400).send({ message: "Email is not found" });
+    return res.status(400).json({ message: "Email or Username not found" });
   }
   try {
     if (await bcrypt.compare(req.body.password, user.password)) {
       const token = jwt.sign({ _id: user.id }, process.env.TOKEN_SECRET);
-      res.header("auth-token", token).send(token);
+      res
+        .header("auth-token", token)
+        .json({ message: "nice", token: token, user: user });
       //res.send("Login success")
     } else {
-      res.send("Invalid password");
+      res.json({ message: "Invalid password" });
     }
   } catch {
-    res.status(500).send();
+    res.status(500).json({ error: error });
   }
 });
 
@@ -75,10 +87,14 @@ router.post("/login", async (req, res) => {
 router.get("/profile/:id", async (req, res) => {
   try {
     const userProfil = await UserModel.findById(req.params.id);
-    res.json({userProfil });
+    res.json({ userProfil });
   } catch (err) {
     res.json({ message: err });
   }
+});
+
+router.get("/nav", verifyToken, async (req, res) => {
+  res.json({ user: req.user });
 });
 
 //updateProfil router

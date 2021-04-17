@@ -14,11 +14,13 @@ mongoose.connect(
   () => {
     console.log("db connect........");
   }
-  );
-  
-  //Middlewares
+);
+
+//Middlewares
 app.use(express.json());
 app.use(express.static("Public"));
+
+
 //Route Middlewares
 app.use("/user", authRoute);
 app.use("/films", filmRoute);

@@ -25,7 +25,6 @@ const FilmPage = ({ match }) => {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
         setFilmInfos(response.film);
       })
       .catch((err) => {

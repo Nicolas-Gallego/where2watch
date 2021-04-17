@@ -9,14 +9,25 @@ const Profil = () => {
   const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    axios.get(url).then((response) => {
-      console.log(response);
-      console.log(
-        `http://localhost:8000/${response.data.userProfil.profilePicture}`
-      );
-      setUserInfo(response.data.userProfil);
-    });
-  }, [url]);
+    fetch(`http://localhost:8000/user/profile/${id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        setUserInfo(response.userProfil);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // axios.get(url).then((response) => {
+    //   console.log(response);
+    //   console.log(
+    //     `http://localhost:8000/${response.data.userProfil.profilePicture}`
+    //   );
+    //   setUserInfo(response.data.userProfil);
+    // });
+  },[]);
 
   return (
     <div>

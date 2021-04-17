@@ -11,7 +11,6 @@ function EditProfile() {
 
     const onClickSave = () => {
         console.clear();
-        console.log("hello signup");
     }
     const onClickAnnuler = (event) => {
         console.clear();
