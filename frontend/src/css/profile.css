@@ -1,0 +1,34 @@
+.profileSquare {
+  background-color: #e5e2fa;
+  padding: 32px;
+  color: #020a17;
+  margin-bottom: 16px;
+}
+
+.image {
+  max-width: 400px;
+  height: 400px;
+}
+
+.profileImage {
+  height: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+@media (max-width: 450px) {
+  .image {
+    max-width: 300px;
+    height: 300px;
+  }
+  .profileImage {
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .profileSquare {
+    padding: 16px;
+  }
+}
