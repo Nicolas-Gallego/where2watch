@@ -10,7 +10,8 @@ mongoose.connect(
   }
 );
 
-const apiKey = "efd8a07427b2c721a89376dbc34799dd";
+// const apiKey = "efd8a07427b2c721a89376dbc34799dd"; //seb
+const apiKey = "c72ac9cf5197a1f66ad0d776f5568bc2"; //Nico
 
 const createFilms = async () => {
   await FilmModel.deleteMany({}).exec();
@@ -225,7 +226,6 @@ const CreateMyFilms = async () => {
   // setTimeout(() => {
   //   addSimilarsFilms();
   // }, 1000);
-
 };
 
 CreateMyFilms();
