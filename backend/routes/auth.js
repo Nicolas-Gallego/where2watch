@@ -45,8 +45,9 @@ router.post("/signup", upload.single("profilePicture"), async (req, res) => {
     password: bcrypt.hashSync(req.body.password),
     age: req.body.age,
     platforms: req.body.Platforms,
-    profilePicture: `profilePicture/${req.body.username}.png`,
+    profilePicture: req.file ? `profilePicture/${req.body.username}.png` : null,
   });
+
   try {
     await user.save();
     res.json({ message: "utilisateur enregister", saveUser: user._id });
