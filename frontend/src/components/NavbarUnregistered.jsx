@@ -13,7 +13,7 @@ const NavbarUnregistered = () => {
             alt="logo"
             className="logo shadowfilter"
           />
-          <div className="">
+          <div className="titleNav">
             <h1 className="mainTitle d-flex flex-wrap shadowfilter">
               <span>Where</span>&thinsp;
               <span>2</span>&thinsp;

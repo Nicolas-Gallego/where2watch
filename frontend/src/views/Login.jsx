@@ -3,9 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { useHistory } from "react-router-dom";
-import Axios from "axios";
 import "../css/main.css";
-import axios from "axios";
+import '../css/login_signup.css'
 import { useForm } from "react-hook-form";
 
 const wait = function (duration = 1000) {
@@ -53,7 +52,7 @@ const Login = () => {
   return (
     <div className="container-fluid">
       <div className="row d-flex justify-content-center">
-        <div className="col-12 col-md-6">
+        <div className="col-6 col-sm-4 col-lg-3">
           <h2 className="title">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
@@ -78,15 +77,15 @@ const Login = () => {
 
               <div className="d-grid gap-2">
                 <button
-                  className="btn btn-primary"
+                  className="btn loginButton"
                   type="submit"
                   disabled={!isValid}
                 >
                   Login
                 </button>
               </div>
-              <div className="d-grid gap-2">
-                <Link to="/signup" className="d-flex justify-content-end">
+              <div className="d-grid gap-2 ">
+                <Link to="/signup" className="linkTo d-flex justify-content-end">
                   Create Account
                 </Link>
               </div>

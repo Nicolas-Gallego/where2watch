@@ -66,7 +66,7 @@ const ProfilePage = () => {
                   </span>
                   <span>
                     <h6>Platform:</h6>
-                    {userInfo.platforms}
+                    {`${userInfo.platforms}`}
                   </span>
                 </div>
               </div>

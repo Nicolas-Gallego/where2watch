@@ -56,3 +56,15 @@ h2 {
   height: 401px;
   max-width: 267px;
 }
+
+input:active, input:focus{
+  background-color: aliceblue !important;
+  border-color: #020a17 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.optionListContainer{
+  background-color: #020a17 !important;
+  color: aliceblue !important;
+}

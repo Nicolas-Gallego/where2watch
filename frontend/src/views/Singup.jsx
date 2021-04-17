@@ -6,7 +6,6 @@ import { Multiselect } from "multiselect-react-dropdown";
 import "../css/FormsInput.css";
 import "../css/main.css";
 
-
 const SingupTest = () => {
   const history = useHistory();
 
@@ -60,10 +59,13 @@ const SingupTest = () => {
   };
 
   const [platform, setPlatform] = useState([
-    { name: "Netflix", id: 1 },
-    { name: "Amazon", id: 2 },
-    { name: "Disney+", id: 3 },
-    { name: "Canal+", id: 4 },
+    { name: "Disney Plus", id: "Disney Plus" },
+    { name: "Netflix", id: "Netflix" },
+    { name: "MyCanal", id: "Canal+" },
+    { name: "Amazon Prime Video", id: "Amazon Prime Video" },
+    { name: "La Cinetek", id: "La Cinetek" },
+    { name: "OCS Go", id: "OCS Go" },
+    { name: "Anime Digital Networks", id: "Anime Digital Networks" },
   ]);
 
   return (
@@ -73,11 +75,14 @@ const SingupTest = () => {
         <div className="col-12 col-md-6">
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div>
+            <label className="form-label">Profile Picture</label>
+              <div className="parent-div">
+                <button className="btn uploadButton">Choose a picture</button>
                 <input
                   placeholder="profilePicture"
                   type="file"
                   name="profilePicture"
+                  className="uploader"
                   {...register("profilePicture")}
                 />
               </div>
@@ -151,6 +156,7 @@ const SingupTest = () => {
                 render={({ field: { onChange, value } }) => (
                   <Multiselect
                     options={platform}
+                    closeIcon="cancel"
                     displayValue="name"
                     showCheckbox={true}
                     selectedValues={value}
@@ -163,7 +169,7 @@ const SingupTest = () => {
               <div className="d-grid gap-2 mt-4">
                 <input
                   type="submit"
-                  className="btn btn-dark"
+                  className="btn signUpButton"
                   value="Signup"
                   disabled={!isValid || isSubmitting}
                 />
