@@ -5,8 +5,11 @@ const filmSchema = new mongoose.Schema({
   titre: String,
   image: String,
   description: String,
-  date: String,
-  platforme: [],
+  //   platforme: [],
+  platforme: {
+    type: [String],
+    default: ["pas trouvé"],
+  },
   casting: [
     {
       nom: String,

@@ -10,8 +10,10 @@ const jwt = require("jsonwebtoken");
 var multer = require("multer");
 const fs = require("fs");
 // const passValidator = require("../middlewares/auth.middlewares")
+
+
 const upload = multer({ dest: "Public/profilePicture" });
-router.use(express.static("Public"));
+
 
 dotenv.config();
 

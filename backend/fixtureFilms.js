@@ -2,15 +2,21 @@ const request = require("request");
 const FilmModel = require("./models/Film");
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/w2w", () => {
-  console.log("connecté");
-});
+mongoose.connect(
+  "mongodb://localhost:27017/w2w",
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("connecté");
+  }
+);
+
+const apiKey = "efd8a07427b2c721a89376dbc34799dd";
 
 const createFilms = async () => {
   await FilmModel.deleteMany({}).exec();
   for (let i = 1; i <= 200; i++) {
     const searchPopularMovies = request(
-      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=efd8a07427b2c721a89376dbc34799dd&page=${i}`,
+      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&page=${i}`,
       async function (error, response, body) {
         console.error("error searchMovies:", error); // Print the error if one occurred
         console.log(
@@ -43,7 +49,7 @@ const addSimilarsFilms = async () => {
 
   await myFilms.map((myfilm) => {
     request(
-      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/similar?api_key=efd8a07427b2c721a89376dbc34799dd`,
+      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/similar?api_key=${apiKey}`,
       async function (error, response, content) {
         console.error("error search similars:", error); // Print the error if one occurred
         console.log(
@@ -70,21 +76,17 @@ const addPlatformFilms = async () => {
 
   await myFilms.map((myfilm) => {
     request(
-      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/watch/providers?api_key=efd8a07427b2c721a89376dbc34799dd`,
+      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/watch/providers?api_key=${apiKey}`,
       async function (error, response, content) {
-        console.error("error search Platform:", error); // Print the error if one occurred
         console.log(
           "statusCode search Platform:",
           response && response.statusCode
         ); // Print the response status code if a response was received
-        PlatformByFilms = JSON.parse(content);
-        platforms = PlatformByFilms.results.FR.flatrate.map((item) => {
-          setTimeout(() => {
-            console.log(item.provider_name);
-            // return item.provider_name;
-          }, 1000);
+        let PlatformByFilms = JSON.parse(content);
+        let platforms = PlatformByFilms.results.FR.flatrate.map((item) => {
+          return item.provider_name;
         });
-        // await myfilm.updateOne({ platforme: platforms });
+        await myfilm.updateOne({ platforme: platforms });
       }
     );
   });
@@ -95,7 +97,7 @@ const addCastFilms = async () => {
 
   await myFilms.map((myfilm) => {
     request(
-      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd`,
+      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=${apiKey}`,
       async function (error, response, content) {
         console.error("error search Casting:", error); // Print the error if one occurred
         console.log(
@@ -116,12 +118,13 @@ const addCastFilms = async () => {
     );
   });
 };
+
 const addDirectorFilms = async () => {
   const myFilms = await FilmModel.find({});
 
   await myFilms.map((myfilm) => {
     request(
-      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=efd8a07427b2c721a89376dbc34799dd&`,
+      `https://api.themoviedb.org/3/movie/${myfilm.id_imdb}/credits?api_key=${apiKey}&`,
       async function (error, response, content) {
         console.error("error search Director:", error); // Print the error if one occurred
         console.log(
@@ -147,7 +150,7 @@ const addDirectorFilms = async () => {
 
 const addGenreFilms = async () => {
   request(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=efd8a07427b2c721a89376dbc34799dd&language=en-US`,
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`,
     async function (error, response, content) {
       console.error("error search genres:", error); // Print the error if one occurred
       console.log("statusCode search genres:", response && response.statusCode); // Print the response status code if a response was received
@@ -168,28 +171,61 @@ const addGenreFilms = async () => {
   );
 };
 
-const tkt = async () => {
+const removeFilmsForPlatformsNotFind = async () => {
+  const filmsPlatNotFind = await FilmModel.find({
+    platforme: { $in: "pas trouvé" },
+  }).deleteMany();
+};
+
+const getTranslation = async () => {
+  const filmNotEn = await FilmModel.find({ langue: { $ne: "en" } });
+
+  await filmNotEn.map((movie) => {
+    request(
+      `https://api.themoviedb.org/3/movie/${movie.id_imdb}/translations?api_key=${apiKey}`,
+      async function (error, response, content) {
+        translationMovie = JSON.parse(content);
+        const translatation = translationMovie.translations.find((movie) => {
+          return movie.iso_3166_1 === "US";
+        });
+        await movie.updateOne({
+          description: translatation.data.overview,
+          titre: translatation.data.title,
+        });
+      }
+    );
+  });
+};
+
+const CreateMyFilms = async () => {
   // createFilms();
 
   // setTimeout(() => {
+  //   addPlatformFilms();
+  // }, 1000);
+
+  // removeFilmsForPlatformsNotFind();
+
+  // setTimeout(() => {
+  //   getTranslation();
+  // }, 1000);
+
+  // setTimeout(() => {
   //   addGenreFilms();
-  // }, 10);
+  // }, 1000);
 
   // setTimeout(() => {
   //   addDirectorFilms();
-  // }, 10);
+  // }, 1000);
 
   // setTimeout(() => {
   //   addCastFilms();
-  // }, 10);
-
-  // setTimeout(() => {
-  //   addPlatformFilms();
-  // }, 10);
+  // }, 1000);
 
   // setTimeout(() => {
   //   addSimilarsFilms();
-  // }, 10);
+  // }, 1000);
+
 };
 
-tkt();
+CreateMyFilms();
