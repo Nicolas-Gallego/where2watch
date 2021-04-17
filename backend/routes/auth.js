@@ -49,7 +49,7 @@ router.post("/signup", upload.single("profilePicture"), async (req, res) => {
   });
   try {
     await user.save();
-    res.json({ message: "utilisateur enregister", saveUser: user._id});
+    res.json({ message: "utilisateur enregister", saveUser: user._id });
   } catch (err) {
     res.json({ message: err });
   }
@@ -84,7 +84,7 @@ router.post("/login", async (req, res) => {
 });
 
 //Profil router
-router.get("/profile/:id", async (req, res) => {
+router.get("/profile/:id",verifyToken, async (req, res) => {
   try {
     const userProfil = await UserModel.findById(req.params.id);
     res.json({ userProfil });
