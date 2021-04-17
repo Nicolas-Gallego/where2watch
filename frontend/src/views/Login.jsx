@@ -29,9 +29,9 @@ const Login = () => {
       username: username,
       password: password,
     }).then((response) => {
-      console.log(response);
       if (response) {
-        history.push(`/profile/:id`);
+        console.log(response.data)
+        // history.push(`/profile/:id`);
       } else {
         setLogInstatus("Incorrect");
       }

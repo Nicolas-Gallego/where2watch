@@ -18,7 +18,7 @@ mongoose.connect(
   
   //Middlewares
 app.use(express.json());
-
+app.use(express.static("Public"));
 //Route Middlewares
 app.use("/user", authRoute);
 app.use("/films", filmRoute);
