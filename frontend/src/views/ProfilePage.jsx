@@ -35,11 +35,15 @@ const ProfilePage = () => {
           {userInfo ? (
             <>
               <div className="col-12 d-flex justify-content-center p-5 image">
-                <img
-                  src={`http://localhost:8000/${userInfo.profilePicture}`}
-                  className="profileImage img-fluid"
-                  alt={`UserName : ${userInfo.username}`}
-                />
+              {userInfo.profilePicture ?(<img
+                        src={`http://localhost:8000/${userInfo.profilePicture}`}
+                        className="profileImage"
+                        alt={`UserName : ${userInfo.pseudo}`}
+                      />) : (<img
+                        src={`/pp.png`}
+                        className="profileImage"
+                        alt={`UserName : ${userInfo.pseudo}`}
+                      />) }
               </div>
               <div className="col-6 profileSquare">
                 <div className="col-6">
