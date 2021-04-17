@@ -15,7 +15,7 @@ const ProfilePage = () => {
     fetch(`http://localhost:8000/user/profile/${id}`, {
       headers: {
         "Content-type": "application/json",
-        "Authorization": `Bearer ${myToken}`,
+        Authorization: `Bearer ${myToken}`,
       },
     })
       .then((response) => {
@@ -23,6 +23,7 @@ const ProfilePage = () => {
       })
       .then((response) => {
         setUserInfo(response.userProfil);
+        console.log(userInfo.profilePicture);
       })
       .catch((err) => {
         console.log(err);
@@ -35,15 +36,19 @@ const ProfilePage = () => {
           {userInfo ? (
             <>
               <div className="col-12 d-flex justify-content-center p-5 image">
-              {userInfo.profilePicture ?(<img
-                        src={`http://localhost:8000/${userInfo.profilePicture}`}
-                        className="profileImage"
-                        alt={`UserName : ${userInfo.pseudo}`}
-                      />) : (<img
-                        src={`/pp.png`}
-                        className="profileImage"
-                        alt={`UserName : ${userInfo.pseudo}`}
-                      />) }
+                {userInfo.profilePicture ? (
+                  <img
+                    src={`http://localhost:8000/${userInfo.profilePicture}`}
+                    className="profileImage"
+                    alt={`UserName : ${userInfo.pseudo}`}
+                  />
+                ) : (
+                  <img
+                    src={`/pp.png`}
+                    className="profileImage"
+                    alt={`UserName : ${userInfo.pseudo}`}
+                  />
+                )}
               </div>
               <div className="col-6 profileSquare">
                 <div className="col-6">

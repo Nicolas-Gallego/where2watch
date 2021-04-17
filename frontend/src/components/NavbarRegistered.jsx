@@ -89,7 +89,7 @@ const NavbarUnregistered = () => {
                 src={
                   myInfos.profilePicture
                     ? `http://localhost:8000/${myInfos.profilePicture}`
-                    : "pp.png"
+                    : "/pp.png"
                 }
                 alt="profile picture"
                 className="profilePicture"
