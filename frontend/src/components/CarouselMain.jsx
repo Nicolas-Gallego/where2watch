@@ -53,7 +53,7 @@ export default class CarouselMain extends Component {
             draggable={true}
             showDots={false}
             responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
+            ssr={false} // means to render carousel on server-side.
             infinite={true}
             autoPlay={this.props.deviceType !== "mobile" ? true : false}
             autoPlaySpeed={3000}

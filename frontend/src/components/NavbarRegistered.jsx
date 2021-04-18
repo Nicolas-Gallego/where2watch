@@ -22,6 +22,7 @@ const NavbarUnregistered = () => {
       })
       .then(async (response) => {
         setMyInfos(response.user);
+        console.log(myInfos)
       })
       .catch((err) => {
         console.log(err);

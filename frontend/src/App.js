@@ -12,6 +12,8 @@ import NavbarRegistered from "./components/NavbarRegistered";
 import FilmPage from "./views/FilmPage";
 import Catalog from "./views/Catalog";
 import Singup from "./views/Singup";
+import FooterUnregistred from "./components/FooterUnregistred"
+import FooterRegistred from "./components/FooterRegistred"
 
 function App() {
   const [myToken, setMyToken] = useState(localStorage.getItem("token"));
@@ -32,6 +34,7 @@ function App() {
         <Route exact path="/films/:id" component={FilmPage}></Route>
         <Route path="/catalog" component={Catalog}></Route>
       </BrowserRouter>
+      {myToken ? <FooterRegistred></FooterRegistred> : <FooterUnregistred></FooterUnregistred>} 
     </div>
   );
 }

@@ -42,6 +42,10 @@ const Login = () => {
         if (response.message === "nice") {
           history.push(`/`);
           window.location.reload(true);
+        } else {
+          alert("Wrong password")
+          window.location.reload(true);
+          localStorage.clear();
         }
       })
       .catch((err) => {
@@ -50,7 +54,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid viewHigh">
       <div className="row d-flex justify-content-center">
         <div className="col-6 col-sm-4 col-lg-3">
           <h2 className="title">Login</h2>

@@ -58,7 +58,6 @@ h2 {
 }
 
 input:active, input:focus{
-  background-color: aliceblue !important;
   border-color: #020a17 !important;
   outline: none !important;
   box-shadow: none !important;

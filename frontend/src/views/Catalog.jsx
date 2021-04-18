@@ -29,12 +29,14 @@ const Catalog = () => {
     })
       .then((response) => {
         return response.json();
+        
       })
       .then((response) => {
         setfilms(response.films);
       });
   };
-
+  console.log(films)
+  
   useEffect(() => {
     if (!searchValue) {
       setfilms();

@@ -50,11 +50,6 @@
   background: #020a17 !important;
 }
 
-.false:hover {
-  background-color: #e5e2fa !important;
-  color: #020a17 !important;
-}
-
 .uploader {
   border: aliceblue solid 1px;
   width: 100%;

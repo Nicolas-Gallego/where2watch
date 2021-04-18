@@ -12,8 +12,8 @@ function Home() {
     
   }, [])
   return (
-    <div>
-      <h2 className="m-3">Popular Movies</h2>
+    <div className="viewHigh">
+      <h2 className="m-3 popular">Popular Movies</h2>
       <CarouselMain />
     </div>
   );

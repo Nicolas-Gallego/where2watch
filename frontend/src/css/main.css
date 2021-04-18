@@ -1,9 +1,11 @@
-.title {
+/* .title {
     text-align: center;
 }
 
 .LoginWith {
     height: 30px;
     color: red;
+} */
+.viewHigh{
+    height: 100vh;
 }
-

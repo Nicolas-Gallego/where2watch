@@ -120,7 +120,8 @@
   align-items: flex-end;
   -webkit-animation: fadeIn 3s;
   animation: fadeIn 3s;
-  margin-bottom: 16px;
+  margin-top: 16px;
+  /* margin-bottom: 16px; */
 }
 
 @-webkit-keyframes fadeIn {

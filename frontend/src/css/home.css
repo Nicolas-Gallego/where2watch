@@ -1,0 +1,11 @@
+@media (max-width: 696px) {
+  .popular {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 590px) {
+  .popular {
+    font-size: 30px;
+  }
+}
