@@ -38,14 +38,14 @@ const Login = () => {
         return response.json();
       })
       .then(async (response) => {
-        localStorage.setItem("token", response.token);
         if (response.message === "nice") {
+          localStorage.setItem("token", response.token);
           history.push(`/`);
           window.location.reload(true);
         } else {
           alert("Wrong password")
           window.location.reload(true);
-          localStorage.clear();
+          
         }
       })
       .catch((err) => {
