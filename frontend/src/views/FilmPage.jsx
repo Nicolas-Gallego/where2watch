@@ -56,7 +56,7 @@ const FilmPage = ({ match }) => {
     return (
       <>
         <div>
-          <div className="container-fluid">
+          <div className="container-fluid p-3">
             {/* must be replace by film title */}
             <h2 className="title">{filmInfos.titre}</h2>
             <div className="row d-flex justify-content-center">

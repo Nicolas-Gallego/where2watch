@@ -79,7 +79,6 @@ const Login = () => {
                 />
               </div>
 
-              <div className="d-grid gap-2">
                 <button
                   className="btn loginButton"
                   type="submit"
@@ -87,8 +86,7 @@ const Login = () => {
                 >
                   Login
                 </button>
-              </div>
-              <div className="d-grid gap-2 ">
+              <div className="">
                 <Link to="/signup" className="linkTo d-flex justify-content-end">
                   Create Account
                 </Link>

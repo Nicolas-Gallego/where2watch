@@ -74,8 +74,8 @@ const SingupTest = () => {
         <h2 className="title">Sign Up</h2>
         <div className="col-12 col-md-6">
           <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="form-label">Profile Picture</label>
+            <form onSubmit={handleSubmit(onSubmit)} className="py-5">
+              <label className="form-label">Profile Picture</label>
               <div className="parent-div">
                 <button className="btn uploadButton">Choose a picture</button>
                 <input
@@ -166,17 +166,16 @@ const SingupTest = () => {
                 )}
               />
 
-              <div className="d-grid gap-2 mt-4">
-                <input
-                  type="submit"
-                  className="btn signUpButton"
-                  value="Signup"
-                  disabled={!isValid || isSubmitting}
-                />
-              </div>
+              <button
+                type="submit"
+                className="btn signUpButton mt-3"
+                disabled={!isValid || isSubmitting}
+              >
+                Signup
+              </button>
 
-              <div className="d-grid gap-2">
-                <Link to="/login" className="d-flex justify-content-end">
+              <div className="d-grid ">
+                <Link to="/login" className="linkTo d-flex justify-content-end">
                   Login
                 </Link>
               </div>

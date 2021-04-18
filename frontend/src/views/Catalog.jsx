@@ -142,10 +142,10 @@ const Catalog = () => {
               </div>
             </div>
             <div className="d-flex flex-row justify-content-evenly filterCatalog">
-              <div className="heightFit">
+              <div className="heightFit shadowFilter">
                 <PlatformFilter checkFilter={checkFilter}></PlatformFilter>
               </div>
-              <div className="heightFit">
+              <div className="heightFit shadowFilter">
                 <GenreFilter checkGenreFilter={checkGenreFilter}></GenreFilter>
               </div>
               <div className="heightFit">
