@@ -31,7 +31,7 @@ const ProfilePage = () => {
   }, []);
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid viewHigh">
         <div className="row d-flex justify-content-center align-items-center">
           {userInfo ? (
             <>
