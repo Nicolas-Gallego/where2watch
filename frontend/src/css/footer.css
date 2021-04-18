@@ -1,45 +1,37 @@
-.footer{
-    margin-top: 32px;
-    border-top: 1px solid #706E7A;
+.footer {
+    padding: 30px 10px 0 10px ;
+  border-top: 1px solid #706e7a;
+  position: relative;
 }
 
-.footerLogo{
-    height: 75px;
-    margin-top: 8px;
-    margin-left: 29px;
-    text-decoration: none !important;
-    color: aliceblue;
+.footerLogo {
+  height: 75px;
+  text-decoration: none !important;
+  color: aliceblue;
 }
 
-.footerLogo:hover{
-    color: aliceblue !important;
+.footerLogo:hover {
+  color: aliceblue !important;
 }
 
-.footerLink{
-    text-decoration: none !important;
-    color: aliceblue;
+.footerLink {
+  text-decoration: none !important;
+  color: aliceblue;
 }
-.footerLink:hover{
-    color: #FF5C9A;
-    -webkit-filter: drop-shadow(0px 0px 7px rgba(240, 240, 240, 0.5)) !important;
-    filter: drop-shadow(0px 0px 7px rgba(210, 210, 210, 0.5)) !important;
-}
-.centerMenu{
-    margin-bottom: 32px;
-    margin-top: 32px;
+.footerLink:hover {
+  color: #ff5c9a;
+  -webkit-filter: drop-shadow(0px 0px 7px rgba(240, 240, 240, 0.5)) !important;
+  filter: drop-shadow(0px 0px 7px rgba(210, 210, 210, 0.5)) !important;
 }
 
-.footerBrand{
-    /* text-align: center; */
+.copiright{
+    padding: 5px;
+    position: absolute;
+    right: 0;
 }
 
 @media (max-width: 425px) {
-    .footer{
-        display: none;
-    }
-}
-@media (max-width: 789px) {
-    .footerLogo{
-        margin-left: 24px;
-    }
+  .footer {
+    display: none;
+  }
 }
