@@ -29,14 +29,14 @@ const Catalog = () => {
     })
       .then((response) => {
         return response.json();
-        
       })
       .then((response) => {
         setfilms(response.films);
+        setNumberOfPage(response.count /20)
       });
   };
-  console.log(films)
-  
+  console.log(films);
+
   useEffect(() => {
     if (!searchValue) {
       setfilms();
@@ -81,7 +81,7 @@ const Catalog = () => {
       return;
     } else {
       setPage(page + 1);
-      window.scrollTo({top: 300, behavior: 'smooth'});
+      window.scrollTo({ top: 300, behavior: "smooth" });
     }
   };
 
